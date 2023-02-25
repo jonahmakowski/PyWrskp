@@ -6,11 +6,11 @@ class BordemFair:
     def __init__(self, people):
         self.people = people
 
-    def fight(self):
+    def fight(self, print_=True):
         averages = []
         for item in self.people:
             info = item.compile_info()
-            a = info['intellegance']
+            a = info['intelligence']
             a += info['speed']
             a += info['strength']
             a = a / 3
@@ -29,13 +29,36 @@ class BordemFair:
         
         winner = self.people[maxnum]
         loser = self.people[minnum]
-        print('The winner is {}! with a average rating of {}!'.format(winner.name, maxs))
-        print('The loser is {}! with a average rating of {}'.format(loser.name, mins))
+        if print_:
+            print('The winner is {}! with a average rating of {}!'.format(winner.name, maxs))
+            print('The loser is {}! with a average rating of {}'.format(loser.name, mins))
+        return winner, loser
+
+    def info(self, print_=True):
+        info = []
+        for item in self.people:
+            i = item.compile_info()
+            info.append(i)
+        if print_:
+            for item in info:
+                print('Name: {}'.format(item['name']))
+                print('Intelligence: {}'.format(item['intelligence']))
+                print('Speed: {}'.format(item['speed']))
+                print('Strength: {}'.format(item['strength']))
+                print('Age: {}'.format(item['age']))
+                print('Size: {}'.format(item['size']))
+                print('Other Info:')
+                for i in item['other']:
+                    print('\t{}'.format(i))
+                print()
+                print()
+                print()
+        return info
 
 
 class Person:
-    def __init__(self, intellegance, speed, strength, size, age, name):
-        self.intellegance = intellegance
+    def __init__(self, intelligence, speed, strength, size, age, name):
+        self.intelligence = intelligence
         self.speed = speed
         self.strength = strength
         self.age = age
@@ -44,19 +67,20 @@ class Person:
         self.other_info = []
 
     def compile_info(self):
-        info = {'intellegance': self.intellegance,
+        info = {'intelligence': self.intelligence,
                 'speed': self.speed,
                 'strength': self.strength,
                 'size': self.size,
                 'age': self.age,
+                'name': self.name,
                 'other': self.other_info}
         return info
 
     def learn(self, amount):
-        self.intellegance += int(amount)
+        self.intelligence += int(amount)
 
     def dumbify(self, amount):
-        self.intellegance -= int(amount)
+        self.intelligence -= int(amount)
 
     def speed_up(self, amount):
         self.speed += int(amount)
@@ -92,10 +116,11 @@ def growing(person):
                 person.speed -= 1
 
 
-def fighting(fair):
+def fighting(fair, printing):
     while True:
         time.sleep(3)
-        fair.fight()
-        print()
-        print()
-        print()
+        fair.fight(print_=printing)
+        if printing:
+            print()
+            print()
+            print()
