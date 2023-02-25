@@ -1,6 +1,7 @@
 import time
 import random
 
+
 class Security:
     def __init__(self):
         self.attempts = []
@@ -12,28 +13,29 @@ class Security:
         self.password = password
         self.attempts.append('get_info')
 
-    def test(self, item, error):
+    def test(self, error):
         temp = False
         for item in self.attempts:
             if item == item:
                 temp = True
-        if temp != True:
+        if not temp:
             for i in range(50):
                 print('ERROR, {}'.format(error))
-            return('error')
+            return 'error'
         else:
-            return('accepted')
+            return 'accepted'
 
     def login(self):
-        if self.test('get_info', 'attempted login failed, no info detected!') == 'error':
+        if self.test('get_info') == 'error':
             exit()
         else:
             print('authenticating username and password')
-            time.sleep(random.randint(1,5))
+            time.sleep(random.randint(1, 5))
             if self.username == 'WhiteSwine' and self.password == 'bored':
-                print('authanticated')
+                print('authenticated')
                 self.attempts.append('login')
                 return
+
 
 s = Security()
 s.get_info(input('What is your username? \n'), input('What is your password? \n'))
