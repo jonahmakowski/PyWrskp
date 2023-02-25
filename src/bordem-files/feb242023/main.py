@@ -1,6 +1,5 @@
 import helper
 import threading
-import time
 
 person1 = helper.Person(0, 0, 0, 0, 0, '1')
 person2 = helper.Person(0, 0, 0, 0, 0, '2')
