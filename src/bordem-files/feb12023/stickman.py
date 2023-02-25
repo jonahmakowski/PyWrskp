@@ -3,7 +3,7 @@ import turtle
 t = turtle.Turtle()
 t.speed(0)
 
-size = 1
+size = int(input('How big would you like it to be?'))
 
 t.left(90)
 
