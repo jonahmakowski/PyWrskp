@@ -1,4 +1,4 @@
-import time
+print('Information About Classes')
 
 
 class Class:  # Information About Classes
@@ -25,8 +25,14 @@ c = Class('Testing')
 # 'Testing' is where you would input the parameters so in this case
 # inp (The name of the parameter used in this example) = 'Testing'
 
+# Information About Functions
 
-def function(parameter):  # Information About Functions
+print()
+print()
+print('Information About Functions')
+
+
+def function(parameter):
     # Parameter is a input that you can get from outside the function when it is called upon on lines 45 - 47
     # A function should be used when:
         # A block of code is used several times
@@ -49,6 +55,11 @@ function('parameter')
 
 
 # Variables and their types in python:
+
+print()
+print()
+print('Variables and their types in python')
+
 string_example = 'String'  # String
 string_example = "String"  # String
 # These two commands do the same thing
@@ -68,7 +79,45 @@ list_item = list_example[0]
 # This is because the first item in the list is 0, then it is 1 2 3 4 5 etc
 
 dictionary_example = {'String': 'string', 'int': 10, 'float': 10.1}
-# dictionaries are similar to lists, but can be called diffrently
+# dictionaries are similar to lists, but is be called differently
 # To call a list you do this:
 dictionary_item = dictionary_example['int']
 # in this case "dictionary_item" would equal 10
+# This is because the index for a dictionary is not a number, but a string value, and under the index 'int' is 10
+
+
+# if then else:
+print()
+print()
+print('if then else')
+
+if 1 + 1 == 2:  # This asks if 1 + 1 = 2
+    print('True')
+elif 2 + 2 == 4:  # Although this will never happen (in this case), should the previous if be false,
+    # it will ask this question if 2 + 2 = 4
+    print('True 2')
+else:  # If the ifs it lines up with are all false, this shall happen
+    print('False')
+
+
+# loops
+print()
+print()
+print('Loops:')
+
+for i in range(10):  # this is a loop 10, so it repeats 10 times
+    print(i)  # i is the counter in this case (it will start at 0)
+
+li = ['L', 'D', 5]
+
+for i in li:  # This is also a list, but for item in a list
+    print(i)  # i is the item in the list that it is currently on in this case
+
+i = 0
+
+while True:  # this will repeat while True is true (so forever) or until a break command is used
+    # You can replace True with any variable as well
+    print(d)
+    i += 1
+    if i > 4:
+        break  # this stops the loop that the command is in
