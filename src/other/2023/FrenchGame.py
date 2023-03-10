@@ -1,5 +1,6 @@
 from random import randint
 import time
+import webbrowser
 
 
 class FrenchAssignment:
@@ -49,13 +50,34 @@ class FrenchAssignment:
         li = l
         r = []
         for i in range(amount):
-            index = randint(0, len(li) - 1)
+            index = randint(0, len(li))
             r.append(li[index])
             del li[index]
         return r, li
     
-    def 
+    def other_extras(self):
+        extras = [{'name': 'Best Song',
+                   'description': 'In my opinion, Outété is the best song in Manie this year I am hopefull that it will win.',
+                   'link': 'https://www.youtube.com/watch?v=opGrbthhH0o&list=PLEavJ99WciNAsHrFEf3ZZQMuF3xYvZezP&index=1',
+                   'command': None},
+                  {'name': 'Python Trivia',
+                   'description' : 'A python code that allows you to play trivia',
+                  'link': None,
+                  'command':'trivia'}]
+        
+        q, l = self.choose_random(extras, 1)
+        print(q[0]['name'])
+        print(q[0]['description'])
+        if q[0]['link'] != None:
+            time.sleep(2)
+            webbrowser.open(q[0]['link'])
+        else:
+            if q[0]['command'] == 'trivia':
+                time.sleep(2)
+                self.trivia()
+        
+        
 
 
 assign = FrenchAssignment(input('Nom d’utilisateur:\n'))
-assign.trivia()
+assign.other_extras()
