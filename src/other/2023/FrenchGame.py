@@ -50,7 +50,8 @@ class FrenchAssignment:
         li = l
         r = []
         for i in range(amount):
-            index = randint(0, len(li))
+            index = randint(1, len(li))
+            index -= 1
             r.append(li[index])
             del li[index]
         return r, li
@@ -69,6 +70,7 @@ class FrenchAssignment:
         print(q[0]['name'])
         print(q[0]['description'])
         if q[0]['link'] != None:
+            print('Link:\n{}'.format(q[0]['link']))
             time.sleep(2)
             webbrowser.open(q[0]['link'])
         else:
