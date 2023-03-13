@@ -1,7 +1,6 @@
 import json
 
 
-
 class Encrption:
     def __init__(self):
         self.abcs = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
@@ -34,6 +33,7 @@ class Encrption:
         for item in completed_list:
             completed_string += item
         return completed_string
+
     def decrypt(self, item, key):
         item_list = list(item)
         completed_list = []
@@ -56,6 +56,7 @@ class Encrption:
         for item in completed_list:
             completed_string += item
         return completed_string
+
 
 def decrypt_txt(path='txt.txt'):
     e = Encrption()

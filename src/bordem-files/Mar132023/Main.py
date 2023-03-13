@@ -2,7 +2,8 @@ import time
 import random
 import json
 from helper import *
-#random.choice(lis)
+# random.choice(lis)
+
 
 class Main:
     def __init__(self):
@@ -11,6 +12,7 @@ class Main:
         self.username = ''
         self.name = ''
         self.login()
+
     def login(self):
         info = decrypt_txt()
         user = input('input your username\n')
@@ -23,5 +25,6 @@ class Main:
                 self.username = item['user']
         if not self.login_check:
             exit()
+
 
 m = Main()
