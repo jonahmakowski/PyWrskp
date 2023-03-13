@@ -1,4 +1,5 @@
 import json
+import datetime
 
 
 class Encrption:
@@ -61,8 +62,7 @@ class Encrption:
 def decrypt_txt(path='txt.txt'):
     e = Encrption()
     end = []
-    with open(path) as json_file:
-        list_encrypt = json.load(json_file)
+    list_encrypt = read_file(path)
     
     for item in list_encrypt:
         count_dic = 0
@@ -76,3 +76,25 @@ def decrypt_txt(path='txt.txt'):
                 end[0][i_key] = i_decrypt
             count += 1
     return end
+
+
+def read_file(path):
+    try:
+        with open(path) as json_file:
+            info = json.load(json_file)
+        return info
+    except FileNotFoundError:
+        return []
+
+
+def write_file(path, save):
+    with open(path, 'w') as outfile:
+        json.dump(save, outfile)
+
+
+def logging(log_item):
+    past_log = read_file('log.txt')
+    now = datetime.datetime.now()
+    now = now.strftime("%d/%m/%Y %H:%M:%S")
+    current_log = past_log + [{'log': log_item, 'datetime': now}]
+    write_file('log.txt', current_log)
