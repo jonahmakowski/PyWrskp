@@ -65,7 +65,6 @@ def decrypt_txt(path='txt.txt'):
     list_encrypt = read_file(path)
     
     for item in list_encrypt:
-        count_dic = 0
         key = item['key']
         count = 0
         end.append({})
