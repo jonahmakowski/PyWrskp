@@ -1,9 +1,12 @@
 from helper import *
+import threading
+import os
 # random.choice(lis)
 
 
 class Main:
     def __init__(self):
+        os.system('clear')
         logging('System Bootup')
         self.login_check = False
         self.security_clearence = 0
@@ -20,6 +23,12 @@ class Main:
             else:
                 break
         while True:
+            print('Options are:')
+            print('\t- messanger send')
+            print('\t- messanger read')
+            print('\t- view passwords')
+            print('\t- music')
+            print('\t- logout')
             option = input('What would you like to do?\n')
             if option == 'messanger send':
                 self.messanger_send()
@@ -27,14 +36,13 @@ class Main:
                 self.messager_read()
             elif option == 'view passwords':
                 self.view_passwords()
+            elif option == 'music':
+                self.music()
+            elif option == 'logout':
+                self.__init__()
             else:
                 print('{} is not an option!'.format(option))
-            print()
-            print()
-            print()
-            print()
-            print()
-            print()
+            os.system('clear')
 
     def original_login(self):
         logging('User Login Attempt')
@@ -151,6 +159,14 @@ class Main:
                                               direct[count]['key']))
             count += 1
 
+    def music(self):
+        while True:
+            if not self.login_check:
+                print('Not logged in')
+                self.original_login()
+            else:
+                break
+        play_music()
 
 m = Main()
 m.hub()

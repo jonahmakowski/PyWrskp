@@ -1,5 +1,6 @@
 import json
 import datetime
+import pygame
 
 
 class Encrption:
@@ -97,3 +98,19 @@ def logging(log_item):
     now = now.strftime("%d/%m/%Y %H:%M:%S")
     current_log = past_log + [{'log': log_item, 'datetime': now}]
     write_file('log.txt', current_log)
+
+
+def play_music(music=None):
+    if music is None:
+        music = input('What is the name of the file you would like to play\n')
+    pygame.init()
+    while True:
+        try:
+            pygame.mixer.music.load('music/{}'.format(music))
+            pygame.mixer.music.play()
+            input('Press enter to stop playing music')
+            pygame.mixer.music.stop()
+            break
+        except pygame.error:
+            print('That file does not exist')
+            music = input('What is the name of the file you would like to play')
