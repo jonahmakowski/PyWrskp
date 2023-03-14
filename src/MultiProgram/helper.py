@@ -102,7 +102,8 @@ def logging(log_item):
 
 def play_music(music=None):
     if music is None:
-        music = input('What is the name of the file you would like to play\n')
+        music = input('What is the name of the file you would like to play\n' +
+                      'Music file must be under the "music" folder\n')
     pygame.init()
     while True:
         try:
