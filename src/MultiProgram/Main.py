@@ -28,6 +28,7 @@ class Main:
             print('\t- encrypt')
             print('\t- decrypt')
             print('\t- view log')
+            print('\t- math game')
             option = input('What would you like to do?\n')
             if option == 'messanger send':
                 self.messanger_send()
@@ -48,6 +49,8 @@ class Main:
                 self.decrypt()
             elif option == 'view log':
                 self.view_log()
+            elif option == 'math game':\
+                self.math_test()
             else:
                 print('{} is not an option!'.format(option))
             time.sleep(2)
@@ -247,7 +250,7 @@ class Main:
             self.clear()
             num1 = random.randint(-1000, 1000)
             num2 = random.randint(-1000, 1000)
-            operation = random.randint(1,4)
+            operation = random.randint(1, 4)
             if operation == 1:
                 question = ('What is {} + {}?'.format(num1, num2))
                 awnser = num1 + num2
@@ -267,8 +270,19 @@ class Main:
                     return
                 try:
                     user_input = float(user_input)
+                    break
                 except ValueError:
                     print('That is not a number, try again')
+            if user_input == awnser:
+                print('Good Job, that is correct')
+                score += 1
+                print('Your current score is {}'.format(score))
+            else:
+                print('Bad Job, that is incorrect')
+                print('The correct awnser is {}, and yours was {}'.format(awnser, user_input))
+                print('Your current score is {}'.format(score))
+            input('Press Enter to Countinue!')
+
 
 m = Main()
 m.hub()
