@@ -1,1 +1,1 @@
-[]
+[{"log": "System Bootup", "datetime": "13/03/2023 21:27:13"}, {"log": "User Login Attempt", "datetime": "13/03/2023 21:27:13"}, {"log": "User successfully logged in", "datetime": "13/03/2023 21:27:17"}, {"log": "Other Login has been activated", "datetime": "13/03/2023 21:27:27"}, {"log": "User successfully Other Logged in", "datetime": "13/03/2023 21:27:33"}, {"log": "user WhiteSwine is viewing logs!", "datetime": "13/03/2023 21:27:33"}, {"log": "System Bootup", "datetime": "13/03/2023 21:28:07"}, {"log": "User Login Attempt", "datetime": "13/03/2023 21:28:07"}]

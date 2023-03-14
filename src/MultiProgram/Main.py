@@ -1,6 +1,7 @@
 from helper import *
 import os
 import time
+import random
 # random.choice(lis)
 
 
@@ -234,6 +235,40 @@ class Main:
         input('\n\nPress enter to go back to hub!')
         return
 
+    def math_test(self):
+        self.login_checker()
+        score = 0
+        print('Welcome {}!'.format(self.username))
+        print('This is a math test with randomly generated awnsers and questions!')
+        print('Warning, some questions may result in a negitive ' +
+              'or a decimal, and a decimal or negetive will be expected')
+        time.sleep(2)
+        while True:
+            self.clear()
+            num1 = random.randint(-1000, 1000)
+            num2 = random.randint(-1000, 1000)
+            operation = random.randint(1,4)
+            if operation == 1:
+                question = ('What is {} + {}?'.format(num1, num2))
+                awnser = num1 + num2
+            elif operation == 2:
+                question = ('What is {} - {}?'.format(num1, num2))
+                awnser = num1 - num2
+            elif operation == 3:
+                question = ('What is {} * {}?'.format(num1, num2))
+                awnser = num1 * num2
+            else:
+                question = ('What is {} / {}?'.format(num1, num2))
+                awnser = num1 / num2
+            while True:
+                print(question)
+                user_input = input()
+                if user_input == '':
+                    return
+                try:
+                    user_input = float(user_input)
+                except ValueError:
+                    print('That is not a number, try again')
 
 m = Main()
 m.hub()
