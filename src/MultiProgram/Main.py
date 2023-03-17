@@ -50,7 +50,7 @@ class Main:
             elif option == 'view log':
                 self.view_log()
             elif option == 'math game':\
-                self.math_test()
+                self.math_game()
             else:
                 print('{} is not an option!'.format(option))
             time.sleep(2)
@@ -238,18 +238,22 @@ class Main:
         input('\n\nPress enter to go back to hub!')
         return
 
-    def math_test(self):
+    def math_game(self):
         self.login_checker()
         score = 0
         print('Welcome {}!'.format(self.username))
         print('This is a math test with randomly generated awnsers and questions!')
         print('Warning, some questions may result in a negitive ' +
               'or a decimal, and a decimal or negetive will be expected')
+        logging('User is playing a math game')
+        max_score = read_file('math.txt')
+        if max_score != []:
+            print('The current high score is {}'.format(max_score))
         time.sleep(2)
         while True:
             self.clear()
-            num1 = random.randint(-1000, 1000)
-            num2 = random.randint(-1000, 1000)
+            num1 = random.randint(-10, 10000)
+            num2 = random.randint(-10, 10000)
             operation = random.randint(1, 4)
             if operation == 1:
                 question = ('What is {} + {}?'.format(num1, num2))
@@ -265,7 +269,7 @@ class Main:
                 awnser = num1 / num2
             while True:
                 print(question)
-                user_input = input()
+                user_input = input('If you now longer wish to play, press enter without a number or space\n')
                 if user_input == '':
                     return
                 try:
@@ -277,12 +281,21 @@ class Main:
                 print('Good Job, that is correct')
                 score += 1
                 print('Your current score is {}'.format(score))
+                if score == max_score:
+                    print('Good Job, you have hit the max score!')
+                elif score < max_score:
+                    print('You still have {} to go before you hit the max score'.format(max_score - score))
+                elif score > max_score:
+                    print('You are {} over the current top score'.format(score - max_score))
             else:
                 print('Bad Job, that is incorrect')
                 print('The correct awnser is {}, and yours was {}'.format(awnser, user_input))
                 print('Your current score is {}'.format(score))
             input('Press Enter to Countinue!')
-
+        if score > max_score:
+            print('You beat the current max score by {}'.format(score - max_score))
+            write_file('math.txt', score)
+            logging('Player {} beat the max score (of {}) and set a new max score as {}'.format(self.username, max_score, score))
 
 m = Main()
 m.hub()
