@@ -2,6 +2,8 @@ from helper import *
 import os
 import time
 import random
+import turtle
+import threading
 # random.choice(lis)
 
 
@@ -49,8 +51,10 @@ class Main:
                 self.decrypt()
             elif option == 'view log':
                 self.view_log()
-            elif option == 'math game':\
+            elif option == 'math game':
                 self.math_game()
+            elif option == 'drawing':
+                self.strange_drawings()
             else:
                 print('{} is not an option!'.format(option))
             time.sleep(2)
@@ -296,6 +300,67 @@ class Main:
             print('You beat the current max score by {}'.format(score - max_score))
             write_file('math.txt', score)
             logging('Player {} beat the max score (of {}) and set a new max score as {}'.format(self.username, max_score, score))
+    
+    def strange_drawings(self):
+        self.login_checker()
+        def scribble_movement(turtle):
+            while True:
+                if random.randint(1, 2) == 1:
+                    turtle.forward(random.randint(1, 100))
+                else:
+                    turtle.backward(random.randint(1, 100))
+                if random.randint(1, 2) == 1:
+                    turtle.right(random.randint(1, 360))
+                else:
+                    turtle.left(random.randint(1, 360))
+        t1 = turtle.Turtle()
+        t2 = turtle.Turtle()
+        t3 = turtle.Turtle()
+        t4 = turtle.Turtle()
+        t5 = turtle.Turtle()
+        t6 = turtle.Turtle()
+        t7 = turtle.Turtle()
+        t8 = turtle.Turtle()
+        t9 = turtle.Turtle()
+        t10 = turtle.Turtle()
+        thread1 = threading.Thread(target=scribble_movement, args=(t1,))
+        thread2 = threading.Thread(target=scribble_movement, args=(t2,))
+        thread3 = threading.Thread(target=scribble_movement, args=(t3,))
+        thread4 = threading.Thread(target=scribble_movement, args=(t4,))
+        thread5 = threading.Thread(target=scribble_movement, args=(t5,))
+        thread6 = threading.Thread(target=scribble_movement, args=(t6,))
+        thread7 = threading.Thread(target=scribble_movement, args=(t7,))
+        thread8 = threading.Thread(target=scribble_movement, args=(t8,))
+        thread9 = threading.Thread(target=scribble_movement, args=(t9,))
+        thread10 = threading.Thread(target=scribble_movement, args=(t10,))
+        thread1.start()
+        thread2.start()
+        thread3.start()
+        thread4.start()
+        thread5.start()
+        thread6.start()
+        thread7.start()
+        thread8.start()
+        thread9.start()
+        thread10.start()
+        
+        while True:
+            pass
+        
+        while True:
+            input('Press enter to halt scribbling')
+            thread1.stop()
+            thread2.stop()
+            thread3.stop()
+            thread4.stop()
+            thread5.stop()
+            thread6.stop()
+            thread7.stop()
+            thread8.stop()
+            thread9.stop()
+            thread10.stop()
+            return
+
 
 m = Main()
 m.hub()
