@@ -72,10 +72,6 @@ class FrenchAssignment:
                    'command': 'blanks'}]
         
         q, l = self.choose_random(extras, 1)
-        q = [{'name': 'Remplissez les blancs !',
-              'description': 'Un jeu de type trivia, mais remplissez les blancs!',
-              'link': None,
-              'command': 'blanks'}]
         print(q[0]['name'])
         print(q[0]['description'])
         if q[0]['link'] is not None:
