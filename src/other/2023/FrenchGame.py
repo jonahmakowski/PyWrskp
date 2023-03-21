@@ -16,7 +16,7 @@ class FrenchAssignment:
                      {'question': 'Qui a gagné la deuxième ronde?', 'awnser': 'Danser avec toi'},
                      {'question': 'Qui a gagné la troisième ronde?', 'awnser': 'Case Depart'},
                      {'question': 'Qui a gagné la quatrième ronde?', 'awnser': 'Demain ca ira'}]
-        print('BIENVENUE AU JEU-QUESTIONNAIRE!')
+        print('BIENVENUE AU JEU-QUESTIONNAIRE {}!'.format(self.user))
         time.sleep(1)
         print('Quand il y a une question comme celle-ci: Combien de temps dure ____, le temps est pris de la vidéo youtube.')
         time.sleep(1)
@@ -43,7 +43,8 @@ class FrenchAssignment:
         print('Le jeu-questionnaire est terminé!')
         print('Vous avez {} points!'.format(self.score))
     
-    def choose_random(self, l, amount):
+    @staticmethod
+    def choose_random(l, amount):
         if len(l) < amount:
             print('choose_random has encountered an error')
             return False, False
@@ -56,30 +57,65 @@ class FrenchAssignment:
             del li[index]
         return r, li
     
-    def other_extras(self):
-        extras = [{'name': 'Best Song',
-                   'description': 'In my opinion, Outété is the best song in Manie this year I am hopefull that it will win.',
+    def extras(self):
+        extras = [{'name': 'Meilleure Chanson',
+                   'description': 'À mon avis, Outété est la meilleure chanson dans Manie cette année, j’espère qu’il va gagner.',
                    'link': 'https://www.youtube.com/watch?v=opGrbthhH0o&list=PLEavJ99WciNAsHrFEf3ZZQMuF3xYvZezP&index=1',
                    'command': None},
-                  {'name': 'Python Trivia',
-                   'description' : 'A python code that allows you to play trivia',
+                  {'name': 'Jeu-questionnaire Python',
+                   'description' : 'Un code python qui vous permet de jouer au trivia.',
                   'link': None,
-                  'command':'trivia'}]
+                  'command': 'trivia'},
+                  {'name': 'Remplissez les blancs !',
+                   'description': 'Un jeu de type trivia, mais remplissez les blancs!',
+                   'link': None,
+                   'command': 'blanks'}]
         
         q, l = self.choose_random(extras, 1)
         print(q[0]['name'])
         print(q[0]['description'])
-        if q[0]['link'] != None:
-            print('Link:\n{}'.format(q[0]['link']))
+        if q[0]['link'] is not None:
+            print('Lien:\n{}'.format(q[0]['link']))
             time.sleep(2)
             webbrowser.open(q[0]['link'])
         else:
             if q[0]['command'] == 'trivia':
                 time.sleep(2)
                 self.trivia()
+            if q[0]['command'] == 'blanks':
+                time.sleep(2)
+                self.blanks()
         
-        
+    def blanks(self):
+        score = 0
+        print('Bienvenue pour remplir les espaces {}!'.format(self.user))
+        word_bank = ['seize']
+        questions = [{'question': 'Il y a _____ chansons dans Manie.', 'awnser': 'seize', 'word bank': 0}]
+        while True:
+            if len(questions) == 0:
+                break
+            print('Banque de mots:')
+            for word in word_bank:
+                print(word)
+            rand, questions = self.choose_random(questions, 1)
+            if not rand:
+                break
+            rand = rand[0]
+            print(rand['question'])
+            user_input = input()
+            if str(user_input).lower() == str(rand['awnser']).lower():
+                print('C’est exact!')
+                score += 1
+                del word_bank[rand['word bank']]
+                print('Votre note actuelle est {}.'.format(score))
+            else:
+                print('C’est faux!')
+                print('Votre note actuelle est {}.'.format(score))
+                del word_bank[rand['word bank']]
+                print('Le bon awnser est {}.'.format(rand['awnser']))
+        print('Blancs remplis!')
+        print('Le score est {}!'.format(score))
 
 
 assign = FrenchAssignment(input('Nom d’utilisateur:\n'))
-assign.other_extras()
+assign.extras()
