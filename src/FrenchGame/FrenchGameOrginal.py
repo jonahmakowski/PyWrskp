@@ -58,11 +58,7 @@ class FrenchAssignment:
         return r, li
     
     def extras(self):
-        extras = [{'name': 'Meilleure Chanson',
-                   'description': 'À mon avis, Outété est la meilleure chanson dans Manie cette année, j’espère qu’il va gagner.',
-                   'link': 'https://www.youtube.com/watch?v=opGrbthhH0o&list=PLEavJ99WciNAsHrFEf3ZZQMuF3xYvZezP&index=1',
-                   'command': None},
-                  {'name': 'Jeu-questionnaire Python',
+        extras = [{'name': 'Jeu-questionnaire Python',
                    'description' : 'Un code python qui vous permet de jouer au trivia.',
                   'link': None,
                   'command': 'trivia'},
