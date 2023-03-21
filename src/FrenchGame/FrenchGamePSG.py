@@ -1,8 +1,8 @@
 from random import randint
 import time
 import webbrowser
-import PySimpleGUI as psg
-
+import PySimpleGUI as sg
+import PSGHelper as Helper
 
 class FrenchAssignment:
     def __init__(self, user):
@@ -18,23 +18,26 @@ class FrenchAssignment:
                      {'question': 'Qui a gagné la deuxième ronde?', 'awnser': 'Danser avec toi'},
                      {'question': 'Qui a gagné la troisième ronde?', 'awnser': 'Case Depart'},
                      {'question': 'Qui a gagné la quatrième ronde?', 'awnser': 'Demain ca ira'}]
-        psg.popup_yes_no('BIENVENUE AU JEU-QUESTIONNAIRE {}!\n' +
+        Helper.show_window('BIENVENUE AU JEU-QUESTIONNAIRE {}!\n'.format(self.user.upper()) +
                          'Quand il y a une question comme celle-ci: Combien de temps dure ____,' +
                          'le temps est pris de la vidéo youtube.\n' +
-                         'Tous les awnsers sont sans accent.'.format(self.user.upper()),
-                         title="Règles du jeu-questionnaire")
+                         'Tous les awnsers sont sans accent.',
+                         "Règles du jeu-questionnaire")
         while len(questions) > 1:
             q, questions = self.choose_random(questions, 1)
             if not q:
                 break
-            awn = self.popup(q[0]['question'], 'JEU-QUESTIONNAIRE')
-            awn = awn.lower()
-            if awn == q[0]['awnser'].lower():
-                self.score += 1
-                self.notification('Bon travail, vous avez raison!\nVotre note actuelle est {}'.format(self.score))
+            awn = Helper.popup(q[0]['question'], 'JEU-QUESTIONNAIRE')
+            if awn is not None:
+                awn = awn.lower()
+                if awn == q[0]['awnser'].lower():
+                    self.score += 1
+                    Helper.notification('Bon travail, vous avez raison!\nVotre note actuelle est {}'.format(self.score))
+                else:
+                    Helper.notification('incorrect!\nVotre note actuelle est {}\nLe bon awnser est {}'.format(self.score, q[0]['awnser']))
             else:
-                self.notification('incorrect!\nVotre note actuelle est {}\nLe bon awnser est {}'.format(self.score, q[0]['awnser']))
-        self.notification('Le jeu-questionnaire est terminé!\n' +
+                Helper.notification('incorrect!\nVotre note actuelle est {}\nLe bon awnser est {}'.format(self.score, q[0]['awnser']))
+        Helper.notification('Le jeu-questionnaire est terminé!\n' +
                           'Vous avez {} points!'.format(self.score))
 
     @staticmethod
@@ -112,14 +115,6 @@ class FrenchAssignment:
                 print('Le bon awnser est {}.'.format(rand['awnser']))
         print('Blancs remplis!')
         print('Le score est {}!'.format(score))
-
-    @staticmethod
-    def popup(question, title):
-        return psg.popup_get_text(question, title=title)
-
-    @staticmethod
-    def notification(text):
-        psg.popup_notify(text)
 
 
 assign = FrenchAssignment(input('Nom d’utilisateur:\n'))
