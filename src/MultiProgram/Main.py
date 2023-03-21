@@ -2,6 +2,8 @@ from helper import *
 import os
 import time
 import random
+import turtle
+import threading
 # random.choice(lis)
 
 
@@ -49,8 +51,10 @@ class Main:
                 self.decrypt()
             elif option == 'view log':
                 self.view_log()
-            elif option == 'math game':\
-                self.math_test()
+            elif option == 'math game':
+                self.math_game()
+            elif option == 'drawing':
+                self.strange_drawings()
             else:
                 print('{} is not an option!'.format(option))
             time.sleep(2)
@@ -238,18 +242,22 @@ class Main:
         input('\n\nPress enter to go back to hub!')
         return
 
-    def math_test(self):
+    def math_game(self):
         self.login_checker()
         score = 0
         print('Welcome {}!'.format(self.username))
         print('This is a math test with randomly generated awnsers and questions!')
         print('Warning, some questions may result in a negitive ' +
               'or a decimal, and a decimal or negetive will be expected')
+        logging('User is playing a math game')
+        max_score = read_file('math.txt')
+        if max_score != []:
+            print('The current high score is {}'.format(max_score))
         time.sleep(2)
         while True:
             self.clear()
-            num1 = random.randint(-1000, 1000)
-            num2 = random.randint(-1000, 1000)
+            num1 = random.randint(-10, 10000)
+            num2 = random.randint(-10, 10000)
             operation = random.randint(1, 4)
             if operation == 1:
                 question = ('What is {} + {}?'.format(num1, num2))
@@ -265,7 +273,7 @@ class Main:
                 awnser = num1 / num2
             while True:
                 print(question)
-                user_input = input()
+                user_input = input('If you now longer wish to play, press enter without a number or space\n')
                 if user_input == '':
                     return
                 try:
@@ -277,11 +285,81 @@ class Main:
                 print('Good Job, that is correct')
                 score += 1
                 print('Your current score is {}'.format(score))
+                if score == max_score:
+                    print('Good Job, you have hit the max score!')
+                elif score < max_score:
+                    print('You still have {} to go before you hit the max score'.format(max_score - score))
+                elif score > max_score:
+                    print('You are {} over the current top score'.format(score - max_score))
             else:
                 print('Bad Job, that is incorrect')
                 print('The correct awnser is {}, and yours was {}'.format(awnser, user_input))
                 print('Your current score is {}'.format(score))
             input('Press Enter to Countinue!')
+        if score > max_score:
+            print('You beat the current max score by {}'.format(score - max_score))
+            write_file('math.txt', score)
+            logging('Player {} beat the max score (of {}) and set a new max score as {}'.format(self.username, max_score, score))
+    
+    def strange_drawings(self):
+        self.login_checker()
+        def scribble_movement(turtle):
+            while True:
+                if random.randint(1, 2) == 1:
+                    turtle.forward(random.randint(1, 100))
+                else:
+                    turtle.backward(random.randint(1, 100))
+                if random.randint(1, 2) == 1:
+                    turtle.right(random.randint(1, 360))
+                else:
+                    turtle.left(random.randint(1, 360))
+        t1 = turtle.Turtle()
+        t2 = turtle.Turtle()
+        t3 = turtle.Turtle()
+        t4 = turtle.Turtle()
+        t5 = turtle.Turtle()
+        t6 = turtle.Turtle()
+        t7 = turtle.Turtle()
+        t8 = turtle.Turtle()
+        t9 = turtle.Turtle()
+        t10 = turtle.Turtle()
+        thread1 = threading.Thread(target=scribble_movement, args=(t1,))
+        thread2 = threading.Thread(target=scribble_movement, args=(t2,))
+        thread3 = threading.Thread(target=scribble_movement, args=(t3,))
+        thread4 = threading.Thread(target=scribble_movement, args=(t4,))
+        thread5 = threading.Thread(target=scribble_movement, args=(t5,))
+        thread6 = threading.Thread(target=scribble_movement, args=(t6,))
+        thread7 = threading.Thread(target=scribble_movement, args=(t7,))
+        thread8 = threading.Thread(target=scribble_movement, args=(t8,))
+        thread9 = threading.Thread(target=scribble_movement, args=(t9,))
+        thread10 = threading.Thread(target=scribble_movement, args=(t10,))
+        thread1.start()
+        thread2.start()
+        thread3.start()
+        thread4.start()
+        thread5.start()
+        thread6.start()
+        thread7.start()
+        thread8.start()
+        thread9.start()
+        thread10.start()
+        
+        while True:
+            pass
+        
+        while True:
+            input('Press enter to halt scribbling')
+            thread1.stop()
+            thread2.stop()
+            thread3.stop()
+            thread4.stop()
+            thread5.stop()
+            thread6.stop()
+            thread7.stop()
+            thread8.stop()
+            thread9.stop()
+            thread10.stop()
+            return
 
 
 m = Main()
