@@ -116,7 +116,9 @@ class FrenchAssignment:
             else:
                 print('C’est faux!')
                 print('Votre note actuelle est {}.'.format(score))
-                del word_bank[rand['word bank']]
+                for item in word_bank:
+                    if item == rand['awnser']:
+                        del item
                 print('Le bon awnser est {}.'.format(rand['awnser']))
         print('Blancs remplis!')
         print('Le score est {}!'.format(score))
