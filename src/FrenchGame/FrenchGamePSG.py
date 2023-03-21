@@ -123,5 +123,4 @@ class FrenchAssignment:
 
 
 assign = FrenchAssignment(input('Nom d’utilisateur:\n'))
-#assign.extras()
-assign.trivia()
+assign.extras()
