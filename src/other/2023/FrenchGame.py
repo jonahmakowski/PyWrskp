@@ -72,6 +72,10 @@ class FrenchAssignment:
                    'command': 'blanks'}]
         
         q, l = self.choose_random(extras, 1)
+        q = [{'name': 'Remplissez les blancs !',
+              'description': 'Un jeu de type trivia, mais remplissez les blancs!',
+              'link': None,
+              'command': 'blanks'}]
         print(q[0]['name'])
         print(q[0]['description'])
         if q[0]['link'] is not None:
@@ -89,8 +93,11 @@ class FrenchAssignment:
     def blanks(self):
         score = 0
         print('Bienvenue pour remplir les espaces {}!'.format(self.user))
-        word_bank = ['seize']
-        questions = [{'question': 'Il y a _____ chansons dans Manie.', 'awnser': 'seize', 'word bank': 0}]
+        word_bank = ['seize', 'Canada', 'Nassi', 'Outété']
+        questions = [{'question': 'Il y a _____ chansons dans Manie.', 'awnser': 'seize'},
+                     {'question': 'Missy D est de ______.', 'awnser': 'Canada'},
+                     {'question': '_____ chanté Rifia', 'awnser': 'Nassi'},
+                     {'question': "______ is KeenV's Song", 'awnser': 'Outété'}]
         while True:
             if len(questions) == 0:
                 break
@@ -106,7 +113,9 @@ class FrenchAssignment:
             if str(user_input).lower() == str(rand['awnser']).lower():
                 print('C’est exact!')
                 score += 1
-                del word_bank[rand['word bank']]
+                for item in word_bank:
+                    if item == rand['awnser']:
+                        del item
                 print('Votre note actuelle est {}.'.format(score))
             else:
                 print('C’est faux!')
