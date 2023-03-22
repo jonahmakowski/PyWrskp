@@ -22,7 +22,7 @@ class FrenchAssignment:
                          'Quand il y a une question comme celle-ci: Combien de temps dure ____,' +
                          'le temps est pris de la vidéo youtube.\n' +
                          'Tous les awnsers sont sans accent.',
-                         "Règles du jeu-questionnaire")
+                         " du jeu-questionnaire")
         while len(questions) > 1:
             q, questions = self.choose_random(questions, 1)
             if not q:
@@ -65,8 +65,7 @@ class FrenchAssignment:
                    'command': 'blanks'}]
 
         q, l = self.choose_random(extras, 1)
-        print(q[0]['name'])
-        print(q[0]['description'])
+        Helper.show_window(q[0]['name'] + '\n' + q[0]['description'], 'info')
         if q[0]['link'] is not None:
             print('Lien:\n{}'.format(q[0]['link']))
             time.sleep(2)
@@ -81,41 +80,30 @@ class FrenchAssignment:
 
     def blanks(self):
         score = 0
-        print('Bienvenue pour remplir les espaces {}!'.format(self.user))
-        word_bank = ['seize', 'Canada', 'Nassi', 'Outété']
-        questions = [{'question': 'Il y a _____ chansons dans Manie.', 'awnser': 'seize'},
+        Helper.show_window('Bienvenue pour remplir les espaces {}!'.format(self.user), 'Règles')
+        word_bank = ['Seize', 'Canada', 'Nassi', 'Outete']
+        questions = [{'question': 'Il y a _____ chansons dans Manie.', 'awnser': 'Seize'},
                      {'question': 'Missy D est de ______.', 'awnser': 'Canada'},
                      {'question': '_____ chanté Rifia', 'awnser': 'Nassi'},
-                     {'question': "______ is KeenV's Song", 'awnser': 'Outété'}]
+                     {'question': "______ is KeenV's Song", 'awnser': 'Outete'}]
         while True:
             if len(questions) == 0:
                 break
-            print('Banque de mots:')
+            words_string = ''
             for word in word_bank:
-                print(word)
+                words_string += word + '\n'
             rand, questions = self.choose_random(questions, 1)
             if not rand:
                 break
             rand = rand[0]
-            print(rand['question'])
-            user_input = input()
+            user_input = Helper.popup('Banque de mots:\n' + words_string + '\n\n\n' + rand['question'], 'Entrée')
             if str(user_input).lower() == str(rand['awnser']).lower():
-                print('C’est exact!')
                 score += 1
-                for item in word_bank:
-                    if item == rand['awnser']:
-                        del item
-                print('Votre note actuelle est {}.'.format(score))
+                Helper.notification('C’est exact!\nVotre note actuelle est {}.'.format(score))
             else:
-                print('C’est faux!')
-                print('Votre note actuelle est {}.'.format(score))
-                for item in word_bank:
-                    if item == rand['awnser']:
-                        del item
-                print('Le bon awnser est {}.'.format(rand['awnser']))
-        print('Blancs remplis!')
-        print('Le score est {}!'.format(score))
+                Helper.notification('C’est faux!\nVotre note actuelle est {}.\nLe bon awnser est {}.'.format(score, rand['awnser']))
+        Helper.notification('Blancs remplis!\nLe score est {}!'.format(score))
 
 
-assign = FrenchAssignment(input('Nom d’utilisateur:\n'))
+assign = FrenchAssignment(Helper.popup('Nom d’utilisateur:', 'Nom d’utilisateur'))
 assign.extras()
