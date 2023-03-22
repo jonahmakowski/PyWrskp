@@ -4,6 +4,7 @@ import webbrowser
 import PySimpleGUI as sg
 import PSGHelper as Helper
 
+
 class FrenchAssignment:
     def __init__(self, user):
         self.user = user
@@ -19,10 +20,10 @@ class FrenchAssignment:
                      {'question': 'Qui a gagné la troisième ronde?', 'awnser': 'Case Depart'},
                      {'question': 'Qui a gagné la quatrième ronde?', 'awnser': 'Demain ca ira'}]
         Helper.show_window('BIENVENUE AU JEU-QUESTIONNAIRE {}!\n'.format(self.user.upper()) +
-                         'Quand il y a une question comme celle-ci: Combien de temps dure ____,' +
-                         'le temps est pris de la vidéo youtube.\n' +
-                         'Tous les awnsers sont sans accent.',
-                         " du jeu-questionnaire")
+                           'Quand il y a une question comme celle-ci: Combien de temps dure ____,' +
+                           'le temps est pris de la vidéo youtube.\n' +
+                           'Tous les awnsers sont sans accent.',
+                           " du jeu-questionnaire")
         while len(questions) > 1:
             q, questions = self.choose_random(questions, 1)
             if not q:
