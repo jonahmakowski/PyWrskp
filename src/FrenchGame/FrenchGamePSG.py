@@ -2,7 +2,7 @@ from random import randint
 import time
 import webbrowser
 import PySimpleGUI as sg
-import PSGHelper as Helper
+import Helper
 
 
 class FrenchAssignment:
