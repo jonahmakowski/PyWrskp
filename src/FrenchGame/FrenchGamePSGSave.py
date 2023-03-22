@@ -110,11 +110,13 @@ class FrenchAssignment:
         word_bank = ['Seize',
                      'Canada',
                      'Nassi',
-                     'Outete']
+                     'Outete',
+                     '4:29']
         questions = [{'question': 'Il y a _____ chansons dans Manie.', 'awnser': 'Seize'},
                      {'question': 'Missy D est de ______.', 'awnser': 'Canada'},
                      {'question': '_____ chanté Rifia', 'awnser': 'Nassi'},
-                     {'question': "______ is KeenV's Song", 'awnser': 'Outete'}]
+                     {'question': "______ is KeenV's Song", 'awnser': 'Outete'},
+                     {'question': 'La chanson Outété est ____ longue. (en format minute/seconde)', 'awnser': '4:29'}]
         while True:
             if len(questions) == 0:
                 break
@@ -140,5 +142,4 @@ class FrenchAssignment:
 
 
 assign = FrenchAssignment(Helper.popup('Nom d’utilisateur:', 'Nom d’utilisateur'))
-#assign.extras()
-assign.blanks()
+assign.extras()
