@@ -39,7 +39,7 @@ class FrenchAssignment:
             else:
                 print('incorrect!')
                 print('Votre note actuelle est {}'.format(self.score))
-                print('Le bon awnser est {}'.format(q[0]['question']))
+                print('Le bon awnser est {}'.format(q[0]['awnser']))
         print('Le jeu-questionnaire est terminé!')
         print('Vous avez {} points!'.format(self.score))
     
