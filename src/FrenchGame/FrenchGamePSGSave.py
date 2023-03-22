@@ -1,13 +1,13 @@
 from random import randint
 import time
 import webbrowser
-import PySimpleGUI as sg
 import Helper
 
 
 class FrenchAssignment:
     def __init__(self, user):
         self.user = user
+
     def trivia(self):
         current_high_score = Helper.read_file('high_scores_trivia.txt')
         questions = [{'question': 'Qui a chanté Sur Va Yeke?', 'awnser': 'Black M'},
@@ -35,13 +35,17 @@ class FrenchAssignment:
                 awn = awn.lower()
                 if awn == q[0]['awnser'].lower():
                     score += 1
-                    Helper.notification('Bon travail, vous avez raison!\nVotre note actuelle est {}'.format(score))
+                    Helper.show_window('Bon travail, vous avez raison!\nVotre note actuelle est {}'.format(score),
+                                       'Correct, bon travail!')
                 else:
-                    Helper.notification('incorrect!\nVotre note actuelle est {}\nLe bon awnser est {}'.format(score, q[0]['awnser']))
+                    Helper.show_window('incorrect!\nVotre note actuelle est {}\nLe bon awnser est {}'.format(score, q[0]['awnser']),
+                                       'incorrect')
             else:
-                Helper.notification('incorrect!\nVotre note actuelle est {}\nLe bon awnser est {}'.format(score, q[0]['awnser']))
-        Helper.notification('Le jeu-questionnaire est terminé!\n' +
-                            'Vous avez {} points!'.format(score))
+                Helper.show_window('incorrect!\nVotre note actuelle est {}\nLe bon awnser est {}'.format(score, q[0]['awnser']),
+                                   'incorrect')
+        Helper.show_window('Le jeu-questionnaire est terminé!\n' +
+                           'Vous avez {} points!'.format(score),
+                           'Fin du jeu-questionnaire')
         current_high_score = Helper.read_file('high_scores_trivia.txt')
         set_score = True
         if score > current_high_score['score']:
@@ -99,8 +103,14 @@ class FrenchAssignment:
 
     def blanks(self):
         score = 0
-        Helper.show_window('Bienvenue pour remplir les espaces {}!'.format(self.user), 'Règles')
-        word_bank = ['Seize', 'Canada', 'Nassi', 'Outete']
+        current_high_score = Helper.read_file('high_scores_blanks.txt')
+        Helper.show_window('Bienvenue pour remplir les espaces {}!\nLe score actuel le plus élevé est {}!'
+                           .format(self.user, current_high_score['score']),
+                           'Règles')
+        word_bank = ['Seize',
+                     'Canada',
+                     'Nassi',
+                     'Outete']
         questions = [{'question': 'Il y a _____ chansons dans Manie.', 'awnser': 'Seize'},
                      {'question': 'Missy D est de ______.', 'awnser': 'Canada'},
                      {'question': '_____ chanté Rifia', 'awnser': 'Nassi'},
@@ -118,12 +128,17 @@ class FrenchAssignment:
             user_input = Helper.popup('Banque de mots:\n' + words_string + '\n\n\n' + rand['question'], 'Entrée')
             if str(user_input).lower() == str(rand['awnser']).lower():
                 score += 1
-                Helper.notification('C’est exact!\nVotre note actuelle est {}.'.format(score))
+                Helper.show_window('C’est exact!\nVotre note actuelle est {}.'.format(score), 'Vrai')
             else:
-                Helper.notification('C’est faux!\nVotre note actuelle est {}.\nLe bon awnser est {}.'.format(score, rand['awnser']))
-        Helper.notification('Blancs remplis!\nLe score est {}!'.format(score))
+                Helper.show_window('C’est faux!\nVotre note actuelle est {}.\nLe bon awnser est {}.'.format(score, rand['awnser']), 'Faux')
+        Helper.show_window('Blancs remplis!\nLe score est {}!'.format(score), 'Blancs remplis!')
+        current_high_score = Helper.read_file('high_scores_blanks.txt')
+        if current_high_score['score'] >= score:
+            Helper.show_window('Votre score est supérieur ou égal au score le plus élevé!\nBon travail!',
+                               'nouveau score élevé.')
+            Helper.write_file('high_scores_blanks.txt.txt', {'username': self.user, 'score': score})
 
 
 assign = FrenchAssignment(Helper.popup('Nom d’utilisateur:', 'Nom d’utilisateur'))
 #assign.extras()
-assign.trivia()
+assign.blanks()
