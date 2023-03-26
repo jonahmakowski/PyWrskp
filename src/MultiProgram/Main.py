@@ -2,9 +2,6 @@ from helper import *
 import os
 import time
 import random
-import turtle
-import threading
-# random.choice(lis)
 
 
 class Main:
@@ -33,6 +30,7 @@ class Main:
             print('\t- math game')
             print('\t- lowest common multiple')
             print('\t- add user')
+            print('\t- mastermind')
             option = input('What would you like to do?\n')
             if option == 'messanger send':
                 self.messanger_send()
@@ -57,8 +55,10 @@ class Main:
                 self.math_game()
             elif option == 'lowest common multiple':
                 self.lowest_common_multiple()
-            elif option == 'add user':\
+            elif option == 'add user':
                 self.add_user()
+            elif option == 'mastermind':\
+                self.mastermind()
             else:
                 print('{} is not an option!'.format(option))
             time.sleep(2)
@@ -216,7 +216,7 @@ class Main:
             print("You don't have the needed clearance level (50), to preform this action")
             return
         logging('user {} is viewing logs!'.format(self.username))
-        logs = read_file('log.txt')
+        logs = read_log()
         print('Info, Datetime')
         for item in logs:
             print('{}, {}'.format(item['log'], item['datetime']))
@@ -289,6 +289,7 @@ class Main:
                                                                                                 score))
 
     def lowest_common_multiple(self):
+        logging('user is operating the lowest common multiple program')
         self.login_checker()
         numb = number_input('The first number you want to check')
         numb2 = number_input('The second number you want to check')
@@ -303,7 +304,10 @@ class Main:
         self.login_checker()
         if not self.clearance_check(100):
             print("You don't have high enough clearnance (100)")
+            logging('User {} tried and failed, with too little clearance of {} to add a new user'.format(self.username,
+                                                                                                         self.security_clearence))
             return
+        logging('user {} is adding a new user'.format(self.username))
         username = input("Enter the new user's username\n")
         password = input("Enter the new user's password\n")
         clearance = input("Enter the new user's clearance\n")
@@ -325,6 +329,68 @@ class Main:
                               'key': key,
                               name_name: name})
         write_file('txt.txt', current_users)
+
+    def mastermind(self):
+        self.login_checker()
+        logging('User is playing mastermind')
+        secret_code = create_secret_code()
+        print('This is the secret code: {}'.format(secret_code, new_line=False))
+        print('| means correct, and correct place')
+        print('/ means correct, and wrong place')
+        print('- means wrong')
+        max_guess = number_input('How many guesses do you want to be able to have?')
+        guessed = False
+        guesses = 0
+        while True:
+            player_guess = []
+            print('Input your guess')
+            print('The options are numbers 1 to 10')
+            for i in range(len(secret_code)):
+                player_guess.append(number_input(''))
+            self.clear()
+            print('{} {} {} {} {}'.format(player_guess[0],
+                                          player_guess[1],
+                                          player_guess[2],
+                                          player_guess[3],
+                                          player_guess[4]))
+
+            print_string = ''
+            count = 0
+            for item in player_guess:
+                found = False
+                if item == secret_code[count]:
+                    print_string += '| '
+                    found = True
+                else:
+                    for i in secret_code:
+                        if item == i:
+                            print_string += '/ '
+                            found = True
+                if not found:
+                    print_string += '- '
+                count += 1
+            print(print_string)
+            guesses += 1
+            if print_string == '| | | | | ':
+                guessed = True
+                break
+            if guesses >= max_guess:
+                break
+
+        if guessed:
+            print('Good Job!')
+            print('You won!')
+            print('You had {} guesses left!'.format(max_guess - guesses))
+            logging('User won mastermind with {} guesses out of a max of {}'.format(guesses, max_guess))
+        else:
+            print('You lost!')
+            print('Here is the code:')
+            print('{} {} {} {} {}'.format(secret_code[0],
+                                          secret_code[1],
+                                          secret_code[2],
+                                          secret_code[3],
+                                          secret_code[4]))
+            logging('User lost mastermind')
 
 
 m = Main()

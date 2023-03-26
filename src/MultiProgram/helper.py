@@ -92,17 +92,33 @@ def read_file(path):
         return []
 
 
+def write_log(data, path='log.txt'):
+    with open(path, 'w') as f:
+        for item in data:
+            f.write(json.dumps(item) + '\n')
+
+
+def read_log(path='log.txt'):
+    with open(path) as f:
+        lines = f.readlines()
+
+    logs = []
+    for line in lines:
+        logs.append(json.loads(line))
+    return logs
+
+
 def write_file(path, save):
     with open(path, 'w') as outfile:
         json.dump(save, outfile)
 
 
 def logging(log_item):
-    past_log = read_file('log.txt')
+    past_log = read_log()
     now = datetime.datetime.now()
     now = now.strftime("%d/%m/%Y %H:%M:%S")
     current_log = past_log + [{'log': log_item, 'datetime': now}]
-    write_file('log.txt', current_log)
+    write_log(current_log)
 
 
 def play_music(music=None):
@@ -157,15 +173,30 @@ def check_lowest_common_multiple(num, multiple, m):
     return False
 
 
-def number_input(question, t='int'):
+def number_input(question, t='int', new_line=True):
     while True:
         try:
-            if t == 'int':
-                a = int(input(question + '\n'))
+            if new_line:
+                if t == 'int':
+                    a = int(input(question + '\n'))
+                else:
+                    a = float(input(question + '\n'))
+                break
             else:
-                a = float(input(question + '\n'))
-            break
+                if t == 'int':
+                    a = int(input(question))
+                else:
+                    a = float(input(question))
+                break
         except ValueError:
             print('That is not a number!')
             print('Try again!')
     return a
+
+
+def create_secret_code(amount=5):
+    secret_code = []
+    for i in range(amount):
+        choice = random.randint(1, amount*2)
+        secret_code.append(choice)
+    return secret_code
