@@ -217,9 +217,10 @@ class Main:
             return
         logging('user {} is viewing logs!'.format(self.username))
         logs = read_log()
-        print('Info, Datetime')
+        display_logs(list(reversed(logs)))
+        '''print('Info, Datetime')
         for item in logs:
-            print('{}, {}'.format(item['log'], item['datetime']))
+            print('{}, {}'.format(item['log'], item['datetime']))'''
         input('\n\nPress enter to go back to hub!')
         return
 

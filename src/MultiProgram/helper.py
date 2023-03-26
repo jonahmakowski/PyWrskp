@@ -200,3 +200,26 @@ def create_secret_code(amount=5):
         choice = random.randint(1, amount*2)
         secret_code.append(choice)
     return secret_code
+
+
+def display_logs(logs):
+    page_size = 10  # number of logs to display per page
+    page = 0
+
+    while True:
+        start_idx = page * page_size
+        end_idx = (page + 1) * page_size
+
+        print('Info, Datetime')
+        for item in logs[start_idx:end_idx]:
+            print('{}, {}'.format(item['log'], item['datetime']))
+
+        if end_idx >= len(logs):
+            break
+
+        user_input = input('\nPress "n" for next page, or "q" to quit: ')
+
+        if user_input == 'n':
+            page += 1
+        elif user_input == 'q':
+            break
