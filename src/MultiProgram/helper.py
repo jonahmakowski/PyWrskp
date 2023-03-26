@@ -1,6 +1,10 @@
 import json
 import datetime
+import threading
+
 import pygame
+import turtle
+import random
 
 
 class Encrption:
@@ -115,3 +119,53 @@ def play_music(music=None):
         except pygame.error:
             print('That file does not exist')
             music = input('What is the name of the file you would like to play')
+
+
+def check_lowest_common_multiple(num, multiple, m):
+
+    class CustomThread(threading.Thread):
+        def __init__(self, ma, numb):
+            self.ma = ma
+            self.numb = numb
+            threading.Thread.__init__(self, target=self.loop, args=())
+            self.multiples = None
+
+        def loop(self):
+            counter = 1
+            current_num = 0
+            multiples = []
+            while counter <= self.ma:
+                current_num += self.numb
+                multiples.append(current_num)
+                counter += 1
+            self.multiples = multiples
+
+    thread = CustomThread(m, num)
+    thread2 = CustomThread(m, multiple)
+    thread.start()
+    thread2.start()
+    thread.join()
+    thread2.join()
+    multiples = thread.multiples
+    multiples2 = thread2.multiples
+
+    for item in multiples:
+        for item2 in multiples2:
+            if item2 == item:
+                return item2
+    return False
+
+
+def number_input(question, t='int'):
+    while True:
+        try:
+            if t == 'int':
+                a = int(input(question + '\n'))
+            else:
+                a = float(input(question + '\n'))
+            break
+        except ValueError:
+            print('That is not a number!')
+            print('Try again!')
+    return a
+

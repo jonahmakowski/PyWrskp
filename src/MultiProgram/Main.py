@@ -31,6 +31,7 @@ class Main:
             print('\t- decrypt')
             print('\t- view log')
             print('\t- math game')
+            print('\t- lowest common multiple')
             option = input('What would you like to do?\n')
             if option == 'messanger send':
                 self.messanger_send()
@@ -53,8 +54,8 @@ class Main:
                 self.view_log()
             elif option == 'math game':
                 self.math_game()
-            elif option == 'drawing':
-                self.strange_drawings()
+            elif option == 'lowest common multiple':
+                self.lowest_common_multiple()
             else:
                 print('{} is not an option!'.format(option))
             time.sleep(2)
@@ -302,7 +303,20 @@ class Main:
         if score > max_score:
             print('You beat the current max score by {}'.format(score - max_score))
             write_file('math.txt', score)
-            logging('Player {} beat the max score (of {}) and set a new max score as {}'.format(self.username, max_score, score))
+            logging('Player {} beat the max score (of {}) and set a new max score as {}'.format(self.username,
+                                                                                                max_score,
+                                                                                                score))
+
+    def lowest_common_multiple(self):
+        self.login_checker()
+        numb = number_input('The first number you want to check')
+        numb2 = number_input('The second number you want to check')
+        ma = number_input('Max amount of loops (Greater the number, greater the time.)')
+        result = check_lowest_common_multiple(numb, numb2, ma)
+        if result is False:
+            print('The program could not find a result in the max of {} you gave.'.format(ma))
+        else:
+            print('The lowest common multiple between {} and {} is {}'.format(numb, numb2, result))
 
 
 m = Main()
