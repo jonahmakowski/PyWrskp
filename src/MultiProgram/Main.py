@@ -108,13 +108,7 @@ class Main:
                 print('Try again')
         if encrypt == 'y':
             if key is None:
-                while True:
-                    try:
-                        key = int(input('What would you like the key to be? (This must be a number)\n'))
-                        break
-                    except ValueError:
-                        print('That is not a number!')
-                        print('Try again')
+                key = number_input('What would you like the key to be? (This must be a number)\n')
             message = e.encrypt(message, key)
         write_file('message.txt', message)
         print('Your message was saved at message.txt!')
@@ -134,13 +128,7 @@ class Main:
                 print('Try again')
         if encrypt == 'y':
             if key is None:
-                while True:
-                    try:
-                        key = int(input('What is the key? (This must be a number)\n'))
-                        break
-                    except ValueError:
-                        print('That is not a number!')
-                        print('Try again')
+                key = number_input('What is the key? (This must be a number)\n')
 
         message = read_file('message.txt')
         if encrypt == 'y':
@@ -208,26 +196,14 @@ class Main:
         self.login_checker()
         e = Encrption()
         message = input('What is the message?\n')
-        while True:
-            try:
-                key = int(input('What is the key? (This must be a number)\n'))
-                break
-            except ValueError:
-                print('That is not a number!')
-                print('Try again')
+        key = number_input('What is the key? (This must be a number)\n')
         print('Your message is {}'.format(e.decrypt(message, key)))
 
     def encrypt(self):
         self.login_checker()
         e = Encrption()
         message = input('What is the message?\n')
-        while True:
-            try:
-                key = int(input('What is the key? (This must be a number)\n'))
-                break
-            except ValueError:
-                print('That is not a number!')
-                print('Try again')
+        key = number_input('What is the key? (This must be a number)\n')
         print('Your encoded message is:')
         print(e.encrypt(message, key))
 
@@ -300,6 +276,7 @@ class Main:
                     print('The correct awnser is {}, and yours was {}'.format(awnser, user_input))
                     print('Your current score is {}'.format(score))
                 input('Press Enter to Countinue!')
+        max_score = read_file('math.txt')
         if score > max_score:
             print('You beat the current max score by {}'.format(score - max_score))
             write_file('math.txt', score)
