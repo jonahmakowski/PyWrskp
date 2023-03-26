@@ -69,16 +69,17 @@ def decrypt_txt(path='txt.txt'):
     end = []
     list_encrypt = read_file(path)
     
+    count = 0
+
     for item in list_encrypt:
         key = item['key']
-        count = 0
         end.append({})
         for i in item:
             if i != 'key':
                 i_key = e.decrypt(i, key)
                 i_decrypt = e.decrypt(item[i], key)
-                end[0][i_key] = i_decrypt
-            count += 1
+                end[count][i_key] = i_decrypt
+        count += 1
     return end
 
 
@@ -168,4 +169,3 @@ def number_input(question, t='int'):
             print('That is not a number!')
             print('Try again!')
     return a
-

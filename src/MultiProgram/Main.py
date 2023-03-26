@@ -32,6 +32,7 @@ class Main:
             print('\t- view log')
             print('\t- math game')
             print('\t- lowest common multiple')
+            print('\t- add user')
             option = input('What would you like to do?\n')
             if option == 'messanger send':
                 self.messanger_send()
@@ -56,6 +57,8 @@ class Main:
                 self.math_game()
             elif option == 'lowest common multiple':
                 self.lowest_common_multiple()
+            elif option == 'add user':\
+                self.add_user()
             else:
                 print('{} is not an option!'.format(option))
             time.sleep(2)
@@ -73,6 +76,7 @@ class Main:
                 self.security_clearence = int(item['clearance'])
                 self.username = item['user']
                 self.password = item['password']
+                self.name = item['name']
                 logging('User successfully logged in')
                 time.sleep(2)
                 self.clear()
@@ -142,7 +146,7 @@ class Main:
         print('To access this program you must log in again!')
         if not self.other_login():
             print('Login Usuccesfull!')
-            return 'Login Fail'
+            return False
         if self.security_clearence >= clearance:
             return True
         else:
@@ -294,6 +298,33 @@ class Main:
             print('The program could not find a result in the max of {} you gave.'.format(ma))
         else:
             print('The lowest common multiple between {} and {} is {}'.format(numb, numb2, result))
+
+    def add_user(self):
+        self.login_checker()
+        if not self.clearance_check(100):
+            print("You don't have high enough clearnance (100)")
+            return
+        username = input("Enter the new user's username\n")
+        password = input("Enter the new user's password\n")
+        clearance = input("Enter the new user's clearance\n")
+        name = input("What is the new user's name?\n")
+        key = number_input("Enter the new user's encryption key")
+        e = Encrption()
+        name = e.encrypt(name, key)
+        username = e.encrypt(username, key)
+        password = e.encrypt(password, key)
+        clearance = e.encrypt(clearance, key)
+        username_name = e.encrypt('user', key)
+        password_name = e.encrypt('password', key)
+        clearance_name = e.encrypt('clearance', key)
+        name_name = e.encrypt('name', key)
+        current_users = read_file('txt.txt')
+        current_users.append({username_name: username,
+                              password_name: password,
+                              clearance_name: clearance,
+                              'key': key,
+                              name_name: name})
+        write_file('txt.txt', current_users)
 
 
 m = Main()
