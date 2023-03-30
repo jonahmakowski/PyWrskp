@@ -25,8 +25,7 @@ class FrenchAssignment:
                      {'question': 'Qui a gagné le 9ème round?', 'awnser': 'Outete'},
                      {'question': 'Qui a gagné le dixième round?', 'awnser': 'Danser avec toi'},
                      {'question': 'Qui a gagné le 11e round?', 'awnser': 'On Va Yeke'},
-                     {'question': 'Qui a gagné le 12e round ?', 'awnser': ''},
-                     {'question': '', 'awnser': '3615 Bonheur'}]
+                     {'question': 'Qui a gagné le 12e round?', 'awnser': '3615 Bonheur'}]
         Helper.show_window('BIENVENUE AU JEU-QUESTIONNAIRE {}!\n'.format(self.user.upper()) +
                            'Quand il y a une question comme celle-ci: Combien de temps dure ____,' +
                            'le temps est pris de la vidéo youtube.\n' +
