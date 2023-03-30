@@ -17,7 +17,16 @@ class FrenchAssignment:
                      {'question': 'Qui a gagné le premier tour?', 'awnser': 'Outete'},
                      {'question': 'Qui a gagné la deuxième ronde?', 'awnser': 'Danser avec toi'},
                      {'question': 'Qui a gagné la troisième ronde?', 'awnser': 'Case Depart'},
-                     {'question': 'Qui a gagné la quatrième ronde?', 'awnser': 'Demain ca ira'}]
+                     {'question': 'Qui a gagné la quatrième ronde?', 'awnser': 'Demain ca ira'},
+                     {'question': 'Qui a gagné le cinquième round?', 'awnser': 'On Va Yeke'},
+                     {'question': 'Qui a gagné le sixième round?', 'awnser': '3615 Bonheur'},
+                     {'question': 'Qui a gagné le septième round?', 'awnser': 'Enfants Du Monde'},
+                     {'question': 'Qui a gagné le huitième round?', 'awnser': 'Céphaz'},
+                     {'question': 'Qui a gagné le 9ème round?', 'awnser': 'Outete'},
+                     {'question': 'Qui a gagné le dixième round?', 'awnser': 'Danser avec toi'},
+                     {'question': 'Qui a gagné le 11e round?', 'awnser': 'On Va Yeke'},
+                     {'question': 'Qui a gagné le 12e round ?', 'awnser': ''},
+                     {'question': '', 'awnser': '3615 Bonheur'}]
         Helper.show_window('BIENVENUE AU JEU-QUESTIONNAIRE {}!\n'.format(self.user.upper()) +
                            'Quand il y a une question comme celle-ci: Combien de temps dure ____,' +
                            'le temps est pris de la vidéo youtube.\n' +
