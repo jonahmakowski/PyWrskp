@@ -286,3 +286,61 @@
 {"log": "Other Login has been activated", "datetime": "26/03/2023 16:33:57"}
 {"log": "User successfully Other Logged in", "datetime": "26/03/2023 16:34:00"}
 {"log": "user WhiteSwine is viewing logs!", "datetime": "26/03/2023 16:34:00"}
+{"log": "System Bootup", "datetime": "29/03/2023 18:28:39"}
+{"log": "User Login Attempt", "datetime": "29/03/2023 18:28:39"}
+{"log": "User successfully logged in", "datetime": "29/03/2023 18:28:53"}
+{"log": "Other Login has been activated", "datetime": "29/03/2023 18:29:04"}
+{"log": "User successfully Other Logged in", "datetime": "29/03/2023 18:29:09"}
+{"log": "user WhiteSwine is viewing logs!", "datetime": "29/03/2023 18:29:09"}
+{"log": "System Bootup", "datetime": "30/03/2023 15:26:13"}
+{"log": "User Login Attempt", "datetime": "30/03/2023 15:26:13"}
+{"log": "User successfully logged in", "datetime": "30/03/2023 15:26:17"}
+{"log": "Other Login has been activated", "datetime": "30/03/2023 15:26:26"}
+{"log": "User successfully Other Logged in", "datetime": "30/03/2023 15:26:30"}
+{"log": "user WhiteSwine is viewing logs!", "datetime": "30/03/2023 15:26:30"}
+{"log": "System Bootup", "datetime": "30/03/2023 15:27:56"}
+{"log": "User Login Attempt", "datetime": "30/03/2023 15:27:56"}
+{"log": "User successfully logged in", "datetime": "30/03/2023 15:27:59"}
+{"log": "System Bootup", "datetime": "30/03/2023 15:28:10"}
+{"log": "User Login Attempt", "datetime": "30/03/2023 15:28:10"}
+{"log": "System Bootup", "datetime": "30/03/2023 15:34:00"}
+{"log": "User Login Attempt", "datetime": "30/03/2023 15:34:00"}
+{"log": "User successfully logged in", "datetime": "30/03/2023 15:34:09"}
+{"log": "Other Login has been activated", "datetime": "30/03/2023 15:34:16"}
+{"log": "User successfully Other Logged in", "datetime": "30/03/2023 15:34:21"}
+{"log": "user WhiteSwine is viewing logs!", "datetime": "30/03/2023 15:34:21"}
+{"log": "System Bootup", "datetime": "02/04/2023 19:22:50"}
+{"log": "User Login Attempt", "datetime": "02/04/2023 19:22:50"}
+{"log": "User successfully logged in", "datetime": "02/04/2023 19:22:57"}
+{"log": "Other Login has been activated", "datetime": "02/04/2023 19:23:02"}
+{"log": "User successfully Other Logged in", "datetime": "02/04/2023 19:23:07"}
+{"log": "user WhiteSwine is adding a new user", "datetime": "02/04/2023 19:23:07"}
+{"log": "System Bootup", "datetime": "02/04/2023 19:28:00"}
+{"log": "User Login Attempt", "datetime": "02/04/2023 19:28:00"}
+{"log": "User successfully logged in", "datetime": "02/04/2023 19:28:19"}
+{"log": "User is playing mastermind", "datetime": "02/04/2023 19:29:07"}
+{"log": "System Bootup", "datetime": "02/04/2023 19:29:30"}
+{"log": "User Login Attempt", "datetime": "02/04/2023 19:29:30"}
+{"log": "User Failed To Login With Username 31579 and password 97531", "datetime": "02/04/2023 19:29:43"}
+{"log": "User Login Attempt", "datetime": "02/04/2023 19:29:46"}
+{"log": "User successfully logged in", "datetime": "02/04/2023 19:29:57"}
+{"log": "User is playing mastermind", "datetime": "02/04/2023 19:30:11"}
+{"log": "User won mastermind with 7 guesses out of a max of 9", "datetime": "02/04/2023 19:34:10"}
+{"log": "System Bootup", "datetime": "03/04/2023 15:14:00"}
+{"log": "User Login Attempt", "datetime": "03/04/2023 15:14:00"}
+{"log": "User successfully logged in", "datetime": "03/04/2023 15:14:06"}
+{"log": "user is operating the lowest common multiple program", "datetime": "03/04/2023 15:14:14"}
+{"log": "System Bootup", "datetime": "03/04/2023 15:14:51"}
+{"log": "User Login Attempt", "datetime": "03/04/2023 15:14:51"}
+{"log": "User successfully logged in", "datetime": "03/04/2023 15:14:56"}
+{"log": "user is operating the lowest common multiple program", "datetime": "03/04/2023 15:15:02"}
+{"log": "System Bootup", "datetime": "03/04/2023 15:15:30"}
+{"log": "User Login Attempt", "datetime": "03/04/2023 15:15:30"}
+{"log": "User successfully logged in", "datetime": "03/04/2023 15:15:35"}
+{"log": "System Bootup", "datetime": "03/04/2023 15:17:04"}
+{"log": "User Login Attempt", "datetime": "03/04/2023 15:17:04"}
+{"log": "User successfully logged in", "datetime": "03/04/2023 15:17:10"}
+{"log": "System Bootup", "datetime": "03/04/2023 15:17:12"}
+{"log": "User Login Attempt", "datetime": "03/04/2023 15:17:12"}
+{"log": "User Failed To Login With Username None and password None", "datetime": "03/04/2023 15:17:15"}
+{"log": "User Login Attempt", "datetime": "03/04/2023 15:17:17"}

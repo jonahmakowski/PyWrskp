@@ -1,10 +1,10 @@
 import json
 import datetime
 import threading
-
+import PySimpleGUI as psg
 import pygame
-import turtle
 import random
+import os
 
 
 class Encrption:
@@ -130,12 +130,18 @@ def play_music(music=None):
         try:
             pygame.mixer.music.load('music/{}'.format(music))
             pygame.mixer.music.play()
-            input('Press enter to stop playing music')
+            question_window('Press enter to stop playing music',
+                            'Press enter to continue')
             pygame.mixer.music.stop()
             break
         except pygame.error:
-            print('That file does not exist')
-            music = input('What is the name of the file you would like to play')
+            show_window('That file does not exist',
+                        'Song does not exist')
+            if music is None:
+                music = question_window('What is the name of the file you would like to play',
+                                        'Input new song')
+            else:
+                return
 
 
 def check_lowest_common_multiple(num, multiple, m):
@@ -173,24 +179,27 @@ def check_lowest_common_multiple(num, multiple, m):
     return False
 
 
-def number_input(question, t='int', new_line=True):
+def number_input(question,
+                 t='int',
+                 new_line=False,
+                 tell=True):
+    if tell:
+        question += ' (This must be a number)'
+    if new_line:
+        question += '\n'
     while True:
         try:
-            if new_line:
-                if t == 'int':
-                    a = int(input(question + '\n'))
-                else:
-                    a = float(input(question + '\n'))
-                break
+            if t == 'int':
+                a = int(question_window(question,
+                                        'Input Number'))
             else:
-                if t == 'int':
-                    a = int(input(question))
-                else:
-                    a = float(input(question))
-                break
+                a = float(question_window(question,
+                                          'Input Number'))
+            break
         except ValueError:
-            print('That is not a number!')
-            print('Try again!')
+            show_window('That is not a number!\n' +
+                        'Try again',
+                        'Not a number')
     return a
 
 
@@ -210,7 +219,7 @@ def display_logs(logs):
         start_idx = page * page_size
         end_idx = (page + 1) * page_size
 
-        print('Info, Datetime')
+        print('Info, Datetime')  # TODO transfer this to PSG
         for item in logs[start_idx:end_idx]:
             print('{}, {}'.format(item['log'], item['datetime']))
 
@@ -223,3 +232,19 @@ def display_logs(logs):
             page += 1
         elif user_input == 'q':
             break
+
+
+def question_window(question, title):
+    return psg.popup_get_text(question, title=title)
+
+
+def notification(text):
+    psg.popup_notify(text)
+
+
+def show_window(text, title):
+    psg.popup_ok(text, title=title)
+
+
+def clear():
+    os.system('clear')
