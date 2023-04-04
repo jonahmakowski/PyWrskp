@@ -2,6 +2,7 @@ import random
 import threading
 import json
 import pygame
+from psg_helper import *
 
 # By this I mean functions that are only used
 # once for a purpose that could be easily in main.py
