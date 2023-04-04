@@ -344,3 +344,52 @@
 {"log": "User Login Attempt", "datetime": "03/04/2023 15:17:12"}
 {"log": "User Failed To Login With Username None and password None", "datetime": "03/04/2023 15:17:15"}
 {"log": "User Login Attempt", "datetime": "03/04/2023 15:17:17"}
+{"log": "System Bootup", "datetime": "04/04/2023 15:34:28"}
+{"log": "User Login Attempt", "datetime": "04/04/2023 15:34:28"}
+{"log": "User successfully logged in", "datetime": "04/04/2023 15:34:36"}
+{"log": "Other Login has been activated", "datetime": "04/04/2023 15:34:41"}
+{"log": "User successfully Other Logged in", "datetime": "04/04/2023 15:34:45"}
+{"log": "user WhiteSwine is viewing logs!", "datetime": "04/04/2023 15:34:45"}
+{"log": "System Bootup", "datetime": "04/04/2023 15:39:48"}
+{"log": "User Login Attempt", "datetime": "04/04/2023 15:39:48"}
+{"log": "User Failed To Login With Username WhiteSwine and password Swube", "datetime": "04/04/2023 15:39:52"}
+{"log": "User Login Attempt", "datetime": "04/04/2023 15:39:54"}
+{"log": "User successfully logged in", "datetime": "04/04/2023 15:39:59"}
+{"log": "Other Login has been activated", "datetime": "04/04/2023 15:40:04"}
+{"log": "User successfully Other Logged in", "datetime": "04/04/2023 15:40:08"}
+{"log": "user WhiteSwine is viewing logs!", "datetime": "04/04/2023 15:40:08"}
+{"log": "System Bootup", "datetime": "04/04/2023 15:40:50"}
+{"log": "User Login Attempt", "datetime": "04/04/2023 15:40:50"}
+{"log": "User successfully logged in", "datetime": "04/04/2023 15:40:56"}
+{"log": "System Bootup", "datetime": "04/04/2023 15:41:55"}
+{"log": "User Login Attempt", "datetime": "04/04/2023 15:41:55"}
+{"log": "User successfully logged in", "datetime": "04/04/2023 15:42:01"}
+{"log": "Other Login has been activated", "datetime": "04/04/2023 15:42:23"}
+{"log": "User successfully Other Logged in", "datetime": "04/04/2023 15:42:26"}
+{"log": "user WhiteSwine is viewing logs!", "datetime": "04/04/2023 15:42:29"}
+{"log": "System Bootup", "datetime": "04/04/2023 15:44:49"}
+{"log": "User Login Attempt", "datetime": "04/04/2023 15:44:49"}
+{"log": "User successfully logged in", "datetime": "04/04/2023 15:44:55"}
+{"log": "Other Login has been activated", "datetime": "04/04/2023 15:44:59"}
+{"log": "User Failed To Other Login With Username WhiteSiwne and password Swine", "datetime": "04/04/2023 15:45:03"}
+{"log": "Other Login has been activated", "datetime": "04/04/2023 15:45:10"}
+{"log": "User successfully Other Logged in", "datetime": "04/04/2023 15:45:15"}
+{"log": "user WhiteSwine is viewing logs!", "datetime": "04/04/2023 15:45:15"}
+{"log": "System Bootup", "datetime": "04/04/2023 15:46:06"}
+{"log": "User Login Attempt", "datetime": "04/04/2023 15:46:06"}
+{"log": "User successfully logged in", "datetime": "04/04/2023 15:46:11"}
+{"log": "Other Login has been activated", "datetime": "04/04/2023 15:46:14"}
+{"log": "User successfully Other Logged in", "datetime": "04/04/2023 15:46:18"}
+{"log": "user WhiteSwine is viewing logs!", "datetime": "04/04/2023 15:46:18"}
+{"log": "System Bootup", "datetime": "04/04/2023 15:49:16"}
+{"log": "User Login Attempt", "datetime": "04/04/2023 15:49:16"}
+{"log": "User successfully logged in", "datetime": "04/04/2023 15:49:21"}
+{"log": "Other Login has been activated", "datetime": "04/04/2023 15:49:25"}
+{"log": "User successfully Other Logged in", "datetime": "04/04/2023 15:49:28"}
+{"log": "user WhiteSwine is viewing logs!", "datetime": "04/04/2023 15:49:28"}
+{"log": "System Bootup", "datetime": "04/04/2023 15:49:53"}
+{"log": "User Login Attempt", "datetime": "04/04/2023 15:49:53"}
+{"log": "User successfully logged in", "datetime": "04/04/2023 15:50:06"}
+{"log": "Other Login has been activated", "datetime": "04/04/2023 15:50:10"}
+{"log": "User successfully Other Logged in", "datetime": "04/04/2023 15:50:13"}
+{"log": "user WhiteSwine is viewing logs!", "datetime": "04/04/2023 15:50:13"}
