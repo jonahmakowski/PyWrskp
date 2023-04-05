@@ -1,6 +1,6 @@
 def number_input(question,
                  t='int',
-                 new_line=False,
+                 new_line=True,
                  tell=True):
     if tell:
         question += ' (This must be a number)'
