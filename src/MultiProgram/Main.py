@@ -1,9 +1,7 @@
-from helpers.odds_and_ends import *
-from helpers.psg_helper import *
-from helpers.main_expanded import *
-from helpers.encription import *
 import time
 import random
+from pyWrskp import *
+from helper import *
 
 
 class Main:
@@ -50,9 +48,9 @@ class Main:
                             'logout')
                 self.__init__()
             elif option == 'encrypt':
-                self.encrypt()
+                self.encrypt_local()
             elif option == 'decrypt':
-                self.decrypt()
+                self.decrypt_local()
             elif option == 'view log':
                 self.view_log()
             elif option == 'math game':
@@ -103,7 +101,6 @@ class Main:
 
     def messanger_send(self, message=None, encrypt=None, key=None):
         logging('User is sending a message')
-        e = Encrption()
         self.login_checker()
         if message is None:
             message = question_window('What is the message you would like to send?', 'Message Send')
@@ -119,7 +116,7 @@ class Main:
         if encrypt == 'y':
             if key is None:
                 key = number_input('What would you like the key to be?')
-            message = e.encrypt(message, key)
+            message = encrypt(key, message)
         write_file('message.txt', message)
         show_window('Your message was saved at message.txt!', 'Successfull Message Save')
         time.sleep(2)
@@ -127,7 +124,6 @@ class Main:
 
     def messager_read(self, encrypt=None, key=None):
         logging('User is reading a message')
-        e = Encrption()
         self.login_checker()
         if encrypt is None:
             while True:
@@ -144,7 +140,7 @@ class Main:
 
         message = read_file('message.txt')
         if encrypt == 'y':
-            message = e.decrypt(message, key)
+            message = decrypt(key, message)
         show_window('Your message is {}!'.format(message),
                     'Message Result')
         clear()
@@ -198,20 +194,18 @@ class Main:
             elif self.login_check:
                 break
 
-    def decrypt(self):
+    def decrypt_local(self):
         self.login_checker()
-        e = Encrption()
         message = question_window('What is the message?\n', 'Message')
         key = number_input('What is the key?')
-        show_window('Your message is {}'.format(e.decrypt(message, key)), 'Message')
+        show_window('Your message is {}'.format(decrypt(key, message)), 'Message')
 
-    def encrypt(self):
+    def encrypt_local(self):
         self.login_checker()
-        e = Encrption()
         message = question_window('What is the message?\n', 'Message')
         key = number_input('What is the key')
         show_window('Your encoded message is:\n' +
-                    e.encrypt(message, key),
+                    encrypt(key, message),
                     'Message')
 
     def view_log(self):
@@ -332,15 +326,14 @@ class Main:
         name = question_window("What is the new user's name?",
                                'Name')
         key = number_input("Enter the new user's encryption key")
-        e = Encrption()
-        name = e.encrypt(name, key)
-        username = e.encrypt(username, key)
-        password = e.encrypt(password, key)
-        clearance = e.encrypt(clearance, key)
-        username_name = e.encrypt('user', key)
-        password_name = e.encrypt('password', key)
-        clearance_name = e.encrypt('clearance', key)
-        name_name = e.encrypt('name', key)
+        name = encrypt(key, name)
+        username = encrypt(key, username)
+        password = encrypt(key, password)
+        clearance = encrypt(key, clearance)
+        username_name = encrypt(key, 'user')
+        password_name = encrypt(key, 'password')
+        clearance_name = encrypt(key, 'clearance')
+        name_name = encrypt(key, 'name')
         current_users = read_file('txt.txt')
         current_users.append({username_name: username,
                               password_name: password,
