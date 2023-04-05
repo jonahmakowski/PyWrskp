@@ -34,10 +34,10 @@ def logging(log_item):
     write_log(current_log)
 
 
-def number_input(question,
-                 t='int',
-                 new_line=False,
-                 tell=True):
+def number_input_local(question,
+                       t='int',
+                       new_line=False,
+                       tell=True):
     if tell:
         question += ' (This must be a number)'
     if new_line:

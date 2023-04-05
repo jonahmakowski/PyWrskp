@@ -115,7 +115,7 @@ class Main:
                             'not y or n')
         if encrypt == 'y':
             if key is None:
-                key = number_input('What would you like the key to be?')
+                key = number_input_local('What would you like the key to be?')
             message = encrypt(key, message)
         write_file('message.txt', message)
         show_window('Your message was saved at message.txt!', 'Successfull Message Save')
@@ -136,7 +136,7 @@ class Main:
                             'not y or n')
         if encrypt == 'y':
             if key is None:
-                key = number_input('What is the key? (This must be a number)\n')
+                key = number_input_local('What is the key? (This must be a number)\n')
 
         message = read_file('message.txt')
         if encrypt == 'y':
@@ -197,13 +197,13 @@ class Main:
     def decrypt_local(self):
         self.login_checker()
         message = question_window('What is the message?\n', 'Message')
-        key = number_input('What is the key?')
+        key = number_input_local('What is the key?')
         show_window('Your message is {}'.format(decrypt(key, message)), 'Message')
 
     def encrypt_local(self):
         self.login_checker()
         message = question_window('What is the message?\n', 'Message')
-        key = number_input('What is the key')
+        key = number_input_local('What is the key')
         show_window('Your encoded message is:\n' +
                     encrypt(key, message),
                     'Message')
@@ -298,9 +298,9 @@ class Main:
     def lowest_common_multiple(self):
         logging('user is operating the lowest common multiple program')
         self.login_checker()
-        numb = number_input('The first number you want to check')
-        numb2 = number_input('The second number you want to check')
-        ma = number_input('Max amount of loops (Greater the number, greater the time.)')
+        numb = number_input_local('The first number you want to check')
+        numb2 = number_input_local('The second number you want to check')
+        ma = number_input_local('Max amount of loops (Greater the number, greater the time.)')
         result = check_lowest_common_multiple(numb, numb2, ma)
         if result is False:
             show_window('The program could not find a result in the max of {} you gave.'.format(ma),
@@ -322,10 +322,10 @@ class Main:
                                    'Username')
         password = question_window("Enter the new user's password",
                                    'Password')
-        clearance = number_input("Enter the new user's clearance")
+        clearance = number_input_local("Enter the new user's clearance")
         name = question_window("What is the new user's name?",
                                'Name')
-        key = number_input("Enter the new user's encryption key")
+        key = number_input_local("Enter the new user's encryption key")
         name = encrypt(key, name)
         username = encrypt(key, username)
         password = encrypt(key, password)
@@ -350,7 +350,7 @@ class Main:
                     '/ means correct, and wrong place\n' +
                     '- means wrong',
                     'Rules')
-        max_guess = number_input('How many guesses do you want to be able to have?')
+        max_guess = number_input_local('How many guesses do you want to be able to have?')
         guessed = False
         guesses = 0
         while True:
