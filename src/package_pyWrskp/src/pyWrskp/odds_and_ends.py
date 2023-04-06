@@ -1,3 +1,6 @@
+from time import sleep
+
+
 def number_input(question,
                  t='int',
                  new_line=True,
@@ -17,3 +20,14 @@ def number_input(question,
             print('That is not a number!\n' +
                   'Try again')
     return a
+
+
+def loading(time):
+    loops = time * 1.5
+    for i in range(loops):
+        print('|', end="\r")
+        sleep(0.5)
+        print('/', end="\r")
+        sleep(0.5)
+        print('-', end="\r")
+        sleep(0.5)

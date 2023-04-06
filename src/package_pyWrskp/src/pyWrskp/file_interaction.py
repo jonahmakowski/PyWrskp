@@ -9,6 +9,7 @@ def read_file(path):
     except FileNotFoundError:
         return None
 
+
 def write_file(path, save):
     with open(path, 'w') as outfile:
         json.dump(save, outfile)
