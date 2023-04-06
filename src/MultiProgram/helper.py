@@ -145,15 +145,15 @@ def play_music(music=None):
 
 
 def check_lowest_common_multiple(num, multiple, m):
-
     class CustomThread(threading.Thread):
-        def __init__(self, ma, numb):
+        def __init__(self, ma, numb, event):
             self.ma = ma
             self.numb = numb
-            threading.Thread.__init__(self, target=self.loop, args=())
-            self.multiples = None
+            threading.Thread.__init__(self, target=self.loop, args=(event,))
+            self.multiples = []
+            self.done = False
 
-        def loop(self):
+        def loop(self, event):
             counter = 1
             current_num = 0
             multiples = []
@@ -161,19 +161,30 @@ def check_lowest_common_multiple(num, multiple, m):
                 current_num += self.numb
                 multiples.append(current_num)
                 counter += 1
+                if event.is_set():
+                    break
             self.multiples = multiples
+            self.done = True
 
-    thread = CustomThread(m, num)
-    thread2 = CustomThread(m, multiple)
+    event = threading.Event()
+    thread = CustomThread(m, num, event)
+    thread2 = CustomThread(m, multiple, event)
     thread.start()
     thread2.start()
-    thread.join()
-    thread2.join()
-    multiples = thread.multiples
-    multiples2 = thread2.multiples
+    count = 0
+    while count != 2:
+        multiples = thread.multiples
+        multiples2 = thread2.multiples
+        done1 = thread.done
+        done2 = thread2.done
 
-    for item in multiples:
-        for item2 in multiples2:
-            if item2 == item:
-                return item2
-            return False
+        for item in multiples:
+            for item2 in multiples2:
+                if item2 == item:
+                    event.set()
+                    return item2
+
+        if done1 and done2:
+            count = 1
+        if count == 1:
+            count = 2

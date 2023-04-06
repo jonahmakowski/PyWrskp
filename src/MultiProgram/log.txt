@@ -410,3 +410,56 @@
 {"log": "System Bootup", "datetime": "05/04/2023 19:09:07"}
 {"log": "User Login Attempt", "datetime": "05/04/2023 19:09:07"}
 {"log": "User successfully logged in", "datetime": "05/04/2023 19:09:12"}
+{"log": "System Bootup", "datetime": "06/04/2023 18:09:30"}
+{"log": "User Login Attempt", "datetime": "06/04/2023 18:09:30"}
+{"log": "User successfully logged in", "datetime": "06/04/2023 18:09:37"}
+{"log": "Other Login has been activated", "datetime": "06/04/2023 18:09:47"}
+{"log": "User successfully Other Logged in", "datetime": "06/04/2023 18:09:51"}
+{"log": "User WhiteSwine is viewing the passwords", "datetime": "06/04/2023 18:09:51"}
+{"log": "System Bootup", "datetime": "06/04/2023 18:11:07"}
+{"log": "User Login Attempt", "datetime": "06/04/2023 18:11:07"}
+{"log": "User successfully logged in", "datetime": "06/04/2023 18:11:12"}
+{"log": "Other Login has been activated", "datetime": "06/04/2023 18:11:19"}
+{"log": "User successfully Other Logged in", "datetime": "06/04/2023 18:11:22"}
+{"log": "User WhiteSwine is viewing the passwords", "datetime": "06/04/2023 18:11:22"}
+{"log": "user is operating the lowest common multiple program", "datetime": "06/04/2023 18:11:55"}
+{"log": "System Bootup", "datetime": "06/04/2023 18:16:15"}
+{"log": "User Login Attempt", "datetime": "06/04/2023 18:16:15"}
+{"log": "User successfully logged in", "datetime": "06/04/2023 18:16:20"}
+{"log": "user is operating the lowest common multiple program", "datetime": "06/04/2023 18:16:26"}
+{"log": "System Bootup", "datetime": "06/04/2023 18:17:01"}
+{"log": "User Login Attempt", "datetime": "06/04/2023 18:17:01"}
+{"log": "User successfully logged in", "datetime": "06/04/2023 18:17:06"}
+{"log": "user is operating the lowest common multiple program", "datetime": "06/04/2023 18:17:11"}
+{"log": "System Bootup", "datetime": "06/04/2023 18:18:22"}
+{"log": "User Login Attempt", "datetime": "06/04/2023 18:18:22"}
+{"log": "User successfully logged in", "datetime": "06/04/2023 18:18:26"}
+{"log": "user is operating the lowest common multiple program", "datetime": "06/04/2023 18:18:33"}
+{"log": "System Bootup", "datetime": "06/04/2023 18:23:00"}
+{"log": "User Login Attempt", "datetime": "06/04/2023 18:23:00"}
+{"log": "User successfully logged in", "datetime": "06/04/2023 18:23:07"}
+{"log": "user is operating the lowest common multiple program", "datetime": "06/04/2023 18:23:20"}
+{"log": "System Bootup", "datetime": "06/04/2023 18:24:02"}
+{"log": "User Login Attempt", "datetime": "06/04/2023 18:24:02"}
+{"log": "User successfully logged in", "datetime": "06/04/2023 18:24:06"}
+{"log": "user is operating the lowest common multiple program", "datetime": "06/04/2023 18:24:14"}
+{"log": "System Bootup", "datetime": "06/04/2023 18:24:58"}
+{"log": "User Login Attempt", "datetime": "06/04/2023 18:24:58"}
+{"log": "User successfully logged in", "datetime": "06/04/2023 18:25:04"}
+{"log": "System Bootup", "datetime": "06/04/2023 18:25:06"}
+{"log": "User Login Attempt", "datetime": "06/04/2023 18:25:06"}
+{"log": "System Bootup", "datetime": "06/04/2023 18:25:27"}
+{"log": "User Login Attempt", "datetime": "06/04/2023 18:25:30"}
+{"log": "User successfully logged in", "datetime": "06/04/2023 18:25:36"}
+{"log": "user is operating the lowest common multiple program", "datetime": "06/04/2023 18:26:11"}
+{"log": "System Bootup", "datetime": "06/04/2023 18:27:56"}
+{"log": "User Login Attempt", "datetime": "06/04/2023 18:27:56"}
+{"log": "User successfully logged in", "datetime": "06/04/2023 18:28:00"}
+{"log": "System Bootup", "datetime": "06/04/2023 18:28:02"}
+{"log": "User Login Attempt", "datetime": "06/04/2023 18:28:02"}
+{"log": "System Bootup", "datetime": "06/04/2023 18:28:10"}
+{"log": "User Login Attempt", "datetime": "06/04/2023 18:28:10"}
+{"log": "User successfully logged in", "datetime": "06/04/2023 18:28:16"}
+{"log": "user is operating the lowest common multiple program", "datetime": "06/04/2023 18:28:37"}
+{"log": "System Bootup", "datetime": "06/04/2023 18:30:43"}
+{"log": "User Login Attempt", "datetime": "06/04/2023 18:30:43"}

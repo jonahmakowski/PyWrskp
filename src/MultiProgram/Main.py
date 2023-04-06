@@ -1,6 +1,6 @@
 import time
 import random
-from pyWrskp import *
+import pyWrskp
 from helper import *
 
 
@@ -116,7 +116,7 @@ class Main:
         if encrypt == 'y':
             if key is None:
                 key = number_input_local('What would you like the key to be?')
-            message = encrypt(key, message)
+            message = pyWrskp.encrypt(key, message)
         write_file('message.txt', message)
         show_window('Your message was saved at message.txt!', 'Successfull Message Save')
         time.sleep(2)
@@ -165,15 +165,15 @@ class Main:
             return
         info = decrypt_txt()
         direct = read_file('txt.txt')
-        print('User\t\tPassword\tName\tClearance\tKey')     # TODO transfer lines to psg
+        print('User, Password, Name, Clearance, Key')     # TODO transfer lines to psg
         count = 0
         logging('User {} is viewing the passwords'.format(self.username))
         for item in info:
-            print('{}\t{}\t\t{}\t{}\t\t{}'.format(item['user'],
-                                                  item['password'],
-                                                  item['name'],
-                                                  item['clearance'],
-                                                  direct[count]['key']))
+            print('{}, {}, {}, {}, {}'.format(item['user'],
+                                              item['password'],
+                                              item['name'],
+                                              item['clearance'],
+                                              direct[count]['key']))
             count += 1
         print()
         print()
@@ -205,7 +205,7 @@ class Main:
         message = question_window('What is the message?\n', 'Message')
         key = number_input_local('What is the key')
         show_window('Your encoded message is:\n' +
-                    encrypt(key, message),
+                    pyWrskp.encrypt(key, message),
                     'Message')
 
     def view_log(self):
@@ -326,14 +326,14 @@ class Main:
         name = question_window("What is the new user's name?",
                                'Name')
         key = number_input_local("Enter the new user's encryption key")
-        name = encrypt(key, name)
-        username = encrypt(key, username)
-        password = encrypt(key, password)
-        clearance = encrypt(key, clearance)
-        username_name = encrypt(key, 'user')
-        password_name = encrypt(key, 'password')
-        clearance_name = encrypt(key, 'clearance')
-        name_name = encrypt(key, 'name')
+        name = pyWrskp.encrypt(key, name)
+        username = pyWrskp.encrypt(key, username)
+        password = pyWrskp.encrypt(key, password)
+        clearance = pyWrskp.encrypt(key, clearance)
+        username_name = pyWrskp.encrypt(key, 'user')
+        password_name = pyWrskp.encrypt(key, 'password')
+        clearance_name = pyWrskp.encrypt(key, 'clearance')
+        name_name = pyWrskp.encrypt(key, 'name')
         current_users = read_file('txt.txt')
         current_users.append({username_name: username,
                               password_name: password,
