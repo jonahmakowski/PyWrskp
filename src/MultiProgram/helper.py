@@ -188,3 +188,4 @@ def check_lowest_common_multiple(num, multiple, m):
             count = 1
         if count == 1:
             count = 2
+    return False
