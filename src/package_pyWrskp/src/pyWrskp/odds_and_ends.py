@@ -23,7 +23,7 @@ def number_input(question,
 
 
 def loading(time):
-    loops = time * 1.5
+    loops = int(time * 1.5)
     for i in range(loops):
         print('|', end="\r")
         sleep(0.5)
