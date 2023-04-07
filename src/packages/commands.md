@@ -1,7 +1,7 @@
 # Commands to upload package
 
 ## Cd
-```cd Desktop/Github/pyWrskp/src/package_pyWrskp```
+```cd ~/Desktop/Github/pyWrskp/src/packages```
 
 ## Build
 ```python3 -m build```
