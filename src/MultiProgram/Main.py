@@ -117,7 +117,7 @@ class Main:
             if key is None:
                 key = number_input_local('What would you like the key to be?')
             message = pyWrskp.encrypt(key, message)
-        write_file('message.txt', message)
+        pyWrskp.write_file('message.txt', message)
         show_window('Your message was saved at message.txt!', 'Successfull Message Save')
         time.sleep(2)
         clear()
@@ -138,9 +138,9 @@ class Main:
             if key is None:
                 key = number_input_local('What is the key? (This must be a number)\n')
 
-        message = read_file('message.txt')
+        message = pyWrskp.read_file('message.txt')
         if encrypt == 'y':
-            message = decrypt(key, message)
+            message = pyWrskp.decrypt(key, message)
         show_window('Your message is {}!'.format(message),
                     'Message Result')
         clear()
@@ -164,7 +164,7 @@ class Main:
                         'Not Enough Clearance')
             return
         info = decrypt_txt()
-        direct = read_file('txt.txt')
+        direct = pyWrskp.read_file('txt.txt')
         print('User, Password, Name, Clearance, Key')     # TODO transfer lines to psg
         count = 0
         logging('User {} is viewing the passwords'.format(self.username))
@@ -198,7 +198,7 @@ class Main:
         self.login_checker()
         message = question_window('What is the message?\n', 'Message')
         key = number_input_local('What is the key?')
-        show_window('Your message is {}'.format(decrypt(key, message)), 'Message')
+        show_window('Your message is {}'.format(pyWrskp.decrypt(key, message)), 'Message')
 
     def encrypt_local(self):
         self.login_checker()
@@ -229,7 +229,7 @@ class Main:
                     'or a decimal, and a decimal or negetive will be expected',
                     'Math Game Rules')
         logging('User is playing a math game')
-        max_score = read_file('math.txt')
+        max_score = pyWrskp.read_file('math.txt')
         if max_score != []:
             show_window('The current high score is {}'.format(max_score),
                         'High Score')
@@ -266,7 +266,7 @@ class Main:
                     show_window('That is not a number, try again',
                                 'Not Number')
             if countinue:
-                max_score = read_file('math.txt')
+                max_score = pyWrskp.read_file('math.txt')
                 if user_input == awnser:
                     score += 1
                     show_window('Good Job, that is correct\n' +
@@ -286,11 +286,11 @@ class Main:
                                 'The correct awnser is {}, and yours was {}\n'.format(awnser, user_input) +
                                 'Your current score is {}'.format(score),
                                 'Incorrect')
-        max_score = read_file('math.txt')
+        max_score = pyWrskp.read_file('math.txt')
         if score > max_score:
             show_window('You beat the current high score by {}'.format(score - max_score),
                         'Beat High Score')
-            write_file('math.txt', score)
+            pyWrskp.write_file('math.txt', score)
             logging('Player {} beat the max score (of {}) and set a new max score as {}'.format(self.username,
                                                                                                 max_score,
                                                                                                 score))
@@ -334,13 +334,13 @@ class Main:
         password_name = pyWrskp.encrypt(key, 'password')
         clearance_name = pyWrskp.encrypt(key, 'clearance')
         name_name = pyWrskp.encrypt(key, 'name')
-        current_users = read_file('txt.txt')
+        current_users = pyWrskp.read_file('txt.txt')
         current_users.append({username_name: username,
                               password_name: password,
                               clearance_name: clearance,
                               'key': key,
                               name_name: name})
-        write_file('txt.txt', current_users)
+        pyWrskp.write_file('txt.txt', current_users)
 
     def mastermind(self):
         self.login_checker()
