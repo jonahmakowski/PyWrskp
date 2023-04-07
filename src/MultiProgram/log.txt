@@ -471,3 +471,17 @@
 {"log": "User Login Attempt", "datetime": "06/04/2023 18:33:21"}
 {"log": "User successfully logged in", "datetime": "06/04/2023 18:33:26"}
 {"log": "user is operating the lowest common multiple program", "datetime": "06/04/2023 18:33:32"}
+{"log": "System Bootup", "datetime": "06/04/2023 21:19:54"}
+{"log": "User Login Attempt", "datetime": "06/04/2023 21:19:54"}
+{"log": "User successfully logged in", "datetime": "06/04/2023 21:19:59"}
+{"log": "user is operating the lowest common multiple program", "datetime": "06/04/2023 21:20:10"}
+{"log": "System Bootup", "datetime": "06/04/2023 21:20:28"}
+{"log": "User Login Attempt", "datetime": "06/04/2023 21:20:28"}
+{"log": "User successfully logged in", "datetime": "06/04/2023 21:20:34"}
+{"log": "user is operating the lowest common multiple program", "datetime": "06/04/2023 21:20:43"}
+{"log": "System Bootup", "datetime": "06/04/2023 21:20:58"}
+{"log": "User Login Attempt", "datetime": "06/04/2023 21:20:58"}
+{"log": "User successfully logged in", "datetime": "06/04/2023 21:21:12"}
+{"log": "Other Login has been activated", "datetime": "06/04/2023 21:21:19"}
+{"log": "User successfully Other Logged in", "datetime": "06/04/2023 21:21:23"}
+{"log": "user WhiteSwine is viewing logs!", "datetime": "06/04/2023 21:21:23"}
