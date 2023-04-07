@@ -5,12 +5,12 @@ import random
 import threading
 import json
 import pygame
-from pyWrskp import *
+import pyWrskp
 
 
 def decrypt_txt(path='txt.txt'):
     end = []
-    list_encrypt = read_file(path)
+    list_encrypt = pyWrskp.read_file(path)
 
     count = 0
 
@@ -19,8 +19,8 @@ def decrypt_txt(path='txt.txt'):
         end.append({})
         for i in item:
             if i != 'key':
-                i_key = decrypt(key, i)
-                i_decrypt = decrypt(key, item[i])
+                i_key = pyWrskp.decrypt(key, i)
+                i_decrypt = pyWrskp.decrypt(key, item[i])
                 end[count][i_key] = i_decrypt
         count += 1
     return end
@@ -125,23 +125,13 @@ def play_music(music=None):
     if music is None:
         music = input('What is the name of the file you would like to play\n' +
                       'Music file must be under the "music" folder\n')
-    pygame.init()
     while True:
-        try:
-            pygame.mixer.music.load('music/{}'.format(music))
-            pygame.mixer.music.play()
-            question_window('Press enter to stop playing music',
-                            'Press enter to continue')
-            pygame.mixer.music.stop()
-            break
-        except pygame.error:
-            show_window('That file does not exist',
-                        'Song does not exist')
+        if pyWrskp.play_music('music/{}'.format(music)):
+            return
+        else:
             if music is None:
-                music = question_window('What is the name of the file you would like to play',
-                                        'Input new song')
-            else:
-                return
+                music = input('What is the name of the file you would like to play\n' +
+                              'Music file must be under the "music" folder\n')
 
 
 def check_lowest_common_multiple(num, multiple, m):
