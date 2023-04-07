@@ -1,4 +1,5 @@
 from time import sleep
+import pygame
 
 
 def number_input(question,
@@ -31,3 +32,16 @@ def loading(time):
         sleep(0.5)
         print('-', end="\r")
         sleep(0.5)
+
+
+def play_music(music):
+    pygame.init()
+    try:
+        pygame.mixer.music.load(music)
+        pygame.mixer.music.play()
+        input('Press enter to stop playing music')
+        pygame.mixer.music.stop()
+        return True
+    except pygame.error:
+        print('That file does not exist')
+        return False
