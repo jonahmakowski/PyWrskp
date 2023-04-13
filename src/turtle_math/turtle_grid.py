@@ -100,8 +100,7 @@ class Grid:
             self.t.goto(self.found_cors[1][0], self.found_cors[1][1])
         self.t.pensize(1)
 
-        for i in range(len(self.found_cors)):
-            del self.found_cors[i - 1]
+        self.found_cors = []
 
 
 C = Grid()
