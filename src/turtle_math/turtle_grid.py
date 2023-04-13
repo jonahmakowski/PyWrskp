@@ -108,8 +108,8 @@ C = Grid()
 while True:
     do = input('Would you like to draw or find location?\n')
     if do == 'find location' or do == 'find':
-        xcor = int(input('What would you like the xcor to be?'))
-        ycor = int(input('What would you like the ycor to be?'))
+        xcor = int(input('What would you like the xcor to be?\n'))
+        ycor = int(input('What would you like the ycor to be?\n'))
         C.find_cor(xcor, ycor)
     elif do == 'draw':
         C.draw()
