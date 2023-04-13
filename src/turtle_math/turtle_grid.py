@@ -43,12 +43,12 @@ class Grid:
 
         for t in range(20):
             self.t.forward(20)
-            self.t.right(90)
+            self.t.left(90)
             self.t.penup()
             self.t.forward(10)
             self.t.write(20 - t)
             self.t.backward(10)
-            self.t.left(90)
+            self.t.right(90)
             self.t.pendown()
 
         self.t.goto(xcor, ycor)
