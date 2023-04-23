@@ -9,8 +9,7 @@ while True:
 
 '''
 
-All this part does is set how many lines there will be for the triangles.
-All three ways will result in the same thing.
+All this part does is set how many lines there will be.
 
 '''
 
@@ -36,6 +35,7 @@ The +1 on line 20 is because the range() command does not include the number giv
 
 '''
 
+input('Press enter to countinue')
 print('Way 2')  # Way I would use before this class (since I did not know about the end paramater in the print function)
 
 star = ' *'
@@ -56,7 +56,10 @@ fourth print: " * * * *"
 
 '''
 
-print('Way 3')  # Kind of diffrent, more of a pyramid
+print('Extra Assignment')
+
+input('Press enter to countinue')
+print('Way 1')  # Did this before I saw the assignment, does not really follow the critrea of the extra assignment
 
 star = []
 for i in range(amount-1):
@@ -79,6 +82,10 @@ for line in range(amount):
 
 '''
 
+I made this very compicated for some reason, way 2 is a much better way to do this.
+
+-----------------------------------------------------------------------------------------------------------
+
 How this works is that I used lists, a diffrent variable type.
 To start I define an empty list (stars = []),
 then I add the correct amount of spaces, to make the payramid start in the middle
@@ -92,3 +99,43 @@ The second last thing I do in this loop, is start a second loop that prints all 
 one line after that I print a new line, so that the next line of the pyraimd starts of on a new line
 
 '''
+
+input('Press enter to countinue')
+print('Way 2')  # done after I saw the assignment, follows the critrea
+
+space = ' '
+star = ' *'
+
+for line in range(1, amount+1):
+    for i in range(amount - line):
+        print(space, end='')
+    for i in range(line):
+        print(star, end='')
+    print()
+
+'''
+
+**Assuming amount is 5**
+
+How this works is first space is print 5 times, then a star is printed 1 time, then a new line
+                                       ^                               ^
+                                       |                               |
+                                       A                               B
+Then remove one from A and add one to B
+
+Repeat five times.
+
+'''
+
+input('Press enter to countinue')
+print('Way 3') # Upside down pyriamd
+
+space = ' '
+star = ' *'
+
+for line in range(amount):
+    for i in range(line):
+        print(space, end='')
+    for i in range(amount - line):
+        print(star, end='')
+    print()
