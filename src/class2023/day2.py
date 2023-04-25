@@ -1,10 +1,14 @@
 while True:
-    try:
-        amount = int(input('How many lines would you like?\n'))
+    amount = input('How many lines would you like?\n')
+    if amount.isnumeric():
+        amount = int(amount)
         break
-    except ValueError:
-        print('That is not a number, try again.')
-        print()
+    else:
+        print('You really are a BIG student, that is not a number!',
+              'I asked how many lines you wanted and you said "{}"!'.format(amount),
+              'Really, you should learn what a number is!',
+              sep='\n',
+              end='\n\n')
 
 
 '''
@@ -139,3 +143,16 @@ for line in range(amount):
     for i in range(amount - line):
         print(star, end='')
     print()
+
+input('Press enter to continue')
+print('Way 4')
+
+space = ' '
+star = ' *'
+amount_of_space = amount + 1
+amount_of_star = 0
+
+for line in range(1, amount+1):
+    amount_of_space -= 1
+    amount_of_star += 1
+    print(space*amount_of_space+star*amount_of_star)
