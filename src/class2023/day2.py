@@ -128,7 +128,7 @@ Repeat five times.
 '''
 
 input('Press enter to countinue')
-print('Way 3') # Upside down pyriamd
+print('Way 3')  # Upside down pyriamd
 
 space = ' '
 star = ' *'
