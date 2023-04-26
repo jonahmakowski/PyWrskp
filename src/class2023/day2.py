@@ -1,6 +1,6 @@
 while True:
     amount = input('How many lines would you like?\n')
-    if amount.isnumeric():
+    if amount.isdigit():
         amount = int(amount)
         break
     else:
