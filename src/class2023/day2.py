@@ -60,6 +60,17 @@ fourth print: " * * * *"
 
 '''
 
+input('Press enter to countinue')
+print('Way 3')
+space = ' '
+star = ' *'
+
+
+for line in range(1, amount+1):
+    spaces = (amount - line) * 2
+    print(space*spaces, end='')
+    print(star*line)
+
 print('Extra Assignment')
 
 input('Press enter to countinue')
