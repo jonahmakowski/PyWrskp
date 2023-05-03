@@ -498,3 +498,11 @@
 {"log": "user WhiteSwine is viewing logs!", "datetime": "03/05/2023 12:43:46"}
 {"log": "user is operating the lowest common multiple program", "datetime": "03/05/2023 12:44:22"}
 {"log": "user is operating the lowest common multiple program", "datetime": "03/05/2023 12:45:07"}
+{"log": "System Bootup", "datetime": "03/05/2023 16:27:39"}
+{"log": "User Login Attempt", "datetime": "03/05/2023 16:27:39"}
+{"log": "User successfully logged in", "datetime": "03/05/2023 16:27:45"}
+{"log": "Other Login has been activated", "datetime": "03/05/2023 16:27:51"}
+{"log": "User successfully Other Logged in", "datetime": "03/05/2023 16:27:54"}
+{"log": "user WhiteSwine is viewing logs!", "datetime": "03/05/2023 16:27:54"}
+{"log": "System Bootup", "datetime": "03/05/2023 16:28:02"}
+{"log": "User Login Attempt", "datetime": "03/05/2023 16:28:02"}
