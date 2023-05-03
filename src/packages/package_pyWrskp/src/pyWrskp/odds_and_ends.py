@@ -34,14 +34,16 @@ def loading(time):
         sleep(0.5)
 
 
-def play_music(music):
+def play_music(music, print_info):
     pygame.init()
     try:
         pygame.mixer.music.load(music)
         pygame.mixer.music.play()
-        input('Press enter to stop playing music')
-        pygame.mixer.music.stop()
+        if print_info:
+            input('Press enter to stop playing music')
+            pygame.mixer.music.stop()
         return True
     except pygame.error:
-        print('That file does not exist')
+        if print_info:
+            print('That file does not exist')
         return False
