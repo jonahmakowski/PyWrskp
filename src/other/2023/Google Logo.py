@@ -5,7 +5,7 @@ class Google:
     def __init__(self):
         self.t = turtle.Turtle()
         self.t.shape('turtle')
-        self.size = 2
+        self.size = 1
         self.t.penup()
         self.current_x = -200 * self.size
         self.current_y = 200 * self.size
@@ -78,7 +78,7 @@ class Google:
         self.drawg()
 
         self.t.goto(self.current_x, self.current_y)
-        self.current_x += self.diffrence
+        self.current_x += self.diffrence / 2
         self.drawl()
 
         self.t.goto(self.current_x, self.current_y)
