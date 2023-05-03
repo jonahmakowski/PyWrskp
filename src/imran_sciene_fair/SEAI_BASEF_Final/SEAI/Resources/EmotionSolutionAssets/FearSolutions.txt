@@ -1,0 +1,3 @@
+W;Starting Netflix;http://www.netflix.com
+M,Playing some relaxing music,Resources/RelaxingMusic.mp3
+M,Breating Exercises,Resources/video.mp4
