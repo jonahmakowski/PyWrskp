@@ -74,7 +74,7 @@ input('Press enter to continue')
 star = ' *'
 space = '-'
 
-for i in range(-lines, lines+1):
+for i in range(-lines+1, lines):
     space_amount = abs(i)
     star_amount = lines-abs(i)
     print(space*space_amount+star*star_amount)
