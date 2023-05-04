@@ -1,6 +1,6 @@
 from random import randint
 
-print('Basic Homework:')
+print('Main Homework:')
 guessed = False
 secret = randint(0, 100)
 name = input('What is your name?\n')
@@ -25,7 +25,7 @@ for i in range(1, guesses + 1):
             print('Wow {} you really are a student!'.format(name))
             print('That is obviously supposed to be a number, you should be ashamed of yourself.')
     if guess == secret:
-        print('Good job! You won on guess number {}'.format(secret))
+        print('Good job! You won on guess number {}'.format(i))
         guessed = True
         break
     elif guess > secret:
@@ -37,17 +37,35 @@ if not guessed:
     print('You failed')
     print('The number was {} you STUDENT!'.format(secret))
 
+'''
+--------------------------------------------------------------------------------------------------------
+Starting here is John's extra homework for me
+Both methods I have created will print exactly this (assuming you set 10 lines):
+          *
+         * *
+        * * *
+       * * * *
+      * * * * *
+     * * * * * *
+    * * * * * * *
+   * * * * * * * *
+  * * * * * * * * *
+ * * * * * * * * * *
+  * * * * * * * * *
+   * * * * * * * *
+    * * * * * * *
+     * * * * * *
+      * * * * *
+       * * * *
+        * * *
+         * *
+          *
+--------------------------------------------------------------------------------------------------------
+'''
 input('Press enter to continue to additional homework')
 
 for i in range(300):
     print()
-
-print('Way One, Cheaty (no abs() used)')
-
-diamond = ''
-star = ' *'
-space = '-'
-
 
 while True:
     lines = input('How many lines would you like {}?\n'.format(name))
@@ -58,6 +76,11 @@ while True:
         print('Wow {} you really are a student!'.format(name))
         print('That is obviously supposed to be a number, you should be ashamed of yourself.')
 
+print('Way One, Cheaty (no abs() used)')
+diamond = ''
+star = ' *'
+space = ' '
+
 for line in range(1, lines+1):
     diamond += space*(lines-line)
     diamond += star*line
@@ -66,15 +89,12 @@ for line in range(1, lines):
     diamond += space*line
     diamond += star*(lines - line)
     diamond += '\n'
-print(diamond) # THE ONLY PRINT
+print(diamond)  # THE ONLY PRINT
 
 print('Way 2, with abs()')
 input('Press enter to continue')
 
-star = ' *'
-space = '-'
-
 for i in range(-lines+1, lines):
     space_amount = abs(i)
     star_amount = lines-abs(i)
-    print(space*space_amount+star*star_amount)
+    print(space*space_amount+star*star_amount)  # THE ONLY PRINT
