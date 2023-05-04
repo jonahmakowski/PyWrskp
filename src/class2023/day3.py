@@ -13,7 +13,7 @@ while True:
         print('Wow {} you really are a student!'.format(name))
         print('That is obviously supposed to be a number, you should be ashamed of yourself.')
 
-print('Welcome to guess my number {}! You have {} guesses!'.format(name, guesses))
+print('Welcome to guess my number {}! You have {} guesses! The number is betweeen 0, and 100'.format(name, guesses))
 
 for i in range(1, guesses + 1):
     while True:
@@ -37,10 +37,12 @@ if not guessed:
     print('You failed')
     print('The number was {} you STUDENT!'.format(secret))
 
-
 input('Press enter to continue to additional homework')
 
-print('Way One, Cheaty')
+for i in range(300):
+    print()
+
+print('Way One, Cheaty (no abs() used)')
 
 diamond = ''
 star = ' *'
@@ -48,7 +50,7 @@ space = '-'
 
 
 while True:
-    lines = input('How many lines would you like {}?'.format(name))
+    lines = input('How many lines would you like {}?\n'.format(name))
     if lines.isdigit():
         lines = int(lines)
         break
@@ -64,4 +66,15 @@ for line in range(1, lines):
     diamond += space*line
     diamond += star*(lines - line)
     diamond += '\n'
-print(diamond)
+print(diamond) # THE ONLY PRINT
+
+print('Way 2, with abs()')
+input('Press enter to continue')
+
+star = ' *'
+space = '-'
+
+for i in range(-lines, lines+1):
+    space_amount = abs(i)
+    star_amount = lines-abs(i)
+    print(space*space_amount+star*star_amount)
