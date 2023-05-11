@@ -39,13 +39,11 @@ class StrangeMathAssignemnts:
                 equation_lis = equation.split('$')
                 equation_lis[0] = float(equation_lis[0])
                 awnser = math.sqrt(equation_lis[0])
-            else:
-                print('{} is not a valid equation.'.format(equation))
-                return
             print('The anwser is:')
             print(awnser)
         except:
-            print('')
+            print('{} is not a valid equation.'.format(equation))
+            return
 
 
 s = StrangeMathAssignemnts('Jonah')
