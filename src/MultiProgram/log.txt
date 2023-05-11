@@ -506,3 +506,5 @@
 {"log": "user WhiteSwine is viewing logs!", "datetime": "03/05/2023 16:27:54"}
 {"log": "System Bootup", "datetime": "03/05/2023 16:28:02"}
 {"log": "User Login Attempt", "datetime": "03/05/2023 16:28:02"}
+{"log": "System Bootup", "datetime": "04/05/2023 17:58:39"}
+{"log": "User Login Attempt", "datetime": "04/05/2023 17:58:39"}
