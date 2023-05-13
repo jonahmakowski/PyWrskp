@@ -76,7 +76,7 @@ for cur_round in range(1, rounds_amount + 1):
     else:
         print('its a tie!')
     print('Computer choose {}'.format(computer['name']))
-    
+
 print('Simple way')
 input('press enter to continue')
 
@@ -86,10 +86,8 @@ for i in range(1, rounds_amount + 1):
     while not good_input:
         player = input('{}, choose rock, paper or scissors?\n'.format(name))
         player = player.lower()
-        for item in options:
-            if item['name'] == player:
-                player = item
-                good_input = True
+        if (player == 'rock' or player == 'paper') or player == 'scissors':
+            break
         if not good_input:
             print('Wow {} you really are a student!'.format(name))
             print('Again, the options are rock, paper or scissors.')
