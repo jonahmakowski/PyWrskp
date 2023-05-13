@@ -83,12 +83,12 @@ input('press enter to continue')
 for i in range(1, rounds_amount + 1):
     computer = choice(['rock', 'paper', 'scissors'])
     good_input = False
-    while not good_input:
+    while True:
         player = input('{}, choose rock, paper or scissors?\n'.format(name))
         player = player.lower()
         if (player == 'rock' or player == 'paper') or player == 'scissors':
             break
-        if not good_input:
+        else:
             print('Wow {} you really are a student!'.format(name))
             print('Again, the options are rock, paper or scissors.')
     if player == 'rock' and computer == 'paper':
@@ -104,3 +104,4 @@ for i in range(1, rounds_amount + 1):
     elif computer == 'scissors' and player == 'rock':
         print('You Won!')
     print('The computer choose {}'.format(computer))
+    
