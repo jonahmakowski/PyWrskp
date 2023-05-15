@@ -24,6 +24,10 @@ ttr.color('purple')
 ttl.color('black')
 tc.color('orange')
 
+# Mark Center (0,0 NOT true center)
+tc.forward(2)
+tc.backward(2)
+
 # Pens up
 tbr.penup()
 tbl.penup()
@@ -51,48 +55,6 @@ tbl.right(180)
 ttr.right(0)
 ttl.right(180)
 tc.right(180)
-
-# Define radius used for the circles
-radius = 50
-
-# Draw the circles (bottom left, top right)
-tbl.forward(50)
-ttr.forward(50)
-
-tbl.circle(radius)
-ttr.circle(radius)
-
-tbl.backward(50)
-ttr.backward(50)
-
-# Draw circles (bottom right, top left)
-ttl.right(90)
-ttl.forward(100)
-ttl.left(90)
-ttl.forward(50)
-ttl.circle(radius)
-ttl.backward(50)
-ttl.right(90)
-ttl.backward(100)
-ttl.left(90)
-
-tbr.right(90)
-tbr.forward(100)
-tbr.left(90)
-tbr.forward(50)
-tbr.circle(radius)
-tbr.backward(50)
-tbr.right(90)
-tbr.backward(100)
-tbr.left(90)
-
-# Draw Circles (Center)
-
-tc.forward(50)
-
-tc.circle(radius)
-
-tc.backward(50)
 
 # Draw the squares
 tbr.forward(100)
@@ -142,6 +104,49 @@ tbl.left(90)
 ttr.left(90)
 ttl.right(90)
 tc.left(90)
+
+# Define radius used for the circles
+radius = 50
+
+# Draw the circles (bottom left, top right)
+tbl.forward(50)
+ttr.forward(50)
+
+tbl.circle(radius)
+ttr.circle(radius)
+
+tbl.backward(50)
+ttr.backward(50)
+
+# Draw circles (bottom right, top left)
+ttl.right(90)
+ttl.forward(100)
+ttl.left(90)
+ttl.forward(50)
+ttl.circle(radius)
+ttl.backward(50)
+ttl.right(90)
+ttl.backward(100)
+ttl.left(90)
+
+tbr.right(90)
+tbr.forward(100)
+tbr.left(90)
+tbr.forward(50)
+tbr.circle(radius)
+tbr.backward(50)
+tbr.right(90)
+tbr.backward(100)
+tbr.left(90)
+
+# Draw Circles (Center)
+
+tc.forward(50)
+
+tc.circle(radius)
+
+tc.backward(50)
+
 
 # Make turtles vanish
 tbr.hideturtle()
