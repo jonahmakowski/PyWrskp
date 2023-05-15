@@ -24,9 +24,11 @@ ttr.color('purple')
 ttl.color('black')
 tc.color('orange')
 
+'''
 # Mark Center (0,0 NOT true center)
 tc.forward(2)
 tc.backward(2)
+'''
 
 # Pens up
 tbr.penup()
