@@ -1,7 +1,5 @@
 import turtle
 
-turtle.screensize(300, 300)
-
 tbr = turtle.Turtle() # Turtle Bottom Right
 tbl = turtle.Turtle() # Turtle Bottom Left
 ttr = turtle.Turtle() # Turtle Top Right
