@@ -119,6 +119,11 @@ def squares():
     tc.left(90)
 
 def circles():
+    global tbr
+    global tbl
+    global ttr
+    global ttl
+    global tc
     # Define radius used for the circles
     radius = 50
 
