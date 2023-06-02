@@ -19,7 +19,7 @@ rand_words = ['actor', 'angry', 'answer', 'ape', 'baby', 'backwards', 'banana', 
 chosen_words = []
 remembered_words = []
 num_words = 10
-display_time = 3
+display_time =3
 
 for i in range(num_words):
     index = randint(0, len(rand_words)+1)
@@ -27,12 +27,15 @@ for i in range(num_words):
     del rand_words[index]
 
 for word in chosen_words:
-    print(word)
+    print('                                           ', end="\r")
+    print(word, end="\r")
     sleep(display_time)
-    if platform.system() == 'Linux' or platform.system() == 'Darwin':
-        os.system('clear')
-    else:
-        os.system('cls')
+
+print('Hello cheater...', end="\r")
+if platform.system() == 'Linux' or platform.system() == 'Darwin':
+    os.system('clear')
+else:
+    os.system('cls')
 
 print('Input the words you can remember')
 for i in range(num_words):
