@@ -5,7 +5,8 @@ import pygame
 def number_input(question,
                  t='int',
                  new_line=True,
-                 tell=True):
+                 tell=True,
+                 message='That is not a number!\n Try again'):
     if tell:
         question += ' (This must be a number)'
     if new_line:
@@ -18,8 +19,7 @@ def number_input(question,
                 a = float(input(question))
             break
         except ValueError:
-            print('That is not a number!\n' +
-                  'Try again')
+            print(message)
     return a
 
 
