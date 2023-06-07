@@ -31,12 +31,6 @@ for word in chosen_words:
     print(word, end="\r")
     sleep(display_time)
 
-print('Hello cheater...', end="\r")
-if platform.system() == 'Linux' or platform.system() == 'Darwin':
-    os.system('clear')
-else:
-    os.system('cls')
-
 print('Input the words you can remember')
 for i in range(num_words):
     word = input()
