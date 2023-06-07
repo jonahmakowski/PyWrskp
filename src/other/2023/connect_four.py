@@ -24,7 +24,30 @@ def get_col(player):
         print('Number must be less then seven, and greater then one')
 
 
+def all_checks(x, y, char, x_change, y_change):
+    found = 1
+    counter_x = x_change
+    counter_y = y_change
+    while True:
+        if not ((y + counter_y) > 5 or (x + counter_x) > 7):
+            if board[x+counter_x][y+counter_y] == char:
+                found += 1
+            else:
+                break
+        else:
+            break
+        if counter_x == 4*x_change:
+            break
+        counter_x += x_change
+        counter_y += y_change
+    return found
+
+
 def horizontal_check(x, y, char):
+    found = all_checks(x, y, char, 1, 0)
+    found += all_checks(x, y, char, -1, 0)
+    return found
+    '''
     horizontal_found = 1
     counter = 1
     while True:
@@ -54,7 +77,7 @@ def horizontal_check(x, y, char):
         counter += 1
 
     return horizontal_found
-
+    '''
 
 def vertical_check(x, y, char):
     vertical_found = 1
