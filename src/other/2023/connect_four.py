@@ -24,14 +24,54 @@ def get_col(player):
         print('Number must be less then seven, and greater then one')
 
 
-def check_win(current_move1, current_move2):
-    # Player one
-    # Horizontal check
-    x = current_move1[0]
-    y = current_move2[1]
-    if board[x+1][y] == 'X':
-        pass
-    
+def horizontal_check(x, y):
+    horizontal_found = 0
+    counter = 1
+    while True:
+        if not (x + counter) > 7:
+            if board[x+counter][y] == 'X':
+                horizontal_found += 1
+        else:
+            break
+        if counter == 3:
+            break
+        counter += 1
+
+    counter = 1
+
+    while True:
+        if not (x - counter) < 1:
+            if board[x-counter][y] == 'X':
+                horizontal_found += 1
+        else:
+            break
+        if counter == 3:
+            break
+        counter += 1
+
+    return horizontal_found
+
+
+def check_win(current_move):
+    if not current_move == [None, None]:
+        # Player one
+        # Horizontal check
+        x = current_move[0]
+        y = current_move[1]
+        if horizontal_check(x, y) >= 4:
+            return True
+        return False
+
+
+def display_winner(win):
+    print('Player {} has won the game of connect four!'.format(win))
+
+
+winner = None
+player1_col = None
+player1_row = None
+player2_col = None
+player2_row = None
 
 
 while True:
@@ -42,6 +82,10 @@ while True:
             board[player1_col][i] = ' X '
             player1_row = i
             break
+
+    if check_win([player1_col, player1_row]):
+        winner = 1
+        break
     
     print()
     print()
@@ -51,8 +95,14 @@ while True:
     for i in range(5, -1, -1):
         if board[player2_col][i] == ' - ':
             board[player2_col][i] = ' O '
-            player1_row = i
+            player2_row = i
             break
-    if check_win([player1_col, player1_row], [player1_col, player1_row]):
+
+    print()
+    print()
+
+    if check_win([player2_col, player2_row]):
+        winner = 2
         break
     
+display_winner(winner)
