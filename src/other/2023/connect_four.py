@@ -19,21 +19,21 @@ def print_board():
 def get_col(player):
     while True:
         col = pyWrskp.number_input('Player {}, which colum would you like to go into?'.format(player))
-        if not col < 1 or col > 7:
+        if not (col < 1 or col > 7):
             return col
         print('Number must be less then seven, and greater then one')
 
 
-def horizontal_check(x, y):
+def horizontal_check(x, y, char):
     horizontal_found = 0
     counter = 1
     while True:
         if not (x + counter) > 7:
-            if board[x+counter][y] == 'X':
+            if board[x+counter][y] == char:
                 horizontal_found += 1
         else:
             break
-        if counter == 3:
+        if counter == 4:
             break
         counter += 1
 
@@ -41,24 +41,24 @@ def horizontal_check(x, y):
 
     while True:
         if not (x - counter) < 1:
-            if board[x-counter][y] == 'X':
+            if board[x-counter][y] == char:
                 horizontal_found += 1
         else:
             break
-        if counter == 3:
+        if counter == 4:
             break
         counter += 1
 
     return horizontal_found
 
 
-def check_win(current_move):
+def check_win(current_move, char):
     if not current_move == [None, None]:
         # Player one
         # Horizontal check
         x = current_move[0]
         y = current_move[1]
-        if horizontal_check(x, y) >= 4:
+        if horizontal_check(x, y, char) >= 4:
             return True
         return False
 
@@ -83,7 +83,7 @@ while True:
             player1_row = i
             break
 
-    if check_win([player1_col, player1_row]):
+    if check_win([player1_col, player1_row], ' X '):
         winner = 1
         break
     
@@ -101,7 +101,7 @@ while True:
     print()
     print()
 
-    if check_win([player2_col, player2_row]):
+    if check_win([player2_col, player2_row], ' O '):
         winner = 2
         break
     
