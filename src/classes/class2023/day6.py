@@ -19,7 +19,7 @@ rand_words = ['actor', 'angry', 'answer', 'ape', 'baby', 'backwards', 'banana', 
 chosen_words = []
 remembered_words = []
 num_words = 10
-display_time =3
+display_time = 3
 
 for i in range(num_words):
     index = randint(0, len(rand_words)+1)
