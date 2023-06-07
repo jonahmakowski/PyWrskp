@@ -25,12 +25,14 @@ def get_col(player):
 
 
 def horizontal_check(x, y, char):
-    horizontal_found = 0
+    horizontal_found = 1
     counter = 1
     while True:
         if not (x + counter) > 7:
             if board[x+counter][y] == char:
                 horizontal_found += 1
+            else:
+                break
         else:
             break
         if counter == 4:
@@ -43,6 +45,8 @@ def horizontal_check(x, y, char):
         if not (x - counter) < 1:
             if board[x-counter][y] == char:
                 horizontal_found += 1
+            else:
+                break
         else:
             break
         if counter == 4:
@@ -52,13 +56,75 @@ def horizontal_check(x, y, char):
     return horizontal_found
 
 
+def vertical_check(x, y, char):
+    vertical_found = 1
+    counter = 1
+    while True:
+        if not (y + counter) > 5:
+            if board[x][y+counter] == char:
+                vertical_found += 1
+            else:
+                break
+        else:
+            break
+        if counter == 4:
+            break
+        counter += 1
+
+    counter = 1
+
+    while True:
+        if not (y - counter) < 0:
+            if board[x][y-counter] == char:
+                vertical_found += 1
+            else:
+                break
+        else:
+            break
+        if counter == 4:
+            break
+        counter += 1
+
+    return vertical_found
+
+
+def diagonal_check(x, y, char):
+    diagonal_found = 1
+    counter = 1
+    while True:
+        if not ((y + counter) > 5 or (x + counter) > 7):
+            if board[x+counter][y+counter] == char:
+                diagonal_found += 1
+            else:
+                break
+        else:
+            break
+        if counter == 4:
+            break
+        counter += 1
+
+    counter = 1
+
+    while True:
+        if not ((y - counter) < 0 or (x - counter) < 1):
+            if board[x-counter][y-counter] == char:
+                diagonal_found += 1
+            else:
+                break
+        else:
+            break
+        if counter == 4:
+            break
+        counter += 1
+
+    return diagonal_found
+
+
 def check_win(current_move, char):
     if not current_move == [None, None]:
-        # Player one
-        # Horizontal check
         x = current_move[0]
         y = current_move[1]
-        if horizontal_check(x, y, char) >= 4:
+        if (horizontal_check(x, y, char) >= 4 or vertical_check(x, y, char) >= 4) or diagonal_check(x, y, char) >= 4:
             return True
         return False
 
@@ -84,7 +150,7 @@ while True:
             break
 
     if check_win([player1_col, player1_row], ' X '):
-        winner = 1
+        winner = 'one'
         break
     
     print()
@@ -102,7 +168,7 @@ while True:
     print()
 
     if check_win([player2_col, player2_row], ' O '):
-        winner = 2
+        winner = 'two'
         break
     
 display_winner(winner)
