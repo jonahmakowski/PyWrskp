@@ -15,12 +15,14 @@ def print_board():
             print(board[c][i], end='')
         print()
 
+
 def get_col(player):
     while True:
         col = pyWrskp.number_input('Player {}, which colum would you like to go into?'.format(player))
         if not col < 1 or col > 7:
             return col
         print('Number must be less then seven, and greater then one')
+
 
 def check_win(current_move1, current_move2):
     # Player one
