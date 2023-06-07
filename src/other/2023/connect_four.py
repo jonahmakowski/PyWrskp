@@ -29,7 +29,7 @@ def all_checks(x, y, char, x_change, y_change):
     counter_x = x_change
     counter_y = y_change
     while True:
-        if ((y + counter_y) < 5 or (x + counter_x) < 7) and ((y + counter_y) > 0 or (x + counter_x) > 0):
+        if ((y + counter_y) <= 6 and (x + counter_x) <= 7) and ((y + counter_y) >= 0 and (x + counter_x) >= 1):
             if board[x+counter_x][y+counter_y] == char:
                 found += 1
             else:
