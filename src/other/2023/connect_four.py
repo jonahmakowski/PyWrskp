@@ -29,7 +29,7 @@ def all_checks(x, y, char, x_change, y_change):
     counter_x = x_change
     counter_y = y_change
     while True:
-        if not ((y + counter_y) > 5 or (x + counter_x) > 7):
+        if ((y + counter_y) < 5 or (x + counter_x) < 7) and ((y + counter_y) > 0 or (x + counter_x) > 0):
             if board[x+counter_x][y+counter_y] == char:
                 found += 1
             else:
@@ -43,111 +43,11 @@ def all_checks(x, y, char, x_change, y_change):
     return found
 
 
-def horizontal_check(x, y, char):
-    found = all_checks(x, y, char, 1, 0)
-    found += all_checks(x, y, char, -1, 0)
-    return found
-    '''
-    horizontal_found = 1
-    counter = 1
-    while True:
-        if not (x + counter) > 7:
-            if board[x+counter][y] == char:
-                horizontal_found += 1
-            else:
-                break
-        else:
-            break
-        if counter == 4:
-            break
-        counter += 1
-
-    counter = 1
-
-    while True:
-        if not (x - counter) < 1:
-            if board[x-counter][y] == char:
-                horizontal_found += 1
-            else:
-                break
-        else:
-            break
-        if counter == 4:
-            break
-        counter += 1
-
-    return horizontal_found
-    '''
-
-def vertical_check(x, y, char):
-    vertical_found = 1
-    counter = 1
-    while True:
-        if not (y + counter) > 5:
-            if board[x][y+counter] == char:
-                vertical_found += 1
-            else:
-                break
-        else:
-            break
-        if counter == 4:
-            break
-        counter += 1
-
-    counter = 1
-
-    while True:
-        if not (y - counter) < 0:
-            if board[x][y-counter] == char:
-                vertical_found += 1
-            else:
-                break
-        else:
-            break
-        if counter == 4:
-            break
-        counter += 1
-
-    return vertical_found
-
-
-def diagonal_check(x, y, char):
-    diagonal_found = 1
-    counter = 1
-    while True:
-        if not ((y + counter) > 5 or (x + counter) > 7):
-            if board[x+counter][y+counter] == char:
-                diagonal_found += 1
-            else:
-                break
-        else:
-            break
-        if counter == 4:
-            break
-        counter += 1
-
-    counter = 1
-
-    while True:
-        if not ((y - counter) < 0 or (x - counter) < 1):
-            if board[x-counter][y-counter] == char:
-                diagonal_found += 1
-            else:
-                break
-        else:
-            break
-        if counter == 4:
-            break
-        counter += 1
-
-    return diagonal_found
-
-
 def check_win(current_move, char):
     if not current_move == [None, None]:
         x = current_move[0]
         y = current_move[1]
-        if (horizontal_check(x, y, char) >= 4 or vertical_check(x, y, char) >= 4) or diagonal_check(x, y, char) >= 4:
+        if all_checks(x, y, char, 1, 0) >= 4 or all_checks(x, y, char, -1, 0) >= 4:
             return True
         return False
 
