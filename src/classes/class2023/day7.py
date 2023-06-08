@@ -53,8 +53,9 @@ missed_list = chosen_words.copy()
 madeup_list = []
 for count in range(len(remembered_words)):
     if remembered_words[count] in chosen_words:
-        correct_list.append(remembered_words[count])
-        missed_list.remove(remembered_words[count])
+        if remembered_words[count] in missed_list:
+            correct_list.append(remembered_words[count])
+            missed_list.remove(remembered_words[count])
     else:
         madeup_list.append(remembered_words[count])
 
