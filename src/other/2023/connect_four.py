@@ -56,6 +56,7 @@ def check_win(current_move, char):
 
 def display_winner(win):
     print('Player {} has won the game of connect four!'.format(win))
+    print_board()
 
 
 winner = None
