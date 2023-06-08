@@ -18,7 +18,7 @@ rand_words = ['actor', 'angry', 'answer', 'ape', 'baby', 'backwards', 'banana', 
 chosen_words = []
 remembered_words = []
 num_words = 10
-display_time = 0
+display_time = 5
 
 for i in range(num_words):
     index = randint(0, len(rand_words)-1)
@@ -29,12 +29,14 @@ for word in chosen_words:
     stdout.write("\033[F")
     print('                                     ')
     stdout.write("\033[F")
-    print(word)
+    print('\n'*40)
+    print(word, end='')
     sleep(display_time)
 
 stdout.write("\033[F")
 print('                                     ')
 stdout.write("\033[F")
+print('\n'*40)
 
 print('Input the words you can remember')
 while len(remembered_words) <= num_words:
