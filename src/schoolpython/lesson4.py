@@ -1,3 +1,11 @@
+'''
+Jonah
+Mrs. Brownhill
+June 13, 2023
+This program is supposed to make squares in a triagular setup.
+'''
+
+
 import turtle
 
 def squares():
