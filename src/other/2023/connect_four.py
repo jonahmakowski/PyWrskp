@@ -10,6 +10,7 @@ board = {1: [' - ', ' - ', ' - ', ' - ', ' - ', ' - '],
 
 
 def print_board():
+    print(' 1  2  3  4  5  6  7 ')
     for i in range(6):
         for c in range(1, 8):
             print(board[c][i], end='')
@@ -25,7 +26,7 @@ def get_col(player):
 
 
 def all_checks(x, y, char, x_change, y_change):
-    found = 1
+    found = 0
     counter_x = x_change
     counter_y = y_change
     while True:
@@ -36,7 +37,9 @@ def all_checks(x, y, char, x_change, y_change):
                 break
         else:
             break
-        if counter_x == 4*x_change:
+        if counter_x == 4*x_change and x_change != 0:
+            break
+        if counter_y == 4*y_change and y_change != 0:
             break
         counter_x += x_change
         counter_y += y_change
@@ -47,16 +50,26 @@ def check_win(current_move, char):
     if not current_move == [None, None]:
         x = current_move[0]
         y = current_move[1]
-        if all_checks(x, y, char, 1, 0) >= 4 or all_checks(x, y, char, -1, 0) >= 4:  # Horizontal Check
+
+        horizontal = all_checks(x, y, char, 1, 0) + all_checks(x, y, char, -1, 0) + 1
+        vertical = all_checks(x, y, char, 0, 1) + all_checks(x, y, char, 0, -1) + 1
+        diagonal1 = all_checks(x, y, char, 1, 1) + all_checks(x, y, char, -1, -1) + 1
+        diagonal2 = all_checks(x, y, char, -1, 1) + all_checks(x, y, char, 1, -1) + 1
+
+        if horizontal >= 4:
             return True
-        elif all_checks(x, y, char, 0, 1) >= 4 or all_checks(x, y, char, 0, -1) >= 4:  # Vertical Check
+        elif vertical >= 4:
+            return True
+        elif diagonal1 >= 4:
+            return True
+        elif diagonal2 >= 4:
             return True
         return False
 
 
 def display_winner(win):
-    print('Player {} has won the game of connect four!'.format(win))
     print_board()
+    print('Player {} has won the game of connect four!'.format(win))
 
 
 winner = None
