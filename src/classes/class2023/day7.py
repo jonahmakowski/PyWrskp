@@ -26,16 +26,9 @@ for i in range(num_words):
     del rand_words[index]
 
 for word in chosen_words:
-    stdout.write("\033[F")
-    print('                                     ')
-    stdout.write("\033[F")
-    print('\n'*40)
-    print(word, end='')
+    print('\n'*40 + word + '\n'*3)
     sleep(display_time)
 
-stdout.write("\033[F")
-print('                                     ')
-stdout.write("\033[F")
 print('\n'*40)
 
 print('Input the words you can remember')
