@@ -1,6 +1,5 @@
 from time import sleep
 from random import randint
-from sys import stdout
 
 rand_words = ['actor', 'angry', 'answer', 'ape', 'baby', 'backwards', 'banana', 'baseball', 'blood', 
               'captain', 'card', 'cat', 'chair', 'checkers', 'cheese', 'children', 'circle', 'coal', 
