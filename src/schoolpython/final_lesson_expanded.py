@@ -53,7 +53,7 @@ def funct():
     # Displaying the amount of circles drawn
     print(str(counter+2) + ' circles were drawn!')
     '''
-    This is where the +3 comes from,
+    This is where the +2 comes from,
     1. The first of the three comes from the first black circle that is drawn
     2. The final of the three comes from the final black circle that is drawn
     '''
