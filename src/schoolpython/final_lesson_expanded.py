@@ -25,6 +25,9 @@ def funct():
 
     # Making it so it doesn't take forever!
     turtle.speed(0)
+    
+    # Making it centered
+    turtle.setpos(0, -radius)
 
     # Starting first circle (The one that is farthest in the back)
     turtle.begin_fill()
