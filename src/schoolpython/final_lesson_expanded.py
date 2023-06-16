@@ -1,12 +1,15 @@
+'''
+Jonah
+Mrs. Brownhill
+June 19, 2023
+This program is supposed to draw a cylinder with the givin radius and height
+'''
+
 import turtle
 from math import pi
 
 
 def funct():
-    # Define var that shows how exact the turtle drawing is
-    exact = int(input('Tell me how exact you want it to be, the higher the more exact.    '))  # So if exact = 100, one height = 100 circles drawn
-    # This is not really that important for this version, but will be more important in the version with floats
-
     # Getting radius and height from the user
     radius = float(input('What radius would you like to use?   '))
     height = float(input('What is the height you would like to use?   '))
@@ -41,13 +44,13 @@ def funct():
     counter = 0
     
     # Drawing the main cylinder
-    while counter < (height*exact) - 2:
-        counter = counter + 1
-        turtle.forward(1 / exact)
+    while counter < height - 2:
+        counter = counter + 0.1
+        turtle.forward(0.1)
         turtle.circle(radius)
 
     # Drawing the final circle
-    turtle.forward(1 / exact)
+    turtle.forward(0.1)
     turtle.color('black')
     turtle.begin_fill()
     turtle.circle(radius)

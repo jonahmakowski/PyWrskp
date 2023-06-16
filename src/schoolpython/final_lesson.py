@@ -1,3 +1,10 @@
+'''
+Jonah
+Mrs. Brownhill
+June 19, 2023
+This program is supposed to draw a cylinder with the givin radius and height (height will be interpreted as a interger)
+'''
+
 import turtle
 from math import pi
 
