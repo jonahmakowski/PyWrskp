@@ -60,8 +60,8 @@ def funct():
     print(str(counter+2) + ' circles were drawn!')
     '''
     This is where the +2 comes from,
-    1. The first of the three comes from the first black circle that is drawn
-    2. The final of the three comes from the final black circle that is drawn
+    1. The first of the two comes from the first black circle that is drawn
+    2. The final of the two comes from the final black circle that is drawn
     '''
 
     # I need this line on my computer at home so that the turtle window does not go away
