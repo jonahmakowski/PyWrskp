@@ -54,6 +54,7 @@
     var socket = io.connect('http://' + document.domain + ':' + location.port);
 
     var username = null;
+    var selectedGroup = 'Everyone';
 
     function setUsername() {
         var userInput = document.getElementById('usernameInput');
@@ -77,18 +78,19 @@
 
     function joinGroup(groupName) {
         socket.emit('join_group', {group_name: groupName});
+        selectedGroup = groupName;
     }
 
     function leaveGroup(groupName) {
         socket.emit('leave_group', {group_name: groupName});
+        selectedGroup = 'Everyone';
     }
 
     function sendMessage() {
         var messageInput = document.getElementById('messageInput');
         var message = messageInput.value.trim();
         if (message.length > 0) {
-            var recipient = document.getElementById('recipientInput').value;
-            socket.emit('send_message', {message: message, recipient: recipient});
+            socket.emit('send_message', {message: message, group_name: selectedGroup});
             messageInput.value = '';
         }
     }
