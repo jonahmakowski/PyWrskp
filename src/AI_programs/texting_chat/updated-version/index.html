@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Visual Chat System</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.2/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        /* Add your custom styles here */
+        .message {
+            padding: 4px;
+            margin: 2px;
+        }
+
+        .user-list-item {
+            cursor: pointer;
+        }
+
+        .group-list-item {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div id="usernameForm">
+    <h2>Choose a username:</h2>
+    <input type="text" id="usernameInput">
+    <button onclick="setUsername()">Set Username</button>
+</div>
+
+<div id="chatApp" style="display: none;">
+    <h1>Visual Chat System</h1>
+
+    <div>
+        <h2>Groups:</h2>
+        <div id="groupList"></div>
+        <input type="text" id="newGroupInput" placeholder="New group name">
+        <button onclick="createGroup()">Create Group</button>
+    </div>
+
+    <div>
+        <h2>Users:</h2>
+        <div id="userList"></div>
+    </div>
+
+    <div id="chatContainer">
+        <h2>Chat:</h2>
+        <div id="chatMessages"></div>
+        <input type="text" id="messageInput" placeholder="Type your message">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<script>
+    var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+    var username = null;
+
+    function setUsername() {
+        var userInput = document.getElementById('usernameInput');
+        var user = userInput.value.trim();
+        if (user.length > 0) {
+            socket.emit('set_username', {username: user});
+            username = user;
+            document.getElementById('usernameForm').style.display = 'none';
+            document.getElementById('chatApp').style.display = 'block';
+        }
+    }
+
+    function createGroup() {
+        var newGroupInput = document.getElementById('newGroupInput');
+        var groupName = newGroupInput.value.trim();
+        if (groupName.length > 0) {
+            socket.emit('create_group', {group_name: groupName});
+            newGroupInput.value = '';
+        }
+    }
+
+    function joinGroup(groupName) {
+        socket.emit('join_group', {group_name: groupName});
+    }
+
+    function leaveGroup(groupName) {
+        socket.emit('leave_group', {group_name: groupName});
+    }
+
+    function sendMessage() {
+        var messageInput = document.getElementById('messageInput');
+        var message = messageInput.value.trim();
+        if (message.length > 0) {
+            var recipient = document.getElementById('recipientInput').value;
+            socket.emit('send_message', {message: message, recipient: recipient});
+            messageInput.value = '';
+        }
+    }
+
+    socket.on('connect', function () {
+        document.getElementById('usernameForm').style.display = 'block';
+    });
+
+    socket.on('username_set', function (data) {
+        document.getElementById('usernameForm').style.display = 'none';
+        username = data.username;
+    });
+
+    socket.on('group_created', function (data) {
+        var groupList = document.getElementById('groupList');
+        var groupListItem = document.createElement('div');
+        groupListItem.textContent = data.group_name;
+        groupListItem.classList.add('group-list-item');
+        groupListItem.onclick = function () {
+            joinGroup(data.group_name);
+        };
+        groupList.appendChild(groupListItem);
+    });
+
+    socket.on('group_list', function (data) {
+        var groupList = document.getElementById('groupList');
+        groupList.innerHTML = '';
+        data.groups.forEach(function (groupName) {
+            var groupListItem = document.createElement('div');
+            groupListItem.textContent = groupName;
+            groupListItem.classList.add('group-list-item');
+            groupListItem.onclick = function () {
+                joinGroup(groupName);
+            };
+            groupList.appendChild(groupListItem);
+        });
+    });
+
+    socket.on('user_list', function (data) {
+        var userList = document.getElementById('userList');
+        userList.innerHTML = '';
+        data.users.forEach(function (user) {
+            var userListItem = document.createElement('div');
+            userListItem.textContent = user;
+            userListItem.classList.add('user-list-item');
+            userListItem.onclick = function () {
+                document.getElementById('recipientInput').value = user;
+            };
+            userList.appendChild(userListItem);
+        });
+    });
+
+    socket.on('user_joined_group', function (data) {
+        var chatMessages = document.getElementById('chatMessages');
+        var messageDiv = document.createElement('div');
+        messageDiv.textContent = 'User "' + data.username + '" joined the group "' + data.group_name + '".';
+        messageDiv.classList.add('message');
+        chatMessages.appendChild(messageDiv);
+    });
+
+    socket.on('user_left_group', function (data) {
+        var chatMessages = document.getElementById('chatMessages');
+        var messageDiv = document.createElement('div');
+        messageDiv.textContent = 'User "' + data.username + '" left the group "' + data.group_name + '".';
+        messageDiv.classList.add('message');
+        chatMessages.appendChild(messageDiv);
+    });
+
+    socket.on('private_message', function (data) {
+        var chatMessages = document.getElementById('chatMessages');
+        var messageDiv = document.createElement('div');
+        messageDiv.textContent = 'Private message from "' + data.sender + '": ' + data.message;
+        messageDiv.classList.add('message');
+        chatMessages.appendChild(messageDiv);
+    });
+
+    socket.on('group_message', function (data) {
+        var chatMessages = document.getElementById('chatMessages');
+        var messageDiv = document.createElement('div');
+        messageDiv.textContent = 'Group message from "' + data.sender + '" in group "' + data.group_name + '": ' + data.message;
+        messageDiv.classList.add('message');
+        chatMessages.appendChild(messageDiv);
+    });
+</script>
+</body>
+</html>
