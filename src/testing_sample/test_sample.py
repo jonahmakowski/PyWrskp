@@ -1,5 +1,5 @@
 # testing sample
-from src.testing_sample import main as my_module
+import main as my_module
 import unittest
 
 class TestMyModule(unittest.TestCase):
