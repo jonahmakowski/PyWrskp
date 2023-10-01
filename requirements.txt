@@ -1,9 +1,9 @@
-future~=0.18.3
-python-dateutil~=2.8.2
-flask~=2.2.2
-numpy~=1.25.0
-requests~=2.31.0
-beautifulsoup4~=4.12.2
-pillow~=9.4.0
-python-dotenv~=0.21.0
+future
+python-dateutil
+flask
+numpy
+requests
+beautifulsoup4
+pillow
+python-dotenv
 pytest
