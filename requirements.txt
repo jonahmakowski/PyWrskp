@@ -6,3 +6,4 @@ requests~=2.31.0
 beautifulsoup4~=4.12.2
 pillow~=9.4.0
 python-dotenv~=0.21.0
+pytest
