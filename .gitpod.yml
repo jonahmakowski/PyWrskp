@@ -1,9 +1,0 @@
-tasks:
-  - name: var
-    command: export PYWRSKP=workspace/pyWrskp
-  - name: pip flask
-    command: pip install flask
-  - name: pip turtle
-    command: pip install turtle
-  - name: pip pygame
-    command: pip install pygame
