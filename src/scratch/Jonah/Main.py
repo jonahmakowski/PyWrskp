@@ -4,8 +4,24 @@ import pygame
 import os
 pygame.init()
 
+
+def cursor():
+    pygame.event.get()
+    mouse = pygame.mouse.get_pos()
+    press = pygame.mouse.get_pressed()
+    return mouse, press
+
+
 class Main:
-    def __init__(self, sprites=[], code=[], backdrops=[], variables=[], name=None):
+    def __init__(self, sprites=None, code=None, backdrops=None, variables=None, name=None):
+        if variables is None:
+            variables = []
+        if backdrops is None:
+            backdrops = []
+        if code is None:
+            code = []
+        if sprites is None:
+            sprites = []
         self.sprites = sprites
         self.backdrops = backdrops
         self.code = code
@@ -15,15 +31,18 @@ class Main:
         if name == None:
             self.choose_file()
         while True:
-            draw_screen()
+            self.draw_screen()
     
     def draw_screen(self):
-        if self.code == []:
+        if not self.code:
             self.choose_file()
-    
-    def cursor(self):
-        mouse = pygame.mouse.get_pos()
-    
+        for item in self.code:
+            print(item)
+        while True:
+            mouse, press = cursor()
+            print(mouse)
+            print(press)
+
     def save(self):
         with open('scratch/' + self.name + '.txt', 'w') as f:
             for item in self.code:
