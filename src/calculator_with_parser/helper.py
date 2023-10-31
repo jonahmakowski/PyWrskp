@@ -3,15 +3,27 @@ TT_MUL = 'MUL'
 TT_DIV = 'DIV'
 TT_ADD = 'ADD'
 TT_SUB = 'SUB'
-TT_INT = 'INT'
-TT_FLO = 'FLO'
-ALL_TTs = (TT_MUL, TT_DIV, TT_ADD, TT_SUB, TT_INT, TT_FLO)
+TT_NUM = 'NUM'
+TT_RPAREN = 'RPAREN'
+TT_LPAREN = 'LPAREN'
+ALL_TTs = (TT_MUL, TT_DIV, TT_ADD, TT_SUB, TT_NUM, TT_RPAREN, TT_LPAREN)
 ###############
+
+DIGITS = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9')
+OPS = ('+', '-', '*', '/')
+
 
 class Token:
     def __init__(self, tt, value=None):
-        if tt in ALL_TTs: type = tt else: 
+        if tt in ALL_TTs:
+            self.tt = tt
+        else:
+            raise TypeError("Must be one of the Token Types")
         self.value = value
+
+    def __repr__(self):
+        return '{}:{}'.format(self.tt, self.value) if self.value is not None else '{}'.format(self.tt)
+
 
 class Parser:
     def __init__(self, text):
@@ -19,7 +31,124 @@ class Parser:
         self.text = list(text)
         self.pos = -1
         self.index = None
+        self.advance()
 
     def advance(self):
         self.pos += 1
-        self.index = self.text[self.pos]
+        if self.pos < len(self.text):
+            self.index = self.text[self.pos]
+            return False
+        else:
+            return True
+
+    def make_tokens(self):
+        tokens = []
+        while True:
+            num = False
+            if self.index != ' ':
+                if self.index in OPS:
+                    if self.index == '*':
+                        tokens.append(Token(TT_MUL))
+                    elif self.index == '/':
+                        tokens.append(Token(TT_DIV))
+                    elif self.index == '+':
+                        tokens.append(Token(TT_ADD))
+                    elif self.index == '-':
+                        tokens.append(Token(TT_SUB))
+                elif self.index in ('(', ')'):
+                    if self.index == '(':
+                        tokens.append(Token(TT_RPAREN))
+                    elif self.index == ')':
+                        tokens.append(Token(TT_LPAREN))
+                elif self.index in DIGITS:
+                    num = True
+                    tokens, stop = self.make_numbers(tokens)
+                    if stop:
+                        break
+                else:
+                    raise Exception("Char {} not allowed".format(self.index))
+
+            if not num:
+                if self.advance():
+                    break
+
+        return tokens
+
+    def make_numbers(self, tokens):
+        stop = False
+        value = ''
+
+        while True:
+            if self.index in DIGITS:
+                value += self.index
+                stop = self.advance()
+                if stop:
+                    break
+            else:
+                break
+
+        tokens.append(Token(TT_NUM, value=int(value)))
+
+        return tokens, stop
+
+
+class Order:
+    def __init__(self, tokens):
+        self.tokens = tokens
+        self.pos, self.index, self.result = None, None, None
+        self.reset()
+
+    def reset(self):
+        self.pos = -1
+        self.index = None
+        self.result = []
+        self.advance()
+
+    def advance(self):
+        self.pos += 1
+        if self.pos < len(self.tokens):
+            self.index = self.tokens[self.pos]
+            return False
+        else:
+            return True
+
+    def make_order(self):
+        self.error_catching()
+        while True:
+            if self.advance():
+                break
+
+    def error_catching(self):
+        left_parentheses = 0
+        right_parentheses = 0
+        while True:
+            if self.index.tt in (TT_MUL, TT_DIV, TT_SUB, TT_ADD):
+                if self.pos + 1 < len(self.tokens) and self.tokens[self.pos+1].tt not in (TT_NUM, TT_RPAREN, TT_LPAREN):
+                    raise Exception('A Number or parentheses must come before and after a operation')
+                elif self.pos > 0 and self.tokens[self.pos-1].tt not in (TT_NUM, TT_RPAREN, TT_LPAREN):
+                    raise Exception('A Number or parentheses must come before and after a operation')
+            elif self.index.tt in (TT_RPAREN, TT_LPAREN):
+                if self.pos + 1 < len(self.tokens) and self.index.tt == TT_RPAREN and self.tokens[self.pos+1].tt != TT_NUM:
+                    raise Exception('A Number or parentheses must happen within parentheses')
+                elif self.pos > 0 and self.index.tt == TT_LPAREN and self.tokens[self.pos-1].tt != TT_NUM:
+                    raise Exception('A Number or parentheses must happen within parentheses')
+                elif self.index.tt == TT_LPAREN:
+                    left_parentheses += 1
+                elif self.index.tt == TT_RPAREN:
+                    right_parentheses += 1
+            elif self.index.tt == TT_NUM:
+                if self.pos > 0 and self.tokens[self.pos-1].tt == TT_NUM:
+                    raise Exception('Numbers can not come directly after other numbers')
+                elif self.pos + 1 < len(self.tokens) and self.tokens[self.pos+1].tt == TT_NUM:
+                    raise Exception('Numbers can not come directly after other numbers')
+                elif self.pos > 0 and self.tokens[self.pos-1].tt == TT_LPAREN:
+                    raise Exception("Numbers can not come directly after left (')') parentheses")
+                elif self.pos + 1 < len(self.tokens) and self.tokens[self.pos+1].tt == TT_RPAREN:
+                    raise Exception("Numbers can not come directly before right ('(') parentheses")
+
+            if self.advance():
+                break
+
+        if left_parentheses != right_parentheses:
+            raise Exception('The number of left and right parentheses must be the same')
+        self.reset()
