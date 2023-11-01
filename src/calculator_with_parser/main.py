@@ -1,6 +1,6 @@
 from helper import *
 
-p = Parser('2*(5+10)')
+p = Parser('2*(5+(10/2))')
 tokens = p.make_tokens()
 print(tokens)
 o = Order(tokens)

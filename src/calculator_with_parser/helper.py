@@ -4,8 +4,8 @@ TT_DIV = 'DIV'
 TT_ADD = 'ADD'
 TT_SUB = 'SUB'
 TT_NUM = 'NUM'
-TT_RPAREN = 'RPAREN'
-TT_LPAREN = 'LPAREN'
+TT_RPAREN = '('
+TT_LPAREN = ')'
 ALL_TTs = (TT_MUL, TT_DIV, TT_ADD, TT_SUB, TT_NUM, TT_RPAREN, TT_LPAREN)
 ###############
 
@@ -23,6 +23,17 @@ class Token:
 
     def __repr__(self):
         return '{}:{}'.format(self.tt, self.value) if self.value is not None else '{}'.format(self.tt)
+
+
+class Expression:
+    def __init__(self, expression):
+        self.expression = expression
+
+    def copy(self):
+        return Expression(self.expression)
+
+    def __repr__(self):
+        return str(self.expression)
 
 
 class Parser:
@@ -72,7 +83,7 @@ class Parser:
                 if self.advance():
                     break
 
-        return tokens
+        return Expression(tokens)
 
     def make_numbers(self, tokens):
         stop = False
@@ -87,63 +98,99 @@ class Parser:
             else:
                 break
 
-        tokens.append(Token(TT_NUM, value=int(value)))
+        tokens.append(Token(TT_NUM, value=float(value)))
 
         return tokens, stop
 
 
 class Order:
-    def __init__(self, tokens):
-        self.tokens = tokens
-        self.pos, self.index, self.result = None, None, None
+    def __init__(self, expression):
+        self.expression = expression
+        self.result = []
+        self.pos, self.index = None, None
         self.reset()
 
     def reset(self):
         self.pos = -1
         self.index = None
-        self.result = []
         self.advance()
 
     def advance(self):
         self.pos += 1
-        if self.pos < len(self.tokens):
-            self.index = self.tokens[self.pos]
+        if self.pos < len(self.expression.expression):
+            self.index = self.expression.expression[self.pos]
             return False
         else:
             return True
 
     def make_order(self):
         self.error_catching()
+        self.parentheses()
+
+    def parentheses(self):
+        right_found = []
+        left_found = []
+        pairs = []
         while True:
+            if self.index.tt == TT_LPAREN:
+                left_found.append(self.pos)
+            elif self.index.tt == TT_RPAREN:
+                right_found.append(self.pos)
+
             if self.advance():
                 break
+        self.reset()
+
+        while True:
+            if len(right_found) == 0:
+                break
+            pairs.append((right_found[0], left_found[len(left_found)-1]))
+            del right_found[0]
+            del left_found[len(left_found)-1]
+
+        for i in range(len(pairs)-1, 0, -1):
+            pair = pairs[i]
+            temp = self.expression.expression
+            temp1 = self.expression.expression[pair[0]+1:pair[1]]
+            temp_expression = Expression(temp1)
+            del temp[pair[0]+1:pair[1]]
+            temp.insert(pair[0], temp_expression)
+            self.expression = Expression(temp)
+
+        print(self.expression)
 
     def error_catching(self):
         left_parentheses = 0
         right_parentheses = 0
         while True:
             if self.index.tt in (TT_MUL, TT_DIV, TT_SUB, TT_ADD):
-                if self.pos + 1 < len(self.tokens) and self.tokens[self.pos+1].tt not in (TT_NUM, TT_RPAREN, TT_LPAREN):
+                if (self.pos + 1 < len(self.expression.expression)
+                        and self.expression.expression[self.pos+1].tt not in (TT_NUM, TT_RPAREN, TT_LPAREN)):
                     raise Exception('A Number or parentheses must come before and after a operation')
-                elif self.pos > 0 and self.tokens[self.pos-1].tt not in (TT_NUM, TT_RPAREN, TT_LPAREN):
+                elif self.pos > 0 and self.expression.expression[self.pos-1].tt not in (TT_NUM, TT_RPAREN, TT_LPAREN):
                     raise Exception('A Number or parentheses must come before and after a operation')
             elif self.index.tt in (TT_RPAREN, TT_LPAREN):
-                if self.pos + 1 < len(self.tokens) and self.index.tt == TT_RPAREN and self.tokens[self.pos+1].tt != TT_NUM:
+                if (self.pos + 1 < len(self.expression.expression) and self.index.tt == TT_RPAREN
+                        and self.expression.expression[self.pos+1].tt != TT_NUM):
                     raise Exception('A Number or parentheses must happen within parentheses')
-                elif self.pos > 0 and self.index.tt == TT_LPAREN and self.tokens[self.pos-1].tt != TT_NUM:
+                elif ((self.pos > 0 and self.index.tt == TT_LPAREN) and
+                      (self.expression.expression[self.pos-1].tt != TT_NUM
+                       and self.expression.expression[self.pos-1].tt != TT_LPAREN)):
                     raise Exception('A Number or parentheses must happen within parentheses')
                 elif self.index.tt == TT_LPAREN:
                     left_parentheses += 1
                 elif self.index.tt == TT_RPAREN:
                     right_parentheses += 1
             elif self.index.tt == TT_NUM:
-                if self.pos > 0 and self.tokens[self.pos-1].tt == TT_NUM:
+                if self.pos > 0 and self.expression.expression[self.pos-1].tt == TT_NUM:
                     raise Exception('Numbers can not come directly after other numbers')
-                elif self.pos + 1 < len(self.tokens) and self.tokens[self.pos+1].tt == TT_NUM:
+                elif (self.pos + 1 < len(self.expression.expression)
+                      and self.expression.expression[self.pos+1].tt == TT_NUM):
                     raise Exception('Numbers can not come directly after other numbers')
-                elif self.pos > 0 and self.tokens[self.pos-1].tt == TT_LPAREN:
+                elif self.pos > 0 and self.expression.expression[self.pos-1].tt == TT_LPAREN:
                     raise Exception("Numbers can not come directly after left (')') parentheses")
-                elif self.pos + 1 < len(self.tokens) and self.tokens[self.pos+1].tt == TT_RPAREN:
+                elif (self.pos + 1 < len(self.expression.expression)
+                      and self.expression.expression[self.pos+1].tt == TT_RPAREN):
                     raise Exception("Numbers can not come directly before right ('(') parentheses")
 
             if self.advance():
