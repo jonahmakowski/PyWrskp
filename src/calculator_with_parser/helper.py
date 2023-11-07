@@ -153,7 +153,7 @@ class Order:
             temp = self.expression.expression
             temp1 = self.expression.expression[pair[0]+1:pair[1]]
             temp_expression = Expression(temp1)
-            del temp[pair[0]+1:pair[1]]
+            del temp[pair[0]:pair[1]+1]
             temp.insert(pair[0], temp_expression)
             self.expression = Expression(temp)
 
