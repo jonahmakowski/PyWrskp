@@ -6,7 +6,8 @@ TT_SUB = 'SUB'
 TT_NUM = 'NUM'
 TT_RPAREN = '('
 TT_LPAREN = ')'
-ALL_TTs = (TT_MUL, TT_DIV, TT_ADD, TT_SUB, TT_NUM, TT_RPAREN, TT_LPAREN)
+TT_EXPRESION = 'EXPERESION'
+ALL_TTs = (TT_MUL, TT_DIV, TT_ADD, TT_SUB, TT_NUM, TT_RPAREN, TT_LPAREN, TT_EXPRESION)
 ###############
 
 DIGITS = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9')
@@ -28,6 +29,7 @@ class Token:
 class Expression:
     def __init__(self, expression):
         self.expression = expression
+        self.tt = TT_EXPRESION
 
     def copy(self):
         return Expression(self.expression)
@@ -126,38 +128,40 @@ class Order:
     def make_order(self):
         self.error_catching()
         self.parentheses()
+        return self.expression
 
     def parentheses(self):
-        right_found = []
-        left_found = []
-        pairs = []
         while True:
-            if self.index.tt == TT_LPAREN:
-                left_found.append(self.pos)
-            elif self.index.tt == TT_RPAREN:
-                right_found.append(self.pos)
+            right_found = []
+            left_found = []
+            pairs = []
+            while True:
+                if self.index.tt == TT_LPAREN:
+                    left_found.append(self.pos)
+                elif self.index.tt == TT_RPAREN:
+                    right_found.append(self.pos)
 
-            if self.advance():
+                if self.advance():
+                    break
+            self.reset()
+
+            while True:
+                if len(right_found) == 0:
+                    break
+                pairs.append((right_found[0], left_found[len(left_found)-1]))
+                del right_found[0]
+                del left_found[len(left_found)-1]
+            
+            if len(pairs) == 0:
                 break
-        self.reset()
-
-        while True:
-            if len(right_found) == 0:
-                break
-            pairs.append((right_found[0], left_found[len(left_found)-1]))
-            del right_found[0]
-            del left_found[len(left_found)-1]
-
-        for i in range(len(pairs)-1, 0, -1):
-            pair = pairs[i]
+            
+            pair = pairs[len(pairs)-1]
             temp = self.expression.expression
             temp1 = self.expression.expression[pair[0]+1:pair[1]]
             temp_expression = Expression(temp1)
             del temp[pair[0]:pair[1]+1]
             temp.insert(pair[0], temp_expression)
             self.expression = Expression(temp)
-
-        print(self.expression)
 
     def error_catching(self):
         left_parentheses = 0
@@ -199,3 +203,57 @@ class Order:
         if left_parentheses != right_parentheses:
             raise Exception('The number of left and right parentheses must be the same')
         self.reset()
+
+class Solve:
+    def __init__(self, expression):
+        self.expression = expression
+        self.solve()
+    
+    def solve(self):
+        self.simple_solve()
+    
+    def simple_solve(self):
+        found = False
+        for item in self.expression.expression:
+            if item.tt == TT_DIV:
+                found = True
+                break
+            elif item.tt == TT_MUL:
+                found = True
+                break
+        
+        while found:
+            found = False
+            for item in self.expression.expression:
+                if item.tt == TT_DIV:
+                    found = True
+                    break
+                elif item.tt == TT_MUL:
+                    found = True
+                    break
+            if not found:
+                break
+            index = 0
+            for item in self.expression.expression:
+                if item.tt == TT_DIV:
+                    prev_val = self.expression.expression[index-1]
+                    next_val = self.expression.expression[index+1]
+                    solve = prev_val.value / next_val.value
+                    del self.expression.expression[index+1]
+                    del self.expression.expression[index]
+                    del self.expression.expression[index-1]
+                    self.expression.expression.insert(index-1, Token(TT_NUM, value=solve))
+                    found = True
+                    break
+                elif item.tt == TT_MUL:
+                    prev_val = self.expression.expression[index-1]
+                    next_val = self.expression.expression[index+1]
+                    solve = prev_val.value * next_val.value
+                    del self.expression.expression[index+1]
+                    del self.expression.expression[index]
+                    del self.expression.expression[index-1]
+                    self.expression.expression.insert(index-1, Token(TT_NUM, value=solve))
+                    found = True
+                    break
+                index += 1
+                    

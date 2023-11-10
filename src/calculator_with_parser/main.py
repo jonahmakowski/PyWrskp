@@ -1,7 +1,11 @@
 from helper import *
 
-p = Parser('2*(5+(10/2))')
+expression = input('Type a mathimatical expression:\n')
+
+p = Parser(expression)
 tokens = p.make_tokens()
-print(tokens)
 o = Order(tokens)
-o.make_order()
+ordered_tokens = o.make_order()
+print(ordered_tokens)
+s = Solve(ordered_tokens)
+print(s.expression)
