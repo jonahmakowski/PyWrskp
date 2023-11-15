@@ -210,11 +210,32 @@ class Solve:
         self.solve()
     
     def solve(self):
-        self.simple_solve()
+        while len(self.expression.expression) > 1:
+            cur_expression = self.expression
+            index = 0
+            expression_found = True
+            while expression_found:
+                expression_found = False
+                for item in cur_expression.expression:
+                    if item.tt == TT_EXPRESION:
+                        expression_found = True
+                        break
+                if not expression_found:
+                    break
+                for item in cur_expression.expression:
+                    if type(item) == type(Expression([])):
+                        cur_expression = item
+                        break
+                    index += 1
+            print(cur_expression)
+            new_expression = self.simple_solve_mul_div(cur_expression)
+            new_expression = self.simple_solve_add_sub(new_expression)
+            del self.expression.expression[index]
+            self.expression.expression.insert(index, new_expression)
     
-    def simple_solve(self):
+    def simple_solve_mul_div(self, expression):
         found = False
-        for item in self.expression.expression:
+        for item in expression.expression:
             if item.tt == TT_DIV:
                 found = True
                 break
@@ -224,7 +245,7 @@ class Solve:
         
         while found:
             found = False
-            for item in self.expression.expression:
+            for item in expression.expression:
                 if item.tt == TT_DIV:
                     found = True
                     break
@@ -234,26 +255,73 @@ class Solve:
             if not found:
                 break
             index = 0
-            for item in self.expression.expression:
+            for item in expression.expression:
                 if item.tt == TT_DIV:
-                    prev_val = self.expression.expression[index-1]
-                    next_val = self.expression.expression[index+1]
+                    prev_val = expression.expression[index-1]
+                    next_val = expression.expression[index+1]
                     solve = prev_val.value / next_val.value
-                    del self.expression.expression[index+1]
-                    del self.expression.expression[index]
-                    del self.expression.expression[index-1]
-                    self.expression.expression.insert(index-1, Token(TT_NUM, value=solve))
+                    del expression.expression[index+1]
+                    del expression.expression[index]
+                    del expression.expression[index-1]
+                    expression.expression.insert(index-1, Token(TT_NUM, value=solve))
                     found = True
                     break
                 elif item.tt == TT_MUL:
-                    prev_val = self.expression.expression[index-1]
-                    next_val = self.expression.expression[index+1]
+                    prev_val = expression.expression[index-1]
+                    next_val = expression.expression[index+1]
                     solve = prev_val.value * next_val.value
-                    del self.expression.expression[index+1]
-                    del self.expression.expression[index]
-                    del self.expression.expression[index-1]
-                    self.expression.expression.insert(index-1, Token(TT_NUM, value=solve))
+                    del expression.expression[index+1]
+                    del expression.expression[index]
+                    del expression.expression[index-1]
+                    expression.expression.insert(index-1, Token(TT_NUM, value=solve))
                     found = True
                     break
                 index += 1
+            return expression
+
+    def simple_solve_add_sub(self, expression):
+        found = False
+        for item in expression.expression:
+            if item.tt == TT_SUB:
+                found = True
+                break
+            elif item.tt == TT_ADD:
+                found = True
+                break
+        
+        while found:
+            found = False
+            for item in expression.expression:
+                if item.tt == TT_SUB:
+                    found = True
+                    break
+                elif item.tt == TT_ADD:
+                    found = True
+                    break
+            if not found:
+                break
+            index = 0
+            for item in expression.expression:
+                if item.tt == TT_SUB:
+                    prev_val = expression.expression[index-1]
+                    next_val = expression.expression[index+1]
+                    solve = prev_val.value - next_val.value
+                    del expression.expression[index+1]
+                    del expression.expression[index]
+                    del expression.expression[index-1]
+                    expression.expression.insert(index-1, Token(TT_NUM, value=solve))
+                    found = True
+                    break
+                elif item.tt == TT_ADD:
+                    prev_val = expression.expression[index-1]
+                    next_val = expression.expression[index+1]
+                    solve = prev_val.value + next_val.value
+                    del expression.expression[index+1]
+                    del expression.expression[index]
+                    del expression.expression[index-1]
+                    expression.expression.insert(index-1, Token(TT_NUM, value=solve))
+                    found = True
+                    break
+                index += 1
+            return expression
                     
