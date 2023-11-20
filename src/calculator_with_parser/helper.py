@@ -6,8 +6,8 @@ TT_SUB = 'SUB'
 TT_NUM = 'NUM'
 TT_RPAREN = '('
 TT_LPAREN = ')'
-TT_EXPRESION = 'EXPERESION'
-ALL_TTs = (TT_MUL, TT_DIV, TT_ADD, TT_SUB, TT_NUM, TT_RPAREN, TT_LPAREN, TT_EXPRESION)
+TT_EXPRESSION = 'EXPRESSION'
+ALL_TTs = (TT_MUL, TT_DIV, TT_ADD, TT_SUB, TT_NUM, TT_RPAREN, TT_LPAREN, TT_EXPRESSION)
 ###############
 
 DIGITS = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9')
@@ -29,7 +29,7 @@ class Token:
 class Expression:
     def __init__(self, expression):
         self.expression = expression
-        self.tt = TT_EXPRESION
+        self.tt = TT_EXPRESSION
 
     def copy(self):
         return Expression(self.expression)
@@ -211,29 +211,56 @@ class Solve:
     
     def solve(self):
         while len(self.expression.expression) > 1:
+            indexes = []
+            versions = [self.expression.expression]
             cur_expression = self.expression
             index = 0
             expression_found = True
             while expression_found:
                 expression_found = False
                 for item in cur_expression.expression:
-                    if item.tt == TT_EXPRESION:
+                    if item.tt == TT_EXPRESSION:
                         expression_found = True
+                        cur_expression = item
+                        indexes.append(index)
+                        versions.append(cur_expression.expression)
                         break
+                index += 1
                 if not expression_found:
                     break
-                for item in cur_expression.expression:
-                    if type(item) == type(Expression([])):
-                        cur_expression = item
-                        break
-                    index += 1
+
             print(cur_expression)
             new_expression = self.simple_solve_mul_div(cur_expression)
-            new_expression = self.simple_solve_add_sub(new_expression)
-            del self.expression.expression[index]
-            self.expression.expression.insert(index, new_expression)
-    
-    def simple_solve_mul_div(self, expression):
+            new_num = self.simple_solve_add_sub(new_expression)
+            new_num = Token(TT_NUM, value=new_num.expression[0].value)
+            print(new_num)
+            self.replace_old(new_num, indexes, versions)
+
+            found = False
+            for item in self.expression.expression:
+                if item.tt == TT_EXPRESSION:
+                    found = True
+                    break
+
+            if not found:
+                break
+
+        final_solve = self.expression
+        final_solve = self.simple_solve_mul_div(final_solve)
+        final_solve = self.simple_solve_add_sub(final_solve)
+        self.expression = final_solve
+
+    def replace_old(self, new_num, indexes, versions):
+        versions_new = versions.copy()
+        versions_new[-1] = new_num
+
+        for i in range(len(versions)-2, 0, -1):
+            versions_new[i] = versions_new[i+1]
+
+        self.expression.expressions = versions_new[0]
+
+    @staticmethod
+    def simple_solve_mul_div(expression):
         found = False
         for item in expression.expression:
             if item.tt == TT_DIV:
@@ -277,9 +304,10 @@ class Solve:
                     found = True
                     break
                 index += 1
-            return expression
+        return expression
 
-    def simple_solve_add_sub(self, expression):
+    @staticmethod
+    def simple_solve_add_sub(expression):
         found = False
         for item in expression.expression:
             if item.tt == TT_SUB:
@@ -323,5 +351,5 @@ class Solve:
                     found = True
                     break
                 index += 1
-            return expression
+        return expression
                     
