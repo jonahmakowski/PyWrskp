@@ -212,20 +212,20 @@ class Solve:
     def solve(self):
         while len(self.expression.expression) > 1:
             indexes = []
-            versions = [self.expression.expression]
+            versions = [self.expression]
             cur_expression = self.expression
-            index = 0
             expression_found = True
             while expression_found:
                 expression_found = False
+                index = 0
                 for item in cur_expression.expression:
                     if item.tt == TT_EXPRESSION:
                         expression_found = True
                         cur_expression = item
                         indexes.append(index)
-                        versions.append(cur_expression.expression)
+                        versions.append(cur_expression.copy())
                         break
-                index += 1
+                    index += 1
                 if not expression_found:
                     break
 
@@ -251,14 +251,18 @@ class Solve:
         self.expression = final_solve
 
     def replace_old(self, new_num, indexes, versions):
-        versions_new = versions.copy()
-        versions_new[-1] = new_num
-
-        for i in range(len(versions)-2, 0, -1):
-            versions_new[i] = versions_new[i+1]
-
-        self.expression.expressions = versions_new[0]
-
+        cur = versions[-2].expression.copy()
+        cur1 = []
+        cur[indexes[-1]] = new_num
+        del indexes[-1]
+        del versions[-2]
+        for item in versions:
+            cur1 = cur
+            cur = item
+            cur[indexes[-1]] = cur1
+            del indexes[-1]
+        self.expression = Expression(cur)
+    
     @staticmethod
     def simple_solve_mul_div(expression):
         found = False
