@@ -204,6 +204,7 @@ class Order:
             raise Exception('The number of left and right parentheses must be the same')
         self.reset()
 
+
 class Solve:
     def __init__(self, expression):
         self.expression = expression
@@ -251,17 +252,10 @@ class Solve:
         self.expression = final_solve
 
     def replace_old(self, new_num, indexes, versions):
-        cur = versions[-2].expression.copy()
-        cur1 = []
-        cur[indexes[-1]] = new_num
-        del indexes[-1]
-        del versions[-2]
-        for item in versions:
-            cur1 = cur
-            cur = item
-            cur[indexes[-1]] = cur1
-            del indexes[-1]
-        self.expression = Expression(cur)
+        temp = versions[0].expression
+        for idx in indexes[:-1]:
+            temp = temp[idx].expression
+        temp[indexes[-1]] = new_num
     
     @staticmethod
     def simple_solve_mul_div(expression):
