@@ -7,3 +7,5 @@ beautifulsoup4
 pillow
 python-dotenv
 pytest
+turtle
+threading
