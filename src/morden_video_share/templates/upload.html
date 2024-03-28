@@ -1,12 +1,24 @@
-<html> 
-<head> 
-	<title>upload the file : GFG</title> 
-</head> 
-<body> 
-	<form action = "/success" method = "post" enctype="multipart/form-data"> 
-		<input type="file" name="file" /> 
-		<input type = "submit" value="Upload"> 
-        <input name="text">
-	</form> 
-</body> 
-</html>
+{% extends "layout.html" %}
+
+{% block content %}
+    <body>
+        <form action = "/success" method = "post" enctype="multipart/form-data">
+            <p>Choose a file to upload</p>
+            <input type="file" name="file" />
+            <br>
+            <br>
+
+            <p>Choose a title for your post:</p>
+            <input type='text' name="title" size="100">
+            <br>
+            <br>
+
+            <p>Write a description for your post</p>
+            <input type='text' name="description" size="100">
+            <br>
+            <br>
+            <input type = "submit" value="Post">
+        </form>
+        <p>{{ error }}</p>
+    </body>
+{% endblock %}

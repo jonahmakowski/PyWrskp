@@ -1,0 +1,14 @@
+body{
+    background: #01194B;
+    color: white;
+    font-size: 12px;
+    font-family: Arial, sans-serif;
+}
+
+h1{
+    color: #61AFDD;
+    text-align: center;
+    text-decoration: underline;
+    font-weight: 900;
+    font-size: 24px;
+}

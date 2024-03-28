@@ -1,0 +1,26 @@
+body {
+    background-color: azure;
+    color: black;
+    font-size: 15px;
+    font-family: Helvetica;
+}
+
+h1 {
+    color: darkred;
+    text-align: center;
+    text-decoration: underline;
+    text-decoration-color: black;
+    font-weight: 900;
+    font-size: 30px;
+    font-family: Helvetica;
+}
+
+h2 {
+    color: blue;
+    text-decoration: underline;
+    text-decoration-color: black;
+    font-family: Helvetica;
+    text-align: left;
+    font-size: 25px;
+    font-weight: 800;
+}

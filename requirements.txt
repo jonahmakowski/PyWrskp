@@ -9,3 +9,4 @@ python-dotenv
 pytest
 turtle
 threading
+flask
