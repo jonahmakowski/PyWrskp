@@ -1,17 +1,16 @@
 <html lang="en">
 	<head>
 		<title>{{ title }}</title>
-        <link rel="shortcut icon" sizes="16x16" href="../constant_images/morden_icon.png">
+        <link rel="shortcut icon" sizes="16x16" href="constant_images/morden_icon.png">
         <link rel="stylesheet" href="main.css" />
         <meta charset="utf-8" />
 	</head>
 	<table>
 		<tr>
 			<form action="/" method="get"><button type="submit">Home</button></form>
+            <form action="/upload/none" method="get"><button type="submit">Post</button></form>
 		</tr>
 	</table>
 	<hr>
-    <body>
-	    {% block content %}{% endblock %}
-    </body>
+    {% block content %}{% endblock %}
 </html>

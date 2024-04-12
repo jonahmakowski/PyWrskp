@@ -1,13 +1,13 @@
-<html> 
-<head> 
-	<title>success</title> 
-</head> 
-<body> 
-	<p>File uploaded successfully</p> 
-	<p>File Name: {{name}}</p>
-    <p>Uploaded as: {{text}}</p>
-    <form action = "/" method = "post" enctype="multipart/form-data"> 
-		<input type = "submit" value="Return To Home"> 
-	</form> 
-</body> 
-</html>
+{% extends "layout.html" %}
+
+{% block content %}
+    <link rel="stylesheet" href="main.css" />
+    <body>
+        <p>File uploaded successfully</p>
+	    <p>File Name: {{ name }}</p>
+        <p>Uploaded as: {{ text }}</p>
+        <form action = "/" method = "post" enctype="multipart/form-data">
+		    <input type = "submit" value="Return To Home">
+	    </form>
+    </body>
+{% endblock %}

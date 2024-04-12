@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <link rel="stylesheet" href="main.css" />
+    <body>
+        <h1>Welcome to the {{ name }}</h1>
+        <p>If this is your first time signing on, please review the rules before positing</p>
+        <br>
+        {% for video in videos%}
+            <div>
+                <h3>{{ video.title }}</h3>
+                <video controls>
+                    <source src="{{ video.location }}" type="video/mp4" />
+                </video>
+                <h4>By {{ video.author }}</h4>
+                <p>{{ video.description }}</p>
+            </div>
+        {% endfor %}
+    </body>
+{% endblock %}

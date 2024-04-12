@@ -1,8 +1,10 @@
 {% extends "layout.html" %}
 
 {% block content %}
+    <link rel="stylesheet" href="main.css" />
     <body>
         <form action = "/success" method = "post" enctype="multipart/form-data">
+            <h1>Create Your Post</h1>
             <p>Choose a file to upload</p>
             <input type="file" name="file" />
             <br>
