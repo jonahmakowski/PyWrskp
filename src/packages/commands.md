@@ -3,6 +3,8 @@
 ## Cd
 ```cd ~/Desktop/Github/pyWrskp/src/packages```
 
+Then move to the correct directory for the package
+
 ## Build
 ```python3 -m build```
 
