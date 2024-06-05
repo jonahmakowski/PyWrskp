@@ -1,4 +1,4 @@
-from datetime import datetime, date, timedelta
+from datetime import date, timedelta
 
 
 class BalancesAndTransactions:
@@ -26,10 +26,10 @@ class BalancesAndTransactions:
             if should_be == balance['amount']:
                 prev_balance = balance
 
-    def transactions_from_date(self, date, amount_only=False):
+    def transactions_from_date(self, date_, amount_only=False):
         transactions = []
         for transaction in self.transaction_history:
-            if transaction['date'].split()[0] == date:
+            if transaction['date'].split()[0] == date_:
                 if amount_only:
                     transactions.append(transaction['amount'])
                 else:
@@ -40,8 +40,8 @@ class BalancesAndTransactions:
     def transactions_between_dates(self, start_date, end_date, amount_only=False):
         dates = self.get_dates_between(start_date, end_date)
         transactions = []
-        for date in dates:
-            transactions.extend(self.transactions_from_date(date, amount_only=amount_only))
+        for date_ in dates:
+            transactions.extend(self.transactions_from_date(date_, amount_only=amount_only))
         return transactions
 
     @staticmethod
@@ -59,6 +59,7 @@ class BalancesAndTransactions:
             dates.append((start_date + timedelta(days=i)).isoformat())
 
         return dates
+
 
 if __name__ == '__main__':
     example_transactions = [{'amount': -100, 'date': '2024-06-01 19:04:53.712267'},
@@ -78,7 +79,7 @@ if __name__ == '__main__':
                         {'amount': 400, 'date': '2024-06-04 19:04:53.712267'},
                         {'amount': 400, 'date': '2024-06-05 19:04:53.712267'},
                         {'amount': 400, 'date': '2024-06-06 19:04:53.712267'},  #
-                        {'amount': -2900, 'date':'2024-06-07 19:04:53.712267'},  #
+                        {'amount': -2900, 'date': '2024-06-07 19:04:53.712267'},  #
                         {'amount': -3900, 'date': '2024-06-08 19:04:53.712267'},  #
                         {'amount': -3900, 'date': '2024-06-09 19:04:53.712267'},
                         {'amount': -3900, 'date': '2024-06-10 19:04:53.712267'},
