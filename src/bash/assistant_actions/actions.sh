@@ -14,6 +14,7 @@ run_app() {
 
 open_file() {
     if [[ -e "$1" ]]; then
+        echo "Opening file!"
         open "$1"
     else
         echo "File '$1' not found"
@@ -87,11 +88,10 @@ while getopts "hl" opt; do
             command="$3"
             parm="$4"
             loc="$2"
+            parm=$(map_locations "$loc" "$parm")
             ;;
     esac
 done
-
-parm=$(map_locations "$loc" "$parm")
 
 if [[ "$command" == 'help' ]]; then
     show_help
