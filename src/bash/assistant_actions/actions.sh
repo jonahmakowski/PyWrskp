@@ -2,10 +2,19 @@ cd /
 
 run_app() {
     if [[ -e "$1.app" ]]; then
+        if [[ "$verbose" == 1 ]]; then
+            echo "Opening '$1.app' from custom path"
+        fi
         open "$1.app"
     elif [[ -e "/Applications/$1.app" ]]; then
+        if [[ "$verbose" == 1 ]]; then
+            echo "Opening '$1.app' from /Applications/"
+        fi
         open "/Applications/$1.app"
     elif [[ -e "~/Applications/$1.app" ]]; then
+        if [[ "$verbose" == 1 ]]; then
+            echo "Opening '$1.app' from ~/Applications/"
+        fi
         open "~/Applications/$1.app"
     else
         echo "App '$1' not found"
@@ -14,7 +23,9 @@ run_app() {
 
 open_file() {
     if [[ -e "$1" ]]; then
-        echo "Opening file!"
+        if [[ "$verbose" == 1 ]]; then
+            echo "Opening file at '$1'"
+        fi
         open "$1"
     else
         echo "File '$1' not found"
@@ -22,11 +33,17 @@ open_file() {
 }
 
 open_web() {
+    if [[ "$verbose" == 1 ]]; then
+        echo "Opening https://www.$1"
+    fi
     open "https://www.$1"
 }
 
 run_python() {
     if [[ -e "$1.py" ]]; then
+        if [[ "$verbose" == 1 ]]; then
+            echo "Running Python script at '$1.py'"
+        fi
         python "$1"
     else
         echo "File not found"
@@ -34,23 +51,43 @@ run_python() {
 }
 
 hide_app() {
+    if [[ "$verbose" == 1 ]]; then
+        echo "Hiding '$1'"
+    fi
     osascript -e "tell application \"System Events\"
     set visible of application process \"$1\" to false
     end tell"
 }
 
 play_spotify() {
+    if [[ "$verbose" == 1 ]]; then
+        echo "Opening Spotify"
+    fi
     run_app "Spotify"
+
+    if [[ "$verbose" == 1 ]]; then
+        echo "Playing music"
+    fi
     osascript -e 'tell application "Spotify" to play'
+
     hide_app "Spotify"
 }
 
+create_file() {
+    if [[ "$verbose" == 1 ]]; then
+        echo "Creating File"
+    fi
+    touch "$1"
+    open_file "$1"
+}
+
 show_help() {
-    echo "Usage: $0 [-h] [-l <location>] <command> <command-helper>"
+    echo "Usage: $0 [-h] [-l <location>] [-v] <command> <command-helper>"
     echo ""
     echo "Flags:"
     echo "      -h                        Shows help screen (this menu)"
     echo "      -l                        For apps that support it, it opens the file from a predefined location"
+    echo "      -v                        Enable Verbose Mode"
     echo ""
     echo "Commands:"
     echo "      help                      Shows help screen (this menu)"
@@ -59,12 +96,25 @@ show_help() {
     echo "      play                      Opens spotify, plays music, and then hides it"
     echo "      open                      Opens the file specificed in the <command-helper> field in the defult app"
     echo "      web                       Opens the page specificed in the <command-helper> field in the defult browser (http://www. not required)"
+    echo "      create                    Creates a file at the specified directory and name in <command-helper>"
 }
 
 map_locations() {
     case "$1" in
         github )
             echo "/Users/jonahmakowski/Desktop/Github/$2"
+            ;;
+        desktop )
+            echo "/Users/jonahmakowski/Desktop/$2"
+            ;;
+        documents )
+            echo "/Users/jonahmakowski/Documents/$2"
+            ;;
+        downloads )
+            echo "/Users/jonahmakowski/Downloads/$2"
+            ;;
+        home )
+            echo "/Users/jonahmakowski/$2"
             ;;
     esac
 }
@@ -74,24 +124,50 @@ if [[ -z "$1" ]]; then
     exit 1
 fi
 
-command="$1"
-parm="$2"
-loc=""
+verbose=0
+loc=0
 
-while getopts "hl" opt; do
+while getopts "hlv" opt; do
     case ${opt} in
         h )
             show_help
             exit 0
             ;;
         l )
-            command="$3"
-            parm="$4"
-            loc="$2"
-            parm=$(map_locations "$loc" "$parm")
+            loc=1
+            ;;
+        v )
+            verbose=1
             ;;
     esac
 done
+
+found=0
+loc_place=""
+
+for var in "$@"; do
+    echo "$var"
+    if [[ ! $var =~ "-" ]]; then
+        if [[ "$found" == 0 && "$loc" == 1 ]]; then
+            loc_place="$var"
+            found=2
+        elif [[ "$found" == 0 || "$found" == 2 ]]; then
+            found=1
+            command="$var"
+        else
+            parm="$var"
+        fi
+    fi
+done
+
+if [[ "$loc" == 1 ]]; then
+    parm=$(map_locations "$loc_place" "$parm")
+fi
+
+if [[ "$verbose" == 1 ]]; then
+    echo "Verbose Mode Enabled"
+    echo "Command is $command, Parm is $parm"
+fi
 
 if [[ "$command" == 'help' ]]; then
     show_help
@@ -105,4 +181,8 @@ elif [[ "$command" == 'python' ]]; then
     run_python "$parm"
 elif [[ "$command" == 'play' ]]; then
     play_spotify
+elif [[ "$command" == 'create' ]]; then
+    create_file "$parm"
+else
+    echo "This is not a valid command"
 fi
