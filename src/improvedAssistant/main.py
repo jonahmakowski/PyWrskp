@@ -6,7 +6,7 @@ import ollama
 
 def run_app(app):
     subprocess.run(['bash', 'actions.sh', 'app', f"{app}"])
-    
+
 
 def open_file(file, loc=None):
     if loc is not None:
@@ -32,10 +32,23 @@ def start_music():
 
 def create_file(file):
     subprocess.run(['bash', 'actions.sh', 'create', f"{file}"])
-    
+
 
 def stop_music():
     subprocess.run(['bash', 'actions.sh', 'pause'])
+
+
+def ask_ai(prompt):
+    respones = ollama.chat(model='llama3', messages=
+               [{'role': 'system', 'content': "You are an ai assistant running locally on the user's computer"},
+                {'role': 'user', 'content': prompt}])
+    layout = [[sg.Text('LLAMA3 Said:')],
+              [sg.Text(respones['message']['content'])],
+              [sg.Button('OK', bind_return_key=True)]]
+    w = sg.Window('Your AI response', layout.copy())
+    w.Read()
+    w.close()
+    return
 
 
 def remove_keyword(text, keyword):
@@ -89,15 +102,18 @@ def parse_command(command):
                     folder = window['-IN-'].get()
                     break
             window.close()
-            create_file(folder+file)
+            create_file(folder + file)
         case "Pause Music":
             stop_music()
+        case "Ask AI":
+            prompt = sg.popup_get_text('What do you want to ask AI?')
+            ask_ai(prompt)
 
 
 def run_assistant():
     layout = [[sg.Text('Choose a command', expand_x=True, justification='center')],
               [sg.Combo(['Choose a Command', 'Open App', 'Open File', 'Open Website', 'Run Python', 'Play Music',
-                         'Create File', 'Pause Music'], default_value='Choose a Command')],
+                         'Create File', 'Pause Music', 'Ask AI'], default_value='Choose a Command')],
               [sg.Button('Ok', bind_return_key=True), sg.Button('Terminate'), sg.Button('Place in top right')]]
     window = sg.Window('Your Assistant', layout, keep_on_top=True)
 
