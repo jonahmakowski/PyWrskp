@@ -38,17 +38,38 @@ def stop_music():
     subprocess.run(['bash', 'actions.sh', 'pause'])
 
 
-def ask_ai(prompt):
-    respones = ollama.chat(model='llama3', messages=
-               [{'role': 'system', 'content': "You are an ai assistant running locally on the user's computer"},
-                {'role': 'user', 'content': prompt}])
-    layout = [[sg.Text('LLAMA3 Said:')],
-              [sg.Text(respones['message']['content'])],
-              [sg.Button('OK', bind_return_key=True)]]
-    w = sg.Window('Your AI response', layout.copy())
-    w.Read()
-    w.close()
-    return
+def ai_backend(chat):
+    respones = ollama.chat(model='llama3', messages=chat)
+    chat.append(respones['message'])
+    return respones['message']['content'], chat
+
+
+def ask_ai():
+    layout = [
+        [sg.Text('Chatbot', expand_x=True, justification='center', font=('Helvetica', 20))],
+        [sg.InputText(key='-INPUT-')],
+        [sg.Button('Send', bind_return_key=True), sg.Button('Goodbye')],
+        [sg.Multiline(key='-CHAT-HISTORY-', size=(40, 10), disabled=True)],
+    ]
+
+    window = sg.Window('AI Chat', layout.copy())
+
+    chat_history = ''
+    chat_history_raw = [{'role': 'system', 'content': "You are an ai assistant running locally on the user's computer"}]
+
+    while True:
+        event, values = window.read()
+        if event == sg.WIN_CLOSED or event == "Goodbye":
+            window.close()
+            break
+        elif event == 'Send':
+            user_input = values['-INPUT-']
+            chat_history_raw.append({'role': 'user', 'content': user_input})
+            response, chat_history_raw = ai_backend(chat_history_raw)  # Replace with your own function
+            chat_history += f'User: {user_input}\n'
+            chat_history += f'Chatbot: {response}\n'
+            window['-CHAT-HISTORY-'].update(chat_history)
+            window['-INPUT-'].update('')
 
 
 def remove_keyword(text, keyword):
@@ -106,8 +127,7 @@ def parse_command(command):
         case "Pause Music":
             stop_music()
         case "Ask AI":
-            prompt = sg.popup_get_text('What do you want to ask AI?')
-            ask_ai(prompt)
+            ask_ai()
 
 
 def run_assistant():
