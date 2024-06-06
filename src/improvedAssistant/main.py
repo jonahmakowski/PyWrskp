@@ -39,12 +39,12 @@ def stop_music():
 
 
 def ai_backend(chat):
-    respones = ollama.chat(model='llama3', messages=chat)
-    chat.append(respones['message'])
-    return respones['message']['content'], chat
+    responses = ollama.chat(model='llama3', messages=chat)
+    chat.append(responses['message'])
+    return responses['message']['content'], chat
 
 
-def ask_ai():
+def ask_ai(): # doesn't use action.sh because it doesn't play well with python
     layout = [
         [sg.Text('Chatbot', expand_x=True, justification='center', font=('Helvetica', 20))],
         [sg.InputText(key='-INPUT-')],
