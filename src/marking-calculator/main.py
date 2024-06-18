@@ -16,10 +16,10 @@ class MarkingCalculator:
             of: The maximum mark.
 
         Returns:
-            The mark as a percentage.
+            The mark as a percentage, rounded to the nearest thousandth.
         """
 
-        percentage = (mark / of) * 100
+        percentage = round((mark / of) * 100, 3)
         return percentage
 
     @staticmethod
@@ -51,15 +51,15 @@ class MarkingCalculator:
                           [sg.Text('Input Your Mark: '), sg.InputText(key='-MARK-', expand_x=True)],
                           [sg.Text('Input The Maximum Mark: '), sg.InputText(key='-MAX-MARK-', expand_x=True)],
                           [sg.Button('Convert'), sg.Button('Exit')],
-                          [sg.Text('Your result goes here: ', key='-Percent-Result-')]]
-        layout_tab_two = [[sg.Text('Enter your grades on new lines in the box below:',
+                          [sg.Text('Your result goes here: (None Yet! Press the "Convert" button to start!)', key='-Percent-Result-')]]
+        layout_tab_two = [[sg.Text('Enter your grades (in percentages) on new lines in the box below:',
                                    expand_x=True, justification='center')],
-                          [sg.Multiline(key='-Grades-', expand_x=True, size=(10, 4))],
-                          [sg.Text('Enter the values of each grade below, in the same order:',
+                          [sg.Multiline(key='-Grades-', expand_x=True, size=(10, 5))],
+                          [sg.Text('Enter the values (in percentages) of each grade below, in the same order:',
                                    expand_x=True, justification='center')],
-                          [sg.Multiline(key='-Values-', expand_x=True, size=(10, 4))],
+                          [sg.Multiline(key='-Values-', expand_x=True, size=(10, 5))],
                           [sg.Button('Calculate'), sg.Button('Exit')],
-                          [sg.Text('Your result goes here: ', key='-Combine-Result-')]]
+                          [sg.Text('Your result goes here: (None Yet! Press the "Calculate" button to start!)', key='-Combine-Result-')]]
 
         main_layout = [[sg.TabGroup([[sg.Tab("Marks > Percentage", layout_tab_one),
                                       sg.Tab("Combine Marks", layout_tab_two)]])]]
@@ -78,7 +78,10 @@ class MarkingCalculator:
                 if not (values['-MARK-'].isdigit() or values['-MAX-MARK-'].isdigit()):
                     sg.popup('Please enter your mark as a number.')
                 else:
-                    result = self.mark_to_percent(float(values['-MARK-']), float(values['-MAX-MARK-']))
+                    if int(values['-MARK-']) == 0 or int(values['-MAX-MARK-']) == 0:
+                        result = 0.0
+                    else:
+                        result = self.mark_to_percent(float(values['-MARK-']), float(values['-MAX-MARK-']))
                     self.window['-MARK-'].update('')
                     self.window['-MAX-MARK-'].update('')
                     self.window['-Percent-Result-'].update('Your result goes here:  {}'.format(result))
@@ -88,9 +91,13 @@ class MarkingCalculator:
                 grade_values = values['-Values-'].split('\n')
                 new = []
                 invalid = False
-
-                if len(grades) != len(grade_values):
+                
+                if (len(grades) == 1 or len(grade_values) == 1) and (grades[0] == '' or grade_values[0] == ''):
+                    sg.popup('You must enter at least one mark.')
+                    invalid = True
+                elif len(grades) != len(grade_values):
                     sg.popup('All grades must have a value and vice versa.')
+                    invalid = True
                 else:
                     for index in range(len(grades)):
                         if not (grades[index].isdigit() or grades_values[index].isdigit()):
