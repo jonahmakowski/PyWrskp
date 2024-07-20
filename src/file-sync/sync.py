@@ -48,6 +48,7 @@ def sync_from_to(source, destination, before_dest):
         for file in files:
             src_path = os.path.join(root, file)
             dst_path = os.path.join(destination, os.path.relpath(src_path, source))
+            print('\t\tPotentially Syncing {} to {}'.format(src_path, dst_path))
             if in_exclude(src_path):
                 # Create the destination directory if it doesn't exist
                 dst_dir = os.path.dirname(dst_path)
@@ -80,7 +81,8 @@ def get_current(folder):
 
 
 if __name__ == "__main__":
-    folder1 = "/Users/jonahmakowski/Documents/Obsidian Synology-iCloud Sync/Notes"
+    folder1 = "/Users/jonahmakowski/Desktop/Obsidian"
+    #folder1 = "/Users/jonahmakowski/Documents/Obsidian Synology-iCloud Sync/Notes"
     folder2 = "/Users/jonahmakowski/Library/Mobile Documents/iCloud~md~obsidian/Documents/Notes"
     while True:
         folder1_last = get_current(folder1)
