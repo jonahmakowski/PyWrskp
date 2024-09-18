@@ -48,13 +48,16 @@ class Board:
         if self.board is None:
             raise ValueError("Board is None")
 
+        cur_row = 0
         for row in self.board:
             for piece in row:
                 if piece is not None:
                     print(str(piece), end='\t')
                 else:
                     print('X', end='\t')
-            print()
+            print(cur_row)
+            cur_row += 1
+        print('0\t1\t2\t3\t4\t5\t6\t7')
         print()
 
     def move(self, location_start:tuple, location_end:tuple): # locations should be in (x, y) pairs
@@ -63,3 +66,23 @@ class Board:
         copy_of_piece = self.board[location_start[0]][location_start[1]].copy()
         self.board[location_start[0]][location_start[1]] = 'X'
         self.board[location_end[0]][location_end[1]] = copy_of_piece
+
+    def calculate_points(self):
+        white_points = 0
+        black_points = 0
+        for row in self.board:
+            for piece in row:
+                if piece is not None:
+                    if piece.side == 0:
+                        white_points += piece.value
+                    elif piece.side == 1:
+                        black_points += piece.value
+
+        return white_points, black_points
+
+    def get_location(self, x, y):
+        if x < 0 or y < 0:
+            raise ValueError("x and y must be positive, not {} and {}".format(x, y))
+        elif x > len(self.board) or y > len(self.board[0]):
+            raise ValueError("x and y must be smaller than board")
+        return self.board[y][x]
