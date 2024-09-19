@@ -20,7 +20,7 @@ class ChessPiece:
         return self.position_x, self.position_y
 
     def copy(self):
-        return self.__class__(self.position_x, self.position_y, self.side, self.value)
+        return self.__class__(self.position_x, self.position_y, self.side)
 
     def list_moves(self, board):
         legal_moves = []

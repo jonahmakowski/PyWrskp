@@ -2,7 +2,6 @@ from peices import Rook, Knight, Bishop, Queen, King, Pawn
 
 class Board:
     def __init__(self):
-        self.turn = 0
         self.board = []
         self.generate_board()
 
@@ -59,13 +58,16 @@ class Board:
             cur_row += 1
         print('0\t1\t2\t3\t4\t5\t6\t7')
         print()
+        white_points, black_points = self.calculate_points()
+        print('White has {} points, Black has {} points.'.format(white_points-10000, black_points-10000))
+        print()
 
     def move(self, location_start:tuple, location_end:tuple): # locations should be in (x, y) pairs
-        self.board[location_start[0]][location_start[1]].position_x = location_end[0]
-        self.board[location_start[0]][location_start[1]].position_y = location_end[1]
-        copy_of_piece = self.board[location_start[0]][location_start[1]].copy()
-        self.board[location_start[0]][location_start[1]] = 'X'
-        self.board[location_end[0]][location_end[1]] = copy_of_piece
+        self.board[location_start[1]][location_start[0]].position_x = location_end[0]
+        self.board[location_start[1]][location_start[0]].position_y = location_end[1]
+        copy_of_piece = self.board[location_start[1]][location_start[0]].copy()
+        self.board[location_start[1]][location_start[0]] = None
+        self.board[location_end[1]][location_end[0]] = copy_of_piece
 
     def calculate_points(self):
         white_points = 0
@@ -79,6 +81,32 @@ class Board:
                         black_points += piece.value
 
         return white_points, black_points
+
+    def get_pieces(self):
+        white_pieces = []
+        black_pieces = []
+        for row in self.board:
+            for piece in row:
+                if piece is not None:
+                    if piece.side == 0:
+                        white_pieces.append(piece)
+                    elif piece.side == 1:
+                        black_pieces.append(piece)
+
+        return white_pieces, black_pieces
+
+    def win_check(self):
+        white_win = True
+        black_win = True
+        white, black = self.get_pieces()
+        for piece in white:
+            if type(piece) is King:
+                black_win = False
+        for piece in black:
+            if type(piece) is King:
+                white_win = False
+
+        return white_win, black_win
 
     def get_location(self, x, y):
         if x < 0 or y < 0:
