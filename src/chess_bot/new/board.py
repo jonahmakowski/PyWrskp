@@ -65,8 +65,8 @@ class Board:
         print()
 
     def move(self, location_start:tuple, location_end:tuple): # locations should be in (x, y) pairs
-        print('Board.py Line 68', self.board)
-        print('Board.py Line 69', self.board[location_start[1]][location_start[0]])
+        #print('Board.py Line 68', self.board)
+        #print('Board.py Line 69', self.board[location_start[1]][location_start[0]])
         self.board[location_start[1]][location_start[0]].position_x = location_end[0]
         self.board[location_start[1]][location_start[0]].position_y = location_end[1]
         copy_of_piece = self.board[location_start[1]][location_start[0]].copy()

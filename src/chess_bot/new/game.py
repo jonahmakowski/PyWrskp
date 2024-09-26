@@ -6,12 +6,13 @@ class Game:
         self.move = 0
         self.board = Board() if board is None else board
 
-    def move_pieces(self, piece:ChessPiece, location_cords:tuple, display=True):
+    def move_pieces(self, piece:ChessPiece, location_cords:tuple, display=True, override=False):
         legal_moves = piece.list_moves(self.board)
-        if location_cords not in legal_moves:
-            return False
-        if piece.side != self.move:
-            return False
+        if not override:
+            if location_cords not in legal_moves:
+                return False
+            if piece.side != self.move:
+                return False
         self.board.move((piece.position_x, piece.position_y), location_cords)
         white_win, black_win = self.board.win_check()
         if display: self.board.pr()

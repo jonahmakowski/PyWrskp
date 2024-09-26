@@ -87,19 +87,19 @@ def artificial_semi_intelligence(game:Game, side=0):
     return best_moves[rand_index]['piece'], best_moves[rand_index]['move']
 
 def make_move_into_game(game:Game, piece, move):
-    print('Line 89', game)
+    #print('Line 89', game)
     g = game.copy()
-    g.move_pieces(piece, move, display=False)
+    g.move_pieces(piece, move, display=False, override=True)
     return g
 
 def m1_analyser(game:Game, piece, move, side):
     enemy_side = 1 if side == 1 else 0
-    print('line 96', game, piece, move)
+    #print('line 96', game, piece, move)
     move_game = make_move_into_game(game, piece, move)
     opponent_best_piece, opponent_best_move = artificial_semi_intelligence(move_game, side=enemy_side)
     opponent_best = make_move_into_game(move_game, opponent_best_piece, opponent_best_move)
     white, black = opponent_best.board.calculate_points()
-    return white - black if side == 0 else black - white, opponent_best_move
+    return white - black if side == 0 else black - white, opponent_best
 
 def bot_m1(game:Game, side=0):
     my_pieces, moves = get_pieces_and_moves(game, side)
@@ -107,11 +107,11 @@ def bot_m1(game:Game, side=0):
     move_games = []
     index = 0
 
-    print('Line 109', game)
+    #print('Line 109', game)
 
     for move_series in moves:
         for move in move_series:
-            print('line 113', game, my_pieces[index], move, side)
+            #print('line 113', game, my_pieces[index], move, side)
             value, game = m1_analyser(game, my_pieces[index], move, side)
             move_values.append(value)
             move_games.append(game)
