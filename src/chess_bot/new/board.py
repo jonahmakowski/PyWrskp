@@ -1,9 +1,11 @@
-from peices import Rook, Knight, Bishop, Queen, King, Pawn
+from peices import Rook, Knight, Bishop, Queen, King, Pawn, ChessPiece
+
 
 class Board:
-    def __init__(self):
-        self.board = []
-        self.generate_board()
+    def __init__(self, board=None):
+        self.board = [] if board is None else board
+        if board is None:
+            self.generate_board()
 
     def generate_board(self):
         self.board = []
@@ -35,13 +37,13 @@ class Board:
                            Pawn(6, 6, 1),
                            Pawn(7, 6, 1)])
         self.board.append([Rook(0, 6, 1),
-                           Knight(1, 6, 1),
-                           Bishop(2, 6, 1),
-                           Queen(3, 6, 1),
-                           King(4, 6, 1),
-                           Bishop(5, 6, 1),
-                           Knight(6, 6, 1),
-                           Rook(7, 6, 1)])
+                           Knight(1, 7, 1),
+                           Bishop(2, 7, 1),
+                           Queen(3, 7, 1),
+                           King(4, 7, 1),
+                           Bishop(5, 7, 1),
+                           Knight(6, 7, 1),
+                           Rook(7, 7, 1)])
 
     def pr(self):
         if self.board is None:
@@ -63,6 +65,8 @@ class Board:
         print()
 
     def move(self, location_start:tuple, location_end:tuple): # locations should be in (x, y) pairs
+        print('Board.py Line 68', self.board)
+        print('Board.py Line 69', self.board[location_start[1]][location_start[0]])
         self.board[location_start[1]][location_start[0]].position_x = location_end[0]
         self.board[location_start[1]][location_start[0]].position_y = location_end[1]
         copy_of_piece = self.board[location_start[1]][location_start[0]].copy()
@@ -114,3 +118,10 @@ class Board:
         elif x > len(self.board) or y > len(self.board[0]):
             raise ValueError("x and y must be smaller than board")
         return self.board[y][x]
+
+    def copy(self):
+        new_board = [row.copy() for row in self.board]
+        return self.__class__(new_board)
+
+    def promote(self, piece:ChessPiece):
+        self.board[piece.position_y][piece.position_x] = Queen(piece.position_x, piece.position_y, piece.side)

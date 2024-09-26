@@ -25,36 +25,46 @@ class ChessPiece:
     def list_moves(self, board):
         legal_moves = []
         for move in self.moves:
-            if not (self.position_x + move[0] < 0 or self.position_y + move[1] < 0):
+            if not ((self.position_x + move[0] < 0 or self.position_y + move[1] < 0) or
+                    (self.position_x + move[0] > 7 or self.position_y + move[1] > 7)):
                 if board.get_location(self.position_x + move[0], self.position_y + move[1]) is None:
                     legal_moves.append((self.position_x + move[0], self.position_y + move[1]))
+                    #print('Found empy square')
                 elif board.get_location(self.position_x + move[0], self.position_y + move[1]).side != self.side:
+                    #print('Found occupied square by enemy')
                     legal_moves.append((self.position_x + move[0], self.position_y + move[1]))
         return legal_moves
 
-    def check_range(self, start, end, x_mul, y_mul, b):
+    def check_range(self, start:int, end:int, x_change:int, y_change:int, b):
         moves = []
-        direction = -1 if start > end else 1
+        direction = -1 if end < start else 1
+        cur_x = x_change
+        cur_y = y_change
+
+        #print('Piece is at {}, {}'.format(self.position_x, self.position_y))
+
         for distance in range(start, end, direction):
-            #print('Checking {}, {} {}'.format(distance, self.position_x - distance*x_mul, self.position_y + distance*y_mul)) # Debug Message
-            if self.position_x - distance*x_mul < 0 or self.position_y + distance*y_mul < 0:
-                #print("Something was negative") # Debug Message
+            if self.position_x + cur_x > 7 or self.position_y + cur_y > 7:
+                # print('Something is greater than 7 at {}, {}'.format(self.position_x + cur_x, self.position_y + cur_y))
                 break
-            elif self.position_x - distance*x_mul > 7 or self.position_y + distance*y_mul > 7:
-                #print('Something was above 7') # Debug Message
+            elif self.position_x + cur_x < 0 or self.position_y + cur_y < 0:
+                # print('Something is less than 0 at {}, {}'.format(self.position_x + cur_x, self.position_y + cur_y))
                 break
-            elif b.get_location(self.position_x - distance*x_mul, self.position_y + distance*y_mul) is None:
-                moves.append((self.position_x - distance*x_mul, self.position_y + distance*y_mul))
-                #print('Found empty location') # Debug Message
-            elif b.get_location(self.position_x - distance*x_mul, self.position_y + distance*y_mul) is not None:
-                if b.get_location(self.position_x - distance*x_mul, self.position_y + distance*y_mul).side != self.side:
-                    moves.append((self.position_x - distance*x_mul, self.position_y + distance*y_mul))
-                    #print('Found enemy location') # Debug Message
+            elif b.get_location(self.position_x + cur_x, self.position_y + cur_y) is None:
+                # print('Found open square at {}, {}'.format(self.position_x + cur_x, self.position_y + cur_y))
+                moves.append((self.position_x + cur_x, self.position_y + cur_y))
+            elif b.get_location(self.position_x + cur_x, self.position_y + cur_y) is not None:
+                if b.get_location(self.position_x + cur_x, self.position_y + cur_y).side != self.side:
+                    # print('Found enemy at {}, {}'.format(self.position_x + cur_x, self.position_y + cur_y))
+                    moves.append((self.position_x + cur_x, self.position_y + cur_y))
                     break
-                elif b.get_location(self.position_x - distance*x_mul, self.position_y + distance*y_mul).side == self.side:
-                    #print('Found friendly') # Debug Message
+                else:
+                    # print('Found friendly at {}, {}'.format(self.position_x + cur_x, self.position_y + cur_y))
                     break
-        #print('Function ended, returned {}'.format(moves)) # Debug Message
+
+            cur_x += x_change
+            cur_y += y_change
+
         return moves
 
 class Pawn(ChessPiece):
@@ -68,9 +78,11 @@ class Pawn(ChessPiece):
         b = board.board
 
         # Moving two forward from a starting position
-        if self.side == 0 and b[self.position_y+2][self.position_x] is None:
+        if ((self.side == 0 and b[self.position_y+2][self.position_x] is None)
+                and b[self.position_y+1][self.position_x] is None):
             legal_moves.append((self.position_x, self.position_y + 2))
-        elif self.side == 1 and b[self.position_y-2][self.position_x] is None:
+        elif ((self.side == 1 and b[self.position_y-2][self.position_x] is None)
+              and b[self.position_y-1][self.position_x] is None):
             legal_moves.append((self.position_x, self.position_y - 2))
 
         # Moving one forward
@@ -80,21 +92,26 @@ class Pawn(ChessPiece):
             legal_moves.append((self.position_x, self.position_y-1))
 
         #Taking
-        if self.side == 0 and (b[self.position_y+1][self.position_x+1] is not None
-                               and b[self.position_y+1][self.position_x+1].side != self.side):
-            legal_moves.append((self.position_x+1, self.position_y+1))
-        elif self.side == 1 and (b[self.position_y-1][self.position_x-1] is not None
-                                 and b[self.position_y-1][self.position_x-1].side != self.side):
-            legal_moves.append((self.position_x-1, self.position_y-1))
+        if 0 < self.position_x+1 < 8 and 0 < self.position_y + 1 < 8:
+            if self.side == 0 and (b[self.position_y+1][self.position_x+1] is not None
+                                   and b[self.position_y+1][self.position_x+1].side != self.side):
+                legal_moves.append((self.position_x+1, self.position_y+1))
+
+        if 0 < self.position_x+1 < 8 and 0 < self.position_y+1 < 8:
+            if self.side == 1 and (b[self.position_y-1][self.position_x-1] is not None
+                                   and b[self.position_y-1][self.position_x-1].side != self.side):
+                legal_moves.append((self.position_x-1, self.position_y-1))
 
         # Taking the other way
-        if self.side == 0 and (b[self.position_y+1][self.position_x-1] is not None
-                               and b[self.position_y+1][self.position_x-1].side != self.side):
-            legal_moves.append((self.position_x-1, self.position_y+1))
+        if 0 < self.position_x+1 < 8 and 0 < self.position_y-1 < 8:
+            if self.side == 0 and (b[self.position_y+1][self.position_x-1] is not None
+                                   and b[self.position_y+1][self.position_x-1].side != self.side):
+                legal_moves.append((self.position_x-1, self.position_y+1))
 
-        elif self.side == 1 and (b[self.position_y-1][self.position_x+1] is not None
-                                 and b[self.position_y-1][self.position_x+1].side != self.side):
-            legal_moves.append((self.position_x+1, self.position_y-1))
+        if 0 < self.position_x-1 < 8 and 0 < self.position_y+1 < 8:
+            if self.side == 1 and (b[self.position_y-1][self.position_x+1] is not None
+                                   and b[self.position_y-1][self.position_x+1].side != self.side):
+                legal_moves.append((self.position_x+1, self.position_y-1))
 
         return legal_moves
 
@@ -115,16 +132,16 @@ class Rook(ChessPiece):
         legal_moves = []
 
         # Check "Downward"
-        legal_moves.extend(self.check_range(-1, -9, 0, 1, board))
+        legal_moves.extend(self.check_range(1, 8, 0, 1, board))
 
         # Check "Upward"
-        legal_moves.extend(self.check_range(1, 9, 0, 1, board))
+        legal_moves.extend(self.check_range(1, 8, 0, -1, board))
 
         # Check "Left"
-        legal_moves.extend(self.check_range(1, 9, 1, 0, board))
+        legal_moves.extend(self.check_range(1, 8, 1, 0, board))
 
         # Check "Right"
-        legal_moves.extend(self.check_range(-1, -9, 1, 0, board))
+        legal_moves.extend(self.check_range(1, 8, -1, 0, board))
 
         return legal_moves
 
@@ -158,14 +175,22 @@ class Bishop(ChessPiece):
         # Check Up left
         legal_moves.extend(self.check_range(1, 8, 1, 1, board))
 
+        #print(legal_moves)
+
         # Check Down left
-        legal_moves.extend(self.check_range(-1, -8, 1, 1, board))
+        legal_moves.extend(self.check_range(1, 8, -1, -1, board))
+
+        #print(legal_moves)
 
         # Check Down Right
-        legal_moves.extend(self.check_range(-1, -8, -1, 1, board))
+        legal_moves.extend(self.check_range(1, 8, -1, 1, board))
+
+        #print(legal_moves)
 
         # Check Up Right
-        legal_moves.extend(self.check_range(1, 8, -1, 1, board))
+        legal_moves.extend(self.check_range(1, 8, 1, -1, board))
+
+        #print(legal_moves)
 
         return legal_moves
 
@@ -196,30 +221,30 @@ class Queen(ChessPiece):
         legal_moves.extend(self.check_range(1, 8, 1, 1, board))
 
         # Check Down left
-        legal_moves.extend(self.check_range(-1, -8, 1, 1, board))
+        legal_moves.extend(self.check_range(1, 8, -1, -1, board))
 
         # Check Down Right
-        legal_moves.extend(self.check_range(-1, -8, -1, 1, board))
-
-        # Check Up Right
         legal_moves.extend(self.check_range(1, 8, -1, 1, board))
 
+        # Check Up Right
+        legal_moves.extend(self.check_range(1, 8, 1, -1, board))
+
         # Check "Downward"
-        legal_moves.extend(self.check_range(-1, -9, 0, 1, board))
+        legal_moves.extend(self.check_range(1, 8, 0, 1, board))
 
         # Check "Upward"
-        legal_moves.extend(self.check_range(1, 9, 0, 1, board))
+        legal_moves.extend(self.check_range(1, 8, 0, -1, board))
 
         # Check "Left"
-        legal_moves.extend(self.check_range(1, 9, 1, 0, board))
+        legal_moves.extend(self.check_range(1, 8, 1, 0, board))
 
         # Check "Right"
-        legal_moves.extend(self.check_range(-1, -9, 1, 0, board))
+        legal_moves.extend(self.check_range(1, 8, -1, 0, board))
 
         return legal_moves
 
 class King(ChessPiece):
     def __init__(self, position_x, position_y, side):
-        moves = [(1, 0), (0, 1), (1, 1), (-1, 1), (1, -1), (-1, -1)]
+        moves = [(1, 0), (0, 1), (-1, 0), (0, -1), (1, 1), (-1, 1), (1, -1), (-1, -1)]
         appearance = '♚' if side == 1 else '♔'
         super().__init__(position_x, position_y, moves, "King", side, appearance, 10000)
