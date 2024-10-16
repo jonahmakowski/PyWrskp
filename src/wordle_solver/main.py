@@ -24,18 +24,20 @@ def check_valid_word(word, word_correct, word_wrong_place, word_wrong):
 
     for letter in word_lis:
         if letter.lower() != word_correct[index] and word_correct[index] != '':
-            #print("Word {} doesn't work at letter {} for not being in correct list, correct was {}"
-                  #.format(word, letter, word_correct[index]))
-            #print(word_correct, word_wrong_place, word_wrong)
+            print("Word {} doesn't work at letter {} for not being in correct list, correct was {}"
+                  .format(word, letter, word_correct[index]))
+            print(word_correct, word_wrong_place, word_wrong)
             return False
         elif letter.lower() in word_wrong:
-            # print("Word {} doesn't work at letter {} for letter in wrong list".format(word, letter))
+            print("Word {} doesn't work at letter {} for letter in wrong list".format(word, letter))
             return False
         elif word_wrong_place.get(word_lis[index]) is not None:
             if index in word_wrong_place[word_lis[index]]:
-                # print("Word {} doesn't work at letter {} for having letter in wrong spot".format(word, letter))
+                print("Word {} doesn't work at letter {} for having letter in wrong spot".format(word, letter))
                 return False
         index += 1
+        if word == "climb":
+            exit()
 
     for letter in word_wrong_place.keys():
         if letter not in word_lis:
