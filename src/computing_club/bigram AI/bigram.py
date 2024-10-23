@@ -53,4 +53,4 @@ class BigramAI:
 
 if __name__ == '__main__':
     b = BigramAI()
-    b.generate_text('a')
+    b.generate_text(input())
