@@ -7,6 +7,7 @@ class NgramAI:
 
     def load_reference(self):
         words = {}
+
         with open('input.txt', 'r') as f:
             paragraph = f.read()
 
@@ -14,7 +15,7 @@ class NgramAI:
 
         # Removing all punctuation
         paragraph = paragraph.replace(',', '')
-        paragraph = paragraph.replace('.', '')
+        # paragraph = paragraph.replace('.', '')
         paragraph = paragraph.replace('!', '')
         paragraph = paragraph.replace('"', '')
         paragraph = paragraph.replace('?', '')
@@ -27,9 +28,14 @@ class NgramAI:
         paragraph = paragraph.replace('(', '')
         paragraph = paragraph.replace(')', '')
         paragraph = paragraph.replace('-', '')
+        paragraph = paragraph.replace('~', '')
+        paragraph = paragraph.replace('*', '')
         paragraph = paragraph.replace('\n', ' ')
-        paragraph = paragraph.replace('  ', ' ')
-        paragraph = paragraph.replace('  ', ' ')
+        for i in range(10):
+            paragraph = paragraph.replace('  ', ' ')
+
+        with open('formated_paragraph.txt', 'w') as f:
+            f.write(paragraph)
 
         # Make sub-lists
         paragraph = paragraph.split()
@@ -37,7 +43,7 @@ class NgramAI:
         for index in range(len(paragraph)):
             try:
                 lastN_words = ''
-                for i in range(-1, -self.length-1, -1):
+                for i in range(self.length-1, 0, -1):
                     lastN_words += paragraph[index-i] + ' '
 
                 lastN_words = lastN_words[:-1]
@@ -81,5 +87,5 @@ class NgramAI:
 
 
 if __name__ == '__main__':
-    b = NgramAI(3)
-    b.generate_text(input('Provide an input: '))
+    b = NgramAI(4)
+    b.generate_text(input('Provide an input: '), word_amount=1000)
