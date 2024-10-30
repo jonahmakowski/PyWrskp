@@ -1,9 +1,19 @@
 from random import choice
+import json
 
 class NgramAI:
-    def __init__(self, length:int):
+    def __init__(self, length:int, file_load=True, making_lists=0):
         self.length = length
-        self.reference = self.load_reference()
+        self.reference = None
+        if making_lists == 0:
+            if not file_load: self.load_reference()
+            else: self.load_reference_from_file()
+        else:
+            self.length = 2
+            while self.length <= making_lists:
+                self.load_reference()
+                print('Made list for {}'.format(self.length))
+                self.length += 1
 
     def load_reference(self):
         words = {}
@@ -55,10 +65,14 @@ class NgramAI:
             except IndexError:
                 pass
 
-        with open('output.txt', 'w') as f:
-            f.write(str(words))
+        with open('cache/output_{}.txt'.format(self.length), 'w') as f:
+            json.dump(words, f)
 
-        return words
+        self.reference = words
+
+    def load_reference_from_file(self):
+        with open('cache/output_{}.txt'.format(self.length), 'r') as f:
+            self.reference = json.load(f)
 
     @staticmethod
     def make_list_into_str(lis):
@@ -87,5 +101,5 @@ class NgramAI:
 
 
 if __name__ == '__main__':
-    b = NgramAI(4)
+    b = NgramAI(2, making_lists=0)
     b.generate_text(input('Provide an input: '), word_amount=1000)
