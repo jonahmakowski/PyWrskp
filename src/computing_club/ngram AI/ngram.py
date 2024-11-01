@@ -14,6 +14,7 @@ class NgramAI:
                 self.load_reference()
                 print('Made list for {}'.format(self.length))
                 self.length += 1
+        self.length = length
 
     def load_reference(self):
         words = {}
@@ -25,7 +26,7 @@ class NgramAI:
 
         # Removing all punctuation
         paragraph = paragraph.replace(',', '')
-        # paragraph = paragraph.replace('.', '')
+        paragraph = paragraph.replace('.', '')
         paragraph = paragraph.replace('!', '')
         paragraph = paragraph.replace('"', '')
         paragraph = paragraph.replace('?', '')
@@ -40,6 +41,8 @@ class NgramAI:
         paragraph = paragraph.replace('-', '')
         paragraph = paragraph.replace('~', '')
         paragraph = paragraph.replace('*', '')
+        paragraph = paragraph.replace('’', '')
+        paragraph = paragraph.replace("'", '')
         paragraph = paragraph.replace('\n', ' ')
         for i in range(10):
             paragraph = paragraph.replace('  ', ' ')
@@ -98,8 +101,12 @@ class NgramAI:
             cur_words.append(active_word)
             print(active_word, end=' ')
             words += 1
+        print()
 
 
 if __name__ == '__main__':
-    b = NgramAI(2, making_lists=0)
-    b.generate_text(input('Provide an input: '), word_amount=1000)
+    b = NgramAI(4, making_lists=0)
+    inp = input('Provide an input: ')
+    b.generate_text(inp, word_amount=1000)
+    b.generate_text(inp, word_amount=1000)
+    b.generate_text(inp, word_amount=1000)
