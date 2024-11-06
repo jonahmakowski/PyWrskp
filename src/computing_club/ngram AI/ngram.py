@@ -20,51 +20,51 @@ class NgramAI:
         words = {}
 
         with open('input.txt', 'r') as f:
-            paragraph = f.read()
+            input_text = f.read()
 
-        paragraph = paragraph.lower()
+        input_text = input_text.lower()
 
         # Removing all punctuation
-        paragraph = paragraph.replace(',', '')
-        paragraph = paragraph.replace('.', '')
-        paragraph = paragraph.replace('!', '')
-        paragraph = paragraph.replace('"', '')
-        paragraph = paragraph.replace('?', '')
-        paragraph = paragraph.replace(':', '')
-        paragraph = paragraph.replace(';', '')
-        paragraph = paragraph.replace('“', '')
-        paragraph = paragraph.replace('”', '')
-        paragraph = paragraph.replace('…', ' ')
-        paragraph = paragraph.replace('—', ' ')
-        paragraph = paragraph.replace('(', '')
-        paragraph = paragraph.replace(')', '')
-        paragraph = paragraph.replace('-', '')
-        paragraph = paragraph.replace('~', '')
-        paragraph = paragraph.replace('*', '')
-        paragraph = paragraph.replace('’', '')
-        paragraph = paragraph.replace("'", '')
-        paragraph = paragraph.replace('\n', ' ')
+        input_text = input_text.replace(',', '')
+        input_text = input_text.replace('.', '')
+        input_text = input_text.replace('!', '')
+        input_text = input_text.replace('"', '')
+        input_text = input_text.replace('?', '')
+        input_text = input_text.replace(':', '')
+        input_text = input_text.replace(';', '')
+        input_text = input_text.replace('“', '')
+        input_text = input_text.replace('”', '')
+        input_text = input_text.replace('…', ' ')
+        input_text = input_text.replace('—', ' ')
+        input_text = input_text.replace('(', '')
+        input_text = input_text.replace(')', '')
+        input_text = input_text.replace('-', '')
+        input_text = input_text.replace('~', '')
+        input_text = input_text.replace('*', '')
+        input_text = input_text.replace('’', '')
+        input_text = input_text.replace("'", '')
+        input_text = input_text.replace('\n', ' ')
         for i in range(10):
-            paragraph = paragraph.replace('  ', ' ')
+            input_text = input_text.replace('  ', ' ')
 
         with open('formated_paragraph.txt', 'w') as f:
-            f.write(paragraph)
+            f.write(input_text)
 
         # Make sub-lists
-        paragraph = paragraph.split()
+        input_text = input_text.split()
 
-        for index in range(len(paragraph)):
+        for index in range(len(input_text)):
             try:
-                lastN_words = ''
+                last_n_words = ''
                 for i in range(self.length-1, 0, -1):
-                    lastN_words += paragraph[index-i] + ' '
+                    last_n_words += input_text[index - i] + ' '
 
-                lastN_words = lastN_words[:-1]
+                last_n_words = last_n_words[:-1]
 
-                if lastN_words in words.keys():
-                    words[lastN_words].append(paragraph[index])
+                if last_n_words in words.keys():
+                    words[last_n_words].append(input_text[index])
                 else:
-                    words[lastN_words] = [paragraph[index]]
+                    words[last_n_words] = [input_text[index]]
             except IndexError:
                 pass
 
@@ -107,6 +107,6 @@ class NgramAI:
 if __name__ == '__main__':
     b = NgramAI(4, making_lists=0)
     inp = input('Provide an input: ')
-    b.generate_text(inp, word_amount=1000)
-    b.generate_text(inp, word_amount=1000)
-    b.generate_text(inp, word_amount=1000)
+    for r in range(1, 6):
+        print('\t\t{}: '.format(r), end='')
+        b.generate_text(inp, word_amount=1000)
