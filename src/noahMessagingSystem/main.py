@@ -1,8 +1,10 @@
 from flask import Flask
-from flask import render_template, redirect, url_for, session, request
+from flask import render_template, redirect, url_for, session, request, send_from_directory
 from helper import *
 
-users = [{'user': 'Jonah', 'password':'pass123'}]
+# Run "gunicorn --config gunicorn.conf.py main:app" for production server
+
+users = load_users()
 
 app = Flask(__name__)
 app.secret_key = 'your-secret-key'
@@ -33,4 +35,5 @@ def logout():
     session.pop('username', None)
     return redirect(url_for('login'))
 
-app.run(host="0.0.0.0", port=1000)
+if __name__ == "__main__":
+    app.run()

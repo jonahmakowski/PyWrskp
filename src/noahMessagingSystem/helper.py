@@ -1,9 +1,11 @@
 from dotenv import load_dotenv
 import os
 
-def in_users(users, user, password):
+def in_users(users, user, password=None):
     for u in users:
-        if u['user'] == user and u['password'] == password:
+        if password is not None and (u['user'] == user and u['password'] == password):
+            return True
+        elif password is None and u['user'] == user:
             return True
     return False
 
@@ -23,5 +25,3 @@ def load_users():
             exit()
 
     return users
-
-print(load_users())
