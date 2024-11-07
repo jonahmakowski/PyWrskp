@@ -1,5 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+    <script>
+        const username = "{{ username }}";
+        const chat = "{{ chat }}".toLowerCase();
+        if (chat !== 'None') {
+            console.log("Connecting to channel:", username);
+            const eventSource = new EventSource(`/stream?channel=${username}`);
+
+            eventSource.addEventListener('personal', function(event) {
+                const data = JSON.parse(event.data);
+
+                console.log("Parsed data:", data);
+
+                // Display the multiple pieces of information
+                if (data.user_sent === chat) {
+                    console.log("Updated:", data);
+                    document.getElementById("message").innerText = data.message;
+                }
+            });
+        }
+    </script>
+
     <head>
         <title>Local Messaging</title>
         <meta charset="UTF-8">
@@ -8,11 +29,24 @@
         <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon.png') }}">
     </head>
     <body>
-        <div class="header">
-            <div class="username">{{ username }}</div>
-            <form action="/logout" method="POST">
-                <button type="submit" class="logout-btn">Logout</button>
-            </form>
+        <form action="/logout" method="POST">
+            <button type="submit" class="logout-btn">Logout</button>
+        </form>
+
+        <div class="sidebar">
+            {% for title, url in sidebar_options.items() %}
+            <a href="{{ url }}">{{ title }}</a>
+            {% endfor %}
+        </div>
+
+        <div class="main-content">
+            {% if not chat %}
+            <p class=center-text>Please Select a Chat on the Left!</p>
+            {% endif %}
+
+            {% if chat %}
+            <p id='message'></p>
+            {% endif %}
         </div>
     </body>
 </html>
