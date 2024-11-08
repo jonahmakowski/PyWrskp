@@ -10,8 +10,6 @@
             eventSource.addEventListener('personal', function(event) {
                 const data = JSON.parse(event.data);
 
-                console.log("Parsed data:", data);
-
                 // Display the multiple pieces of information
                 if (data.user_sent === chat) {
                     console.log("Updated:", data);

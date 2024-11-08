@@ -65,8 +65,6 @@ def message_dic_to_text(ls, user1, user2):
     for message in ls_new['chat']:
         result += '{}: {}\n'.format(message['username'], message['message'])
 
-    print(result)
-
     return result
 
 def add_to_chat_dic(ls, sender, respondent, message):
@@ -76,7 +74,6 @@ def add_to_chat_dic(ls, sender, respondent, message):
             chat_copy.remove(sender)
             if (chat_copy == [sender] and sender == respondent) or sender != respondent:
                 chat['chat'].append({'username': sender, 'message': message})
-                print('Found one matching chat with {} and {}, message was {}'.format(sender, respondent, message))
 
     return ls
 

@@ -21,7 +21,6 @@ def send_message(message, username, other_user):
     try:
         data = {'message': message,
                 'user_sent': other_user.lower()}
-        print('sent {} to {}'.format(data, username.lower()))
         sse.publish(data, type='personal', channel=username.lower())
         return 200
     except Exception as e:
