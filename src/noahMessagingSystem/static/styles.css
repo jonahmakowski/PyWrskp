@@ -75,6 +75,38 @@
 }
 
 .main-content {
+    margin-top: 20px;
     margin-left: 200px;
     padding: 20px;
+}
+
+.top-bottom-layout {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Space between top and bottom */
+    height: 90vh;
+    padding: 10px;
+}
+
+/* Text at the top */
+.top-text {
+    margin: 0;
+    white-space: pre-line;
+}
+
+/* Bottom controls */
+.bottom-controls {
+    display: flex;
+    justify-content: space-between; /* Aligns input and button horizontally */
+    align-items: center; /* Aligns them vertically */
+}
+
+/* Styling for the input and button (optional) */
+.bottom-controls input {
+    flex: 1; /* Makes input expand */
+    margin-right: 10px; /* Adds space between input and button */
+}
+
+.bottom-controls button {
+    padding: 5px 10px;
 }

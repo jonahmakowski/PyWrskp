@@ -18,9 +18,15 @@ app.config["REDIS_URL"] = "redis://localhost:6379/0"
 app.register_blueprint(sse, url_prefix='/stream')
 
 def send_message(message, username, other_user):
-    data = {'message': message,
-            'user_sent': other_user.lower()}
-    sse.publish(data, type='personal', channel=username)
+    try:
+        data = {'message': message,
+                'user_sent': other_user.lower()}
+        print('sent {} to {}'.format(data, username.lower()))
+        sse.publish(data, type='personal', channel=username.lower())
+        return 200
+    except Exception as e:
+        print("Error in send_message:", e)
+        return 500
 
 @app.route('/chat')
 def home():
@@ -28,9 +34,24 @@ def home():
         return redirect(url_for('login'))
     return render_template('home.html', username=session['username'], sidebar_options=user_pages(users))
 
-@app.route('/chat/<user>')
+@app.route('/chat/<user>', methods=['GET', 'POST'])
 def chat(user):
-    return render_template('home.html', username=session['username'], sidebar_options=user_pages(users), chat=user.lower())
+    if 'username' not in session:
+        return redirect(url_for('login'))
+
+    user = user.title()
+
+    if request.method == 'POST':
+        message = request.form['message']
+        chats = load_chats_from_file()
+        chats = add_to_chat_dic(chats, session['username'], user, message)
+        save_chats_to_file(chats)
+        send_message(message_dic_to_text(chats, user, session['username']), user, session['username'])
+
+    return render_template('home.html', username=session['username'],
+                           sidebar_options=user_pages(users),
+                           chat=user,
+                           messages=message_dic_to_text(load_chats_from_file(), user, session['username']))
 
 @app.route('/')
 def redirect_from_main():
@@ -59,10 +80,5 @@ def logout():
     session.pop('username', None)
     return redirect(url_for('login'))
 
-@app.route('/trigger')
-def trigger():
-    send_message('Test', 'Jonah', 'Jonah')
-    return 'Attempted Send'
-
 if __name__ == "__main__":
-    app.run()
+    app.run(port=2000)
