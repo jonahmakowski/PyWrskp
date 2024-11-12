@@ -30,6 +30,8 @@ def load_users():
             print('User {} does not have a defined password. Terminating'.format(username))
             exit()
 
+    users.append({'user':'Ai', 'password':None})
+
     return users
 
 def user_pages(users):
@@ -52,6 +54,7 @@ def save_chats_to_file(chats):
 def message_dic_to_text(ls, user1, user2):
     result = ''
     ls_new = None
+    # print(user1, user2, ls)
     for chat in ls:
         if user1 in chat['usernames'] and user2 in chat['usernames']:
             chat_copy = chat['usernames'].copy()
@@ -60,20 +63,26 @@ def message_dic_to_text(ls, user1, user2):
                 ls_new = chat.copy()
 
     if ls_new is None:
-        raise "Couldn't find this user"
+        ls_new = {"usernames": [user1, user2], "chat": []}
 
     for message in ls_new['chat']:
-        result += '{}: {}\n'.format(message['username'], message['message'])
+        result += '\n<u>**{}**</u>: {}'.format(message['username'], message['message'])
 
     return result
 
 def add_to_chat_dic(ls, sender, respondent, message):
+    found = False
+
     for chat in ls:
         if sender in chat['usernames'] and respondent in chat['usernames']:
             chat_copy = chat['usernames'].copy()
             chat_copy.remove(sender)
             if (chat_copy == [sender] and sender == respondent) or sender != respondent:
                 chat['chat'].append({'username': sender, 'message': message})
+                found = True
+
+    if not found:
+        ls.append({'usernames': [sender, respondent], 'chat':[{'username': sender, 'message': message}]})
 
     return ls
 
@@ -83,5 +92,21 @@ def clear_message_history():
         chat['chat'] = []
     save_chats_to_file(chats)
 
+def convert_to_ai_message_system(ls, user):
+    chat = []
+    for c in ls:
+        if 'Ai' in c['usernames'] and user in c['usernames']:
+            chat = c['chat']
+
+    new_chat = [{'role':'system', 'content': 'You are an AI assistant running on a local chat platform. The other person is called {}. You can use markdown bolding and italics. You are the LLM llama3.2.'.format(user)}]
+    for message in chat:
+        if message['username'] == 'Ai':
+            new_chat.append({'role':'assistant', 'content': message['message']})
+        else:
+            new_chat.append({'role':'user', 'content': message['message']})
+
+    return new_chat
+
 if __name__ == '__main__':
     clear_message_history()
+    print('Cleared History')
