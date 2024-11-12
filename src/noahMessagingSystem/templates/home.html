@@ -1,23 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-    <script>
-        const username = "{{ username }}".toLowerCase();
-        const chat = "{{ chat }}".toLowerCase();
-        if (chat !== 'None') {
-            console.log("Connecting to channel:", username);
-            const eventSource = new EventSource(`/stream?channel=${username}`);
+    <p style='display: none;' id=raw_messages>{{ messages }}</p>
 
-            eventSource.addEventListener('personal', function(event) {
-                const data = JSON.parse(event.data);
-
-                // Display the multiple pieces of information
-                if (data.user_sent === chat) {
-                    console.log("Updated:", data);
-                    document.getElementById("message").innerText = data.message;
-                }
-            });
-        }
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.1/purify.min.js"></script>
 
     <head>
         <title>Local Messaging with {{ chat }}</title>
@@ -44,11 +30,11 @@
 
             {% if chat %}
             <div class="top-bottom-layout">
-                <p class="top-text" id='message'>{{ messages }}</p>
+                <p class="top-text" id='messages'>placeholder</p>
                 <div class="bottom-controls">
                     <form method="POST" action="/chat/{{ chat }}">
                         <label>
-                            <input type="text" name="message" placeholder="Message..." />
+                            <input type="text" name="message" placeholder="Message..." autocomplete="off"/>
                         </label>
                         <button>Submit</button>
                     </form>
@@ -60,4 +46,74 @@
             {% endif %}
         </div>
     </body>
+
+    <script>
+        marked.setOptions({
+            breaks: true,
+            gfm: true,
+            sanitize: true
+        });
+
+        const username = "{{ username }}".toLowerCase();
+        const chat = "{{ chat }}".toLowerCase();
+        if (chat !== 'None') {
+            console.log("Connecting to channel:", username);
+            const eventSource = new EventSource(`/stream?channel=${username}`);
+
+            function renderMessages() {
+                const container = document.getElementById('messages');
+                const rawMessages = document.getElementById('raw_messages').innerHTML;
+
+                marked.setOptions({
+                        sanitize: true,  // Deprecated but kept for older versions
+                        headerIds: false, // Prevent header ID injection
+                        mangle: false,   // Prevent header ID mangling
+                        breaks: true,    // Treat carriage returns as <br>
+                        gfm: true      // Use GitHub Flavored Markdown
+                })
+
+                const purifyConfig = {
+                        ALLOWED_TAGS: [
+                            // Basic formatting
+                            'p', 'br', 'strong', 'em', 'del',
+                            // Lists
+                            'ul', 'ol', 'li',
+                            // Code
+                            'code', 'pre',
+                            // Links and images
+                            'a', 'img'
+                        ],
+                        ALLOWED_ATTR: [
+                            'href',      // For links
+                            'src',       // For images
+                            'alt',       // For images
+                            'title',     // For tooltips
+                        ]
+                    };
+
+                try {
+                    // Parse markdown and sanitize the output
+                    const htmlContent = marked.parse(rawMessages);
+                    const sanitizedContent = DOMPurify.sanitize(htmlContent, purifyConfig);
+                    container.innerHTML = sanitizedContent;
+                } catch (error) {
+                    console.error('Error rendering markdown:', error);
+                    container.innerHTML = 'Error rendering content safely';
+                }
+            }
+
+            eventSource.addEventListener('personal', function(event) {
+                const data = JSON.parse(event.data);
+
+                // Display the multiple pieces of information
+                if (data.user_sent === chat) {
+                    document.getElementById("raw_messages").innerText = data.message;
+                    renderMessages()
+                }
+            });
+
+            renderMessages();
+
+        }
+    </script>
 </html>

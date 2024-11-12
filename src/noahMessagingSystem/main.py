@@ -1,9 +1,11 @@
+import ollama
 from flask import Flask
 from flask import render_template, redirect, url_for, session, request, Response
 from flask_sse import sse
 from helper import *
 
 # Run "gunicorn --config gunicorn.conf.py main:app" for production server (from within this folder)
+# Run "redis-server" before starting the code
 
 users = load_users()
 
@@ -41,11 +43,23 @@ def chat(user):
     user = user.title()
 
     if request.method == 'POST':
-        message = request.form['message']
-        chats = load_chats_from_file()
-        chats = add_to_chat_dic(chats, session['username'], user, message)
-        save_chats_to_file(chats)
-        send_message(message_dic_to_text(chats, user, session['username']), user, session['username'])
+        if user != 'Ai':
+            message = request.form['message']
+            chats = load_chats_from_file()
+            chats = add_to_chat_dic(chats, session['username'], user, message)
+            save_chats_to_file(chats)
+            send_message(message_dic_to_text(chats, user, session['username']), user, session['username'])
+        else:
+            message = request.form['message']
+            chats = load_chats_from_file()
+            chats = add_to_chat_dic(chats, session['username'], user, message)
+            save_chats_to_file(chats)
+            chats_ai = convert_to_ai_message_system(chats, session['username'])
+            new_message = ollama.chat(model='llama3.2', messages=chats_ai)['message']['content']
+            new_message.replace('\t', '    ')
+            chats = add_to_chat_dic(load_chats_from_file(), 'Ai', session['username'], new_message)
+            save_chats_to_file(chats)
+            send_message(message_dic_to_text(chats, user, session['username']), session['username'], user)
 
     return render_template('home.html', username=session['username'],
                            sidebar_options=user_pages(users),
