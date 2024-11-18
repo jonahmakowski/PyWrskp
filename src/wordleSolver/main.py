@@ -1,3 +1,5 @@
+from random import choice
+
 def parse_input(inp, word, word_correct, word_wrong_place, word_wrong):
     word_lis = list(word)
     index = 0
@@ -24,20 +26,18 @@ def check_valid_word(word, word_correct, word_wrong_place, word_wrong):
 
     for letter in word_lis:
         if letter.lower() != word_correct[index] and word_correct[index] != '':
-            print("Word {} doesn't work at letter {} for not being in correct list, correct was {}"
-                  .format(word, letter, word_correct[index]))
-            print(word_correct, word_wrong_place, word_wrong)
+            #print("Word {} doesn't work at letter {} for not being in correct list, correct was {}"
+                  #.format(word, letter, word_correct[index]))
+            #print(word_correct, word_wrong_place, word_wrong)
             return False
         elif letter.lower() in word_wrong:
-            print("Word {} doesn't work at letter {} for letter in wrong list".format(word, letter))
+            #print("Word {} doesn't work at letter {} for letter in wrong list".format(word, letter))
             return False
         elif word_wrong_place.get(word_lis[index]) is not None:
             if index in word_wrong_place[word_lis[index]]:
-                print("Word {} doesn't work at letter {} for having letter in wrong spot".format(word, letter))
+                #print("Word {} doesn't work at letter {} for having letter in wrong spot".format(word, letter))
                 return False
         index += 1
-        if word == "climb":
-            exit()
 
     for letter in word_wrong_place.keys():
         if letter not in word_lis:
@@ -71,14 +71,21 @@ def solver(starting_word="crane"):
 
     guess = 2
     while True:
-        word = words[0]
+        if len(words) == 0:
+            print("The word isn't on the list")
+            break
+        word = choice(words)
         if not check_valid_word(word, word_correct, word_wrong_place, word_wrong):
-            del words[0]
+            words.pop(words.index(word))
             continue
         print('Guess {}: {}'.format(guess, word))
+        inp = input()
+        if inp == 'n':
+            words.pop(words.index(word))
+            continue
         (word_correct,
          word_wrong_place,
-         word_wrong) = parse_input(input(), word, word_correct, word_wrong_place, word_wrong)
+         word_wrong) = parse_input(inp, word, word_correct, word_wrong_place, word_wrong)
 
         if word_correct == list(word):
             print('{} is the correct word. Worked at guess {}'.format(word, guess))

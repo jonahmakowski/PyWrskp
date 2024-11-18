@@ -8125,7 +8125,6 @@ glued
 gluey
 gluer
 glues
-gluma
 glume
 glump
 gluon
@@ -9741,7 +9740,6 @@ julus
 jumba
 jumby
 jumbo
-jumma
 jumpy
 jumps
 junco
