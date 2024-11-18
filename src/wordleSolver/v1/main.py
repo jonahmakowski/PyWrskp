@@ -47,7 +47,7 @@ def check_valid_word(word, word_correct, word_wrong_place, word_wrong):
     return True
 
 def solver(starting_word="crane"):
-    with open('five_letter_words.txt', 'r') as file:
+    with open('../five_letter_words.txt', 'r') as file:
         words_temp = file.readlines()
 
     words = []
