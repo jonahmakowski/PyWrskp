@@ -1,11 +1,12 @@
 from flask import Flask
-import playsound
+import vlc
 
 app = Flask(__name__)
 
 @app.route('/')
 def main():
-    playsound.playsound('doorbell.wav', block=False)
+    player = vlc.MediaPlayer("doorbell.wav")
+    player.play()
     return '<h1>Rang Doorbell!</h1>'
 
 if __name__ == '__main__':
