@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def main():
-    subprocess.run(['play', 'doorbell.wav'])
+    subprocess.run(['play', '-q', 'doorbell.wav'])
     return '<h1>Rang Doorbell!</h1>'
 
 if __name__ == '__main__':
