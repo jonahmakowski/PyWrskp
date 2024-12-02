@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Base 10 to Hexadecimal Converter</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon.png') }}">
+    </head>
+    <h1 class="center-text">Base 10 to Hexadecimal Converter</h1>
+    <p class="center-text">This converter only works on integers</p>
+    <div class="converter-container">
+        <form method="POST" action="/converter/base_convert">
+            <div class="form-group">
+                <label>Base 10 to Hexadecimal</label>
+                <label>
+                    <input type="number" name="base10" required autocomplete="off">
+                </label>
+            </div>
+            <button type="submit">Convert</button>
+        </form>
+        <p>Result: {{ base10_result }}</p>
+    </div>
+
+    <div class="converter-container">
+        <form method="POST" action="/converter/hexa_convert">
+            <div class="form-group">
+                <label>Hexadecimal to Base 10</label>
+                <label>
+                    <input type="text" name="hexadecimal" required autocomplete="off">
+                </label>
+            </div>
+            <button type="submit">Convert</button>
+        </form>
+        <p>Result: {{ hexadecimal_result }}</p>
+    </div>
+</html>
