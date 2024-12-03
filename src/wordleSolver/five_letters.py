@@ -1,10 +1,6 @@
-def get_five_letters():
-    invalid_chars = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '_', '~', '.', '$', '[', ']', '{', '}', '%', '!', ',', '/', '(', ')', '\\', '#', '*']
-
-
-    five_letters = []
-    with open('words.txt', 'r') as file:
-        words_temp = file.readlines()
+def get_words(file='words.txt'):
+    with open(file, 'r') as f:
+        words_temp = f.readlines()
 
     words = []
     for word in words_temp:
@@ -12,6 +8,16 @@ def get_five_letters():
         word = word.lower()
         these_words = word.split()
         words.extend(these_words)
+    
+    return words
+
+def get_five_letters(in_file='words.txt', out_file='five_letter_words.txt'):
+    invalid_chars = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '_', '~', '.', '$', '[', ']', '{', '}', '%', '!', ',', '/', '(', ')', '\\', '#', '*']
+
+
+    five_letters = []
+
+    words = get_words(file=in_file)
 
     for word in words:
         word = word.lower()
@@ -24,14 +30,14 @@ def get_five_letters():
             
             if valid:
                 five_letters.append(word.lower())
-                print('Found {}'.format(word.lower()))
 
     five_letters = list(set(five_letters))
     five_letters.sort()
 
-    print('Found {} words'.format(len(words)))
+    print('Loaded {} words'.format(len(words)))
 
-    with open('five_letter_words.txt', 'w') as file:
+    with open(out_file, 'w') as file:
         file.write('\n'.join(five_letters) + '\n')
 
-get_five_letters()
+if __name__ == '__main__':
+    get_five_letters()
