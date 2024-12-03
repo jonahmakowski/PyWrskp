@@ -10,7 +10,7 @@ def parse_input(inp, word, word_correct, word_wrong_place, word_wrong):
             else:
                 word_wrong_place[word_lis[index]] = [index]
         elif letter.lower() == "w":
-            if word_lis not in word_wrong:
+            if word_lis[index] not in word_wrong and (word_lis[index] not in word_correct or word_lis[index] in word_wrong_place.keys()):
                 word_wrong.append(word_lis[index])
         else:
             print('There was an invalid input, terminating')
@@ -51,8 +51,8 @@ def give_rank(word_list):
     rank4 = ['b', 'h', 'm']
     rank5 = ['p', 'g', 'u']
     rank6 = ['d', 'c', 'l']
-    rank7 = ['u', 't', 'n']
-    rank8 = ['r', 'i']
+    rank7 = ['t', 'n']
+    rank8 = ['r', 'i', 'o']
     rank9 = ['s', 'e', 'a']
 
     ranks = []
@@ -145,6 +145,12 @@ def solver(starting_word="crane"):
             print("The word isn't on the list")
             break
         words, ranks = find_all_valid(words, ranks, word_correct, word_wrong_place, word_wrong)
+
+        print('There are {} words left'.format(len(words)))
+
+        if len(words) == 0:
+            print("Unfortunatly, we've run out of words.")
+            break
 
         word = words[find_highest_points(words, ranks)]
 
