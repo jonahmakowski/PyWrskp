@@ -1,3 +1,8 @@
+import sys
+sys.path.append('../')
+from five_letters import get_five_letters, get_words
+
+
 def parse_input(inp, word, word_correct, word_wrong_place, word_wrong):
     word_lis = list(word)
     index = 0
@@ -111,6 +116,17 @@ def find_highest_points(words, ranks):
 
     return high_index
 
+def remove_invalid_word_from_file(word, file='../words.txt'):
+    words = get_words(file=file)
+    words.pop(words.index(word))
+    
+    while word in words:
+        words.pop(words.index(word))
+    
+    with open(file, 'w') as f:
+        f.write('\n'.join(words) + '\n')
+    print('Removed file from words.txt, will be saved for next time.')
+
 
 def solver(starting_word="crane"):
     with open('../five_letter_words.txt', 'r') as file:
@@ -141,9 +157,6 @@ def solver(starting_word="crane"):
 
     guess = 2
     while True:
-        if len(words) == 0:
-            print("The word isn't on the list")
-            break
         words, ranks = find_all_valid(words, ranks, word_correct, word_wrong_place, word_wrong)
 
         print('There are {} words left'.format(len(words)))
@@ -158,7 +171,9 @@ def solver(starting_word="crane"):
         inp = input()
         if inp == 'n':
             words.pop(words.index(word))
+            remove_invalid_word_from_file(word)
             continue
+        
         (word_correct,
          word_wrong_place,
          word_wrong) = parse_input(inp, word, word_correct, word_wrong_place, word_wrong)
@@ -168,4 +183,6 @@ def solver(starting_word="crane"):
             break
         guess += 1
 
-solver()
+if __name__ == '__main__':
+    get_five_letters(in_file='../words.txt', out_file='../five_letter_words.txt')
+    solver()
