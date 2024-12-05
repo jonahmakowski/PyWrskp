@@ -7,6 +7,10 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
         <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon.png') }}">
     </head>
+    <div class="button-container">
+        <form method="GET" action="/information"><button type="submit">Information</button></form>
+        <form method="GET" action="/bibliography"><button type="submit">Bibliography</button></form>
+    </div>
     <h1 class="center-text">Base 10 to Hexadecimal Converter</h1>
     <p class="center-text">This converter only works on integers</p>
     <div class="converter-container">
@@ -19,7 +23,7 @@
             </div>
             <button type="submit">Convert</button>
         </form>
-        <p>Result: {{ base10_result }}</p>
+        <p>Result: {{ base_base }} = {{ base10_result }}</p>
     </div>
 
     <div class="converter-container">
@@ -32,6 +36,6 @@
             </div>
             <button type="submit">Convert</button>
         </form>
-        <p>Result: {{ hexadecimal_result }}</p>
+        <p>Result: {{ base_hex }} = {{ hexadecimal_result }}</p>
     </div>
 </html>

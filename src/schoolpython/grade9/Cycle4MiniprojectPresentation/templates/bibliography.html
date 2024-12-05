@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Bibliography</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon.png') }}">
+    </head>
+    <div class="button-container">
+        <form method="GET" action="/converter"><button type="submit">Converter</button></form>
+        <form method="GET" action="/information"><button type="submit">Information</button></form>
+    </div>
+    <h1 class="center-text">Bibliography</h1>
+    
+    <div style="display: flex; align-items: center;">
+        <p>Fisher, T. (2023, May 29). Hexadecimal numbers: Everything you need to know. Lifewire.</p>
+        <a href="https://www.lifewire.com/what-is-hexadecimal-2625897" style="margin-left: 10px;">https://www.lifewire.com/what-is-hexadecimal-2625897</a>
+    </div>
+
+    <div style="display: flex; align-items: center;">
+        <p>Gill, N. S. (2019, July 3). Why the 4,000-year-old Babylonian math base 60 system is still used. ThoughtCo.</p>
+        <a href="https://www.thoughtco.com/why-we-still-use-babylonian-mathematics-116679" style="margin-left: 10px;">https://www.thoughtco.com/why-we-still-use-babylonian-mathematics-116679</a>
+    </div>
+
+    <div style="display: flex; align-items: center;">
+        <p>Demystifying hex codes: An expert guide to HTML color codes. History Tools. (2024, March 26).</p>
+        <a href="https://www.historytools.org/concepts/hex-code-html-color-codes" style="margin-left: 10px;">https://www.historytools.org/concepts/hex-code-html-color-codes</a>
+    </div>
+</html>
