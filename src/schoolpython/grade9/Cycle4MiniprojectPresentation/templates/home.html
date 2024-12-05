@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Information</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon.png') }}">
+    </head>
+    <div class="button-container">
+        <form method="GET" action="/converter"><button type="submit">Converter</button></form>
+        <form method="GET" action="/bibliography"><button type="submit">Bibliography</button></form>
+    </div>
+    <h1 class="center-text">Information about Hexadecimal</h1>
+</html>

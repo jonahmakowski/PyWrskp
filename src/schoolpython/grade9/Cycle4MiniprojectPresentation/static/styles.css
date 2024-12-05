@@ -25,3 +25,12 @@
     border-radius: 3px;
     cursor: pointer;
 }
+
+.converter-container :is(input, button) {
+    box-sizing: border-box;
+}
+
+.button-container {
+    display: flex;
+    gap: 10px; /* Adds space between buttons */
+  }
