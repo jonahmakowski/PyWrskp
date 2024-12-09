@@ -12,7 +12,7 @@ def get_words(file='words.txt'):
     return words
 
 def get_five_letters(in_file='words.txt', out_file='five_letter_words.txt'):
-    invalid_chars = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '_', '~', '.', '$', '[', ']', '{', '}', '%', '!', ',', '/', '(', ')', '\\', '#', '*']
+    invalid_chars = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '_', '~', '.', '$', '[', ']', '{', '}', '%', '!', ',', '/', '(', ')', '\\', '#', '*', "'", '"']
 
 
     five_letters = []
