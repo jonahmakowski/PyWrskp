@@ -7,7 +7,7 @@ app = Flask(__name__)
 def converter_page():
     return render_template('converter.html')
 
-@app.route('/converter/base_convert', methods=['POST', 'GET']) 
+@app.route('/converter/base_convert', methods=['POST', 'GET'])
 def base_convert():
     if request.method == 'GET':
         return redirect(url_for('converter_page'))
