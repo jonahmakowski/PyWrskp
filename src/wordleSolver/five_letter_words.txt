@@ -9264,7 +9264,6 @@ icaro
 icars
 icash
 icasm
-icast
 icdev
 icdvd
 iceni
@@ -9298,9 +9297,7 @@ icpac
 icqme
 ictic
 ictus
-idabc
 idaho
-idaic
 idant
 idasp
 idata
@@ -9370,7 +9367,6 @@ ignaw
 ignis
 igolf
 igrep
-ihack
 iherb
 ihlat
 ihome
@@ -9421,7 +9417,6 @@ ilona
 ilove
 iltam
 ilyfe
-imacs
 image
 imago
 imail
@@ -9688,7 +9683,6 @@ irusy
 irvin
 irweb
 irwin
-isaac
 isaak
 isams
 isapi
@@ -9939,7 +9933,6 @@ jboss
 jbseo
 jbuck
 jcart
-jcats
 jcifs
 jciws
 jeans
@@ -13555,9 +13548,7 @@ neeri
 neese
 neeze
 nefas
-nefer
 neffy
-neger
 negev
 negro
 negus
@@ -17239,7 +17230,6 @@ sbjct
 sblow
 sbook
 scabs
-scada
 scads
 scaff
 scags
@@ -17252,7 +17242,6 @@ scalp
 scalt
 scalx
 scaly
-scalz
 scamp
 scams
 scans
@@ -17270,13 +17259,10 @@ scary
 scase
 scats
 scatt
-scaul
 scaum
 scaup
 scaur
 scaut
-scawd
-scawl
 sccto
 sceat
 scelp
@@ -20652,7 +20638,6 @@ uaupe
 uayeb
 ubank
 ubykh
-ucats
 uchee
 uchet
 ucita
@@ -21016,7 +21001,6 @@ usama
 usana
 usant
 usara
-usawc
 usbeg
 usbek
 uscan
@@ -21724,7 +21708,6 @@ wazir
 wazoo
 wbweb
 wbxml
-wcast
 wchat
 wdbox
 wdibb
