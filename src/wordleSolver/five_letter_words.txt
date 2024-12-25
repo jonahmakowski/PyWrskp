@@ -6356,21 +6356,16 @@ eshow
 esign
 esist
 esite
-esito
 eskar
 esker
 eslam
-esmtp
 esnes
-esoft
 espec
-espgs
 esraa
 esrog
 essai
 essam
 essay
-essed
 essee
 essen
 esses
@@ -17285,9 +17280,6 @@ scico
 scifi
 scind
 scion
-sciot
-scipy
-scity
 sclat
 sclav
 sclaw
@@ -18820,7 +18812,6 @@ staid
 staig
 stail
 stain
-staio
 stair
 stake
 stale
@@ -19999,7 +19990,6 @@ tinta
 tints
 tinty
 tioga
-tions
 tipis
 tipit
 tiple
@@ -20141,7 +20131,6 @@ tonka
 tonks
 tonna
 tonne
-tonny
 tonto
 tonus
 tonys
@@ -20802,7 +20791,6 @@ unice
 unico
 unifi
 unify
-uninn
 union
 uniqe
 unism
