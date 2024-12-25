@@ -1,0 +1,5 @@
+flask
+ollama
+python-dotenv
+gunicorn
+flask-sse
