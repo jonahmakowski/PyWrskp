@@ -13,6 +13,17 @@ def script_helper(script, actor, show_cue=False):
             print(line['actor'], line['line'])
             speak(line['line'])
 
+def load_script(path='script_raw.txt'):
+    with open(path, 'r') as f:
+        text = f.readlines()
+
+    script = []
+
+    for line in text:
+        line = line.strip()
+        script.append({'actor': line.split(': ')[0], 'line': line.split(': ')[1]})
+
+    return script
+
 if __name__ == '__main__':
-    from script_formatter import load_script
     script_helper(load_script(), 'M2')
