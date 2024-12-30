@@ -1,109 +1,197 @@
-W2: Just a minute, can you stop?
-M2: What’s the matter?
-W2: I’m bored with this conversation.
-M2: You’re what?
-W2: The conversation doesn’t interest me.
-M2: Oh?
-W2: Can you talk about something else?
-M2: Certainly, if you want me to. I do apologize for boring you.
-W2: Not you, your conversation. You weren’t to know, I was trying to look interested. My fault.
-M2: You mean you should have looked bored?
-W2: No, I should have told you straight away I wasn’t interested.
-M2: Hm. Does this happen often?
-W2: What?
-M2: Finding yourself saddled with a crashing bore?
-W2: You are not a crashing bore.
-M2: Just an ordinary bore.
-W2: I’ve offended you.
-M2: Me? Why should I be offended. You’re the one who should be offended, having to put up with a crashing bore.
-W2: You are not …
-M2: After all, if one’s a crashing bore it’s best that one’s told. Thank you. For telling me. That I’m a …..
-W2: Stop it.
-M2: Am I boring you again?
-W2: Listen. Stop it and listen, be quiet and shut up and listen. It’s quite simple. You were talking about something which didn’t interest me. I should have let you know at once. Instead I pretended to be interested. It was my mistake. I apologize.
-M2: Oh, don’t apologize, I should apologize, I’m the bore.
-W2: You’re not listening…..
-M2: And now I have news for you. May I tell it, at the risk of boring you?
-W2: Go on.
-M2: This conversation is boring me. So shall we change the subject? Or better still, since we both find each other such crashing bores, perhaps I’ll but the television on.
-W2: I don’t want television, I want to talk to you.
-M2: In spit of the fact that I’m ….
-W2: Please. Stop it, please, please.
-M2: The sad thing is, I was only telling you that story because I thought you might be interested, It was of no interest to me.
-M2: What’s wrong?
-W2: Hm?
-M2: What’s the matter?
-W2: With what?
-M2: With you.
-W2: Nothing as far as I know. Why?
-M2: Something obviously is.
-W2: Why, what have I said?
-M2: You haven’t said anything.
-W2: Well then.
-M2: You still manage to make it pretty obvious you’re upset about something.
-W2: I don’t know what gives you that idea. You’re probably feeling a bit morose, so you imagine I’m upset.
-M2: I’m not morose.
-W2: No? You’re not exactly cheerful, are you?
-M2: Do you expect me to be cheerful when you’re like this?
-W2: Like what?
-M2: You know very well.
-W2: Are you blaming me for it?
-M2: For what?
-W2: For your moroseness.
-M2: I’m not morose and I’m not blaming you for anything.
-W2: Oh do leave me alone. I don’t know why it is you take everything so personally.
-M2: What are you talking about?
-W2: The minute I’m a little under the weather you go around as if it’s the end of the world. You make me feel so guilty.
-M2: If you’d just tell me what I’ve done wrong.
-W2: Why shouldn’t I feel a bit low now and then? You’re depressed often enough. I don’t automatically assume it’s something I’ve done.
-M2: I know you don’t.
-W2: You mean it usually is something I’ve done. Oh do leave me alone. If I’m such a depressing influence why don’t you go out?
-M2: I don’t want to go out a leave you like this.
-W2: You’re not doing much good staying, are you? Face as long as a fiddle. You’re making me feel guilty.
-M2: Look, I can’t help it if I’m affected by your moods.
-W2: Moods. Is that what you think they are?
-M2: I can’t be happy if you’re upset. I’m sorry…
-W2: Well I’m very sorry but there’s nothing I can do about it.
-M2: I’m not saying there is.
-W2: Well then. Go out, leave me alone. Go out and have a drink or something. I’ll be all right. No point in both of us being miserable.
-M2: Oh God… I’m no help am I?
-W2: Obviously not.
-M2: Well am I? Is there anything I can do?
-W2: No. I said no.
-M2: I’m going out then.
-W2: Where to?
-M2: I don’t know. For a walk. All right?
-W2: Wait.
-M2: What?
-W2: Don’t leave me.
-W2: So you’re going at last.
-M2: Seems like it.
-W2: Is that a yes or a no?
-M2: Unless you’ve got some other idea.
-W2: I’ve run out of ideas. Why, do you have any other ideas?
-M2: If I had I supposed I wouldn’t be going, would I?
-W2: I suppose not. Anyway, I’ve tried everything.
-M2: You’ve tried everything?
-W2: We’ve both tried everything, I suppose. I suppose there’s no point in hanging on. No point in trying again. No point in going over the same old ground again and again and again. Best to give up, I suppose. Cut one’s losses. Go, go. Try with somebody else.
-M2: There’s nobody else.
-W2: You’ll find somebody else.
-M2: So will you.
-W2: I daresay. Not to worry about me.
-M2: We did agree it would be best.
-W2: I know we agreed. I’m say, go, go. Only.
-M2: Only what?
-W2: It’s your decision.
-M2: My decision!
-W2: Just so long as you realize. It’s your decision.
-M2: We both agreed…
-W2: We Botha agreed but it’s your decision, it’s still your decision. You’re the one who’s going.
-M2: One of us has to go.
-W2: And you’re the one. You’ve made a decision to go. I haven’t. I can’t make decisions for you. Just so long as you realize.
-M2: Do you want me to go?
-W2: I want you to make your own decision and do your own thing. I’m not going to hold you back. If you want to go. I also don’t want to be—held responsible—if you do.
-M2: Do you want me to go?
-W2: I want you to do as you think fit!
-M2: Do you want me to go! Do you want me to go!!
-W2: No. Do you want to go?
-M2: No. Oh, what else is there to say?
-W2: We’ll find something.
+Nicholas: Oh my high almighty lords, are you alright?
+Damien: Blimey! Get off me you scallywag or I’ll take yer head as a trophy! Wait, where in the seven seas did my sword go?
+Pirate looks around frantically
+Damien: Aha! Me trusty sword!
+Vlad: What in the world? Where is my- Dang, lost it.
+Jonah: Where am I?! King Julian! I have to go save him!
+Nicholas: King.. Julian?
+Damien: King? I haven’t heard of any king for ages!
+Vlad: King? You make no sense. What are you, a Drunkie? And also, where are we? Who are you people? Who is that fool with only cloth on? 
+Nicholas: (Gasp) I’m a fool? Oh, how I’ve failed you, my lords.
+Jonah: You’re not a fool. Wait- Did you call us “my lords?”
+Nicholas: You came from the sky so uh- Yeah? You guys don’t look good-
+Damien: I’m good as ever! I could take Kraken on right now! I don’t know what ye rapscallion is on about!
+Nicholas: Just come to my campsite, it’s close to here and you could take some food, get some rest.
+Vlad: I'm sure we don't need to, I’m more like asking where I am and getting back home. I was having a duel.
+Damien: A duel! Bring it on!
+Cowboy darts his head to look at knight
+Jonah: Nobody shall fight. At least not for the moment.
+Nicholas: Please my lords, don’t fight.
+Vlad: Please partner, with all due respect, quit calling me “lord”. It's bothering me.
+Nicholas: Sorry m’lord
+Damien: Let’s go to his.. campsite. He mentioned food, I wouldn’t mind some cronch from some bananas!
+Nicholas: A banana?
+Jonah: Wait. This is ancient Egypt, isn’t it?
+Nicholas: Probably.
+Jonah: What food do you even have?
+Vlad: Do ya cloth-wearing people have gold?
+Damien: Gold!
+Jonah: No gold.
+Damien: Arrr…
+Nicholas: I think I know where some is.
+Damien: Gold!
+Jonah: No gold.
+Damien: Arrr…
+Jonah: So what’s the food?
+Nicholas: Oh yes sorry, I have grains, vegetables, the usual stuff.
+Jonah: Wow, the food is different here.
+Nicholas: Where do you come from? 
+Jonah: I am the noble knight; Sir Horace, from Araluen in medieval times
+Damien: Names Captain Graves of the mighty ship; The Death of Deceit! We’re in the prime time of piracy!
+Vlad: The Wild Wild West in the heart of Uncle Sam’s land.
+Nicholas: None of that made sense but your outfits are… Unusual.
+Vlad: Where’s this.. What did the pirate say?.. campsite?
+Nicholas: This way!
+Vlad: Hey Pirate. Here’s an idea…..
+Nicholas: Please my lord slow down.
+Damien: Oi, belay that talk.
+Jonah: Be nicer to him. He’s giving us food and shelter. That’s all we can ask for while we try to figure out how the hell to get back.
+Vlad: Ol’ knighty here’s got a point. 
+Nicholas: Please take a seat. Er- well, I only have 2.
+Jonah: I kind of expected you guys to do something like that. (Pause) Hey merchant, can you get us some food? Oh, and some water, I feel very parched.
+Nicholas: What would the others like?
+Damien: Ho, I don’t care just get me some grub.
+Nicholas: Funky hat man?
+Vlad: Don’t call me that.. And anything’s good. 
+Nicholas: What should I call you then? 
+Vlad: Colt's fine. What should I call you fella?
+Nicholas: My given name is Amunet. But refer to me as anything you wish, Colt.. And you guys too!
+Nicholas: I’ll be back with some food and water for you all. 
+Damien: Discuss later. We need more privacy. Unless you wanna involve him.
+Jonah: Hm?
+Vlad: Oh nothin.
+Jonah: I’m going to keep my eye on both of you. You don’t seem trustworthy. You guys act so recklessly and-
+Damien: Stop hollerin' at yer captain!
+Knight looks confused
+Vlad: Uh partner.. We’re not on your ship.
+Jonah: You guys are so stupid.
+Vlad: Hey! Maybe he is but I haven't done anything yet.
+Jonah: yet
+Damien: What have I done?! Don’t call me stupid! None of ye would be able to handle me vessel if you tried!
+Jonah: Well yeah, from my understanding you’ve spent like your whole life on a ship of sorts.
+Damien: You’re right… but I don’t like it. (pause) Come with me, Cowboy. 
+Damien: You! Belay yer followin
+Jonah: If they’re not back soon I’ll go find them myself.
+Knight takes a seat (Pirate’s seat)
+Damien: If we are to take the merchant to interrogate him about the gold where do we go?
+Vlad: Well to keep it simple why not some sort of cardinal direction? Stop at the nearest landmark or past a hill.
+Damien: How does east by northeast sound?
+Vlad: Sounds good to me partner.
+Jonah: I suppose you want my seat?
+Damien: No, you’ve sat in it now.
+Vlad: I’ll take it.
+Damien: No you won’t. You sat in that one before. I will stand here menacingly showing off my sword.
+Nicholas: Ah!
+Nicholas: Sorry for losing my composure, my lords I was not expecting to see.. You standing there. On my table. I need to put the food there. So can you uh…
+Nicholas: You guys want to get back to your homes, don’t you? 
+Jonah: Uh yeah. Do you have any idea how we can? We don’t even know how we got here.
+Damien: I might.
+Jonah: Go on.
+Damien: Nah, I’ll wait. 
+Vlad: There’s something I want to do first.
+Jonah: You shouldn’t do anything here! You don’t belong here! WE don’t belong here.
+Nicholas: Please, stop fighting.
+Nicholas: Uh..
+Damien: Shhh.. I’m... protecting you.
+Vlad: We wouldn’t be fightin if this pal over here knew how to have some fun.
+Jonah: This is way more serious than you think! I don’t know what was happening before you ended up here but if we can get back to exactly where we were and when we left I got a king to save.
+Vlad: Likewise. You aren’t making even a bit of sense. Time’s passed hasn’t it? Where we left is irrelevant. No?
+Jonah: Time has passed HERE. We’re thousands of years in our pasts, we can go back to where we were in the future where we left.
+Nicholas: None of this makes sense.. I don’t like it.
+Vlad: Whatever. You can go home but as I said. I. Have. Stuff. To. Do.
+Jonah: I will personally make sure you get home myself!
+Vlad: I’d watch your tongue if I were you, partner.
+Damien: Is it time?
+Nicholas: Time for what?
+Vlad: Yes! Go! Find the gold!
+Jonah: Gold? GOLD! That’s what you’re after?!
+Vlad: Dang I should’ve kept quiet.  No! Gold was a.. Metaphor! Is that even a word?
+Jonah: What?
+Vlad: Knight! Look at me. I can dance.
+Jonah: What are you?- this is dumber than the things that dang jester does.
+Vlad: Time.
+Jonah: Huh? Wait! The merchant is gone!
+Vlad: Uh huh.
+Nicholas: Captain Graves, where are you taking me?! You don’t know this place!
+Damien: I’m taking ye East by North East of wherever yer campsite is!
+Nicholas: You sure?
+Damien: We’re very likely being followed by Sir Horace and I don’t want that. He’s a dangerous scallywag.
+Nicholas: I feel like you’re more dangerous, Captain Graves.
+Damien: You feel that way, lad?
+Nicholas: Uhh.. Yeah?
+Damien: I don’t blame ya.
+Nicholas: What?
+Damien: Never mind that. Tell me a bit about yerself, matey, maybe I'll seem less dangerous.
+Nicholas: Oh I’m a travelling merchant, my parents they’re.. Not here. I have a little brother I have to take care of. Being a travelling merchant from town to town can cause some problems with that. I miss him.
+Damien: Blimey, sorry to hear that matey.
+Nicholas: It's ok captain! What about you, what's your story?
+Damien: Oh me? Well, there's so much to talk about. As you know I have me very own vessel, a ship as ye'd call it! Me father was a great captain, everyone feared him. I was born on his ship in the midst of battle! Me mother she.. she got taken hostage and I never saw her again. But life's great sailing with yer very own ship! Me hearties.. I miss em.
+Nicholas: WOW! That's so cool. Well except the part about your mother and your.. hearties? But having your very own ship is so cool even though I have no idea what a ship is! 
+Damien: Keep quiet or they’ll find us. We need to get back on track.
+Nicholas: Ok but can’t I help you?
+Damien: How would a lubber like yerself be able to do that?
+Nicholas: Well I can just tell you where you’re going. You said East by North East, right?
+Damien: Uh yeah.
+Nicholas: A big thing is coming from the sky in that direction. It looks like it’s ripping the air itself which is strange. I don’t know how to describe it. It's kind of tunnel-like.
+Damien: Tunnel-like you said? From the air?
+Nicholas: Uh yes, that is what I said.
+Damien: Shiver me timbers… That’s dumb luck if I’d say so meself.
+Nicholas: Why? 
+Damien: You know how I said I might have an idea as to how Sir Horace, Colt and I ended up here, lad?
+Nicholas: Maybe? Oh uh yes! I do!
+Damien: That’s how. I ended up here right after I went into my quarters and saw a tunnel ripping the air itself, as you said. I don’t think Sir Horace or Colt knew what it looked like. If they did they would’ve said something.
+Nicholas: But if you all were in it at the same time why did Sir Horace say he didn’t have any idea how we got here? You guys all fell from the sky at the same time.
+Vlad: Oi Captain Graves! I caught up with you. But why did you stop here of all places? We’re out in the middle of nowhere, nothing’s hiding us. We may as well be sitting ducks.
+Damien: Let’s step to it then.
+Vlad: You alright there partner? You seem a little shook.
+Damien: Me crew…
+Nicholas: I think he’s scared or something because he’s been like that ever since I told him that in the direction we’re going there’s something that he thinks will take you guys home.
+Vlad: If we know how to get home then we’ll just do that right after doing the things we need to do here first. I’ll finish my duel and Captain Graves will go back to his crew.
+Damien: Colt?
+Vlad: Yeah?
+Damien: Before you came here did you fall forwards or backwards?
+Vlad: I think backwards.
+Damien: That’s why they didn’t know, Amunet
+Vlad: Oi Captain Graves, did you start interrogating him?
+Vlad: Little merchant, you seem innocent enough.. We have an offer for you.
+Damien: I guess you could call it that. I may have lied to you before. (to cowboy) We sure we want to do this?
+Vlad: You seemed so keen on this idea beforehand partner? Of course, we do! (Looks at local) You mentioned you had gold, or at least you knew where some are, correct?
+Nicholas: I do know where there’s some gold yes, do you need some? I can’t really get to it easily.
+Damien: Take us to it then-
+Vlad: Else we’ll force it out of you!
+Nicholas: Wow ok! Fine fine, I’ll tell you.
+Damien: Come, tell me, Amunet.
+Vlad: Well what did he say? 
+Nicholas: We were heading in the right direction already.
+Damien: How far away was Sir Horace when you got here?
+Knight goes on stage
+Jonah: Not very! Leave him alone!
+Vlad: What do you want with him?
+Damien: Never mind that- The loot’s this way!
+Jonah: Where’s this?!
+Vlad: What’s that?!
+Vlad: Captain Graves, say something!
+Jonah: Give me the merchant! You guys can’t be trusted with him, you guys are dangerous. I knew it from the start!
+Damien: No, we must fight. Down to the depths with you! We’re keepin the merchant, hold fast!
+Jonah: Then let the battle commence.
+Jonah: You little- You’re an idiot you know that?
+Damien: No, he doesn’t but he is a chowderhead.
+Vlad: WHO’S SIDE ARE YOU ON? 
+Damien: Just fight ye chowderhead!
+Cowboy punches knight in the face
+Nicholas: Can’t you fight back Sir Horace?
+Damien: Sir Horace doesn’t actually want to hurt us. At least I think so, else he’s addled for not killin him.
+Vlad: Graves! Do something!
+Damien: And let him get the hostage? Nah.
+Jonah: Wait- I shouldn’t be fighting you, Colt, Captain Graves has the hostage!
+Nicholas: Yeah, but who’s showing more aggression?! You should get rid of the immediate threat don’t worry about me!
+Nicholas: There! There! That’s how you can go home!
+Vlad:  What’s that sound!? Oh no!
+Jonah: Oh yes.
+Damien: Stay here.
+Knight body checks pirate into the wormhole 
+Damien: Until we meet again- Me time is back-o-beyond!
+Jonah: Amunet, are you ok?
+Nicholas: Yes, I’m great actually. Captain Graves told me to lie about the gold and take us here. He didn’t want to hurt me either. If anything, Captain Graves is the only reason those two are gone. Shouldn’t you go through as well?
+Jonah: I suppose I should be heading back, let’s see if I can save King Julian this time, farewell!
+Nicholas: Where am I again?
