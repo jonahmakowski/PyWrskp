@@ -1,7 +1,8 @@
-import os
+#import os
 
 def speak(text):
-    os.system('say "{}"'.format(text))
+    #os.system('say "{}"'.format(text))
+    pass
 
 def script_helper(script, actor, show_cue=False):
     for line in script:
@@ -26,4 +27,4 @@ def load_script(path='script_raw.txt'):
     return script
 
 if __name__ == '__main__':
-    script_helper(load_script(), 'M2')
+    script_helper(load_script(), 'Jonah')
