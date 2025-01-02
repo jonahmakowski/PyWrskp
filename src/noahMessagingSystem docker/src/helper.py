@@ -110,3 +110,17 @@ def convert_to_ai_message_system(ls, user):
 if __name__ == '__main__':
     clear_message_history()
     print('Cleared History')
+
+def get_user(username, users):
+    for user in users:
+        if user['user'] == username:
+            return user
+
+def load_file(file):
+    with open(file, 'r') as f:
+        file = f.read()
+    return file
+
+def write_file(file, data):
+    with open(file, 'w') as f:
+        f.write(data)
