@@ -93,9 +93,24 @@ def logout():
     session.pop('username', None)
     return redirect(url_for('login'))
 
-@app.route('/admin')
+@app.route('/admin', methods=['GET', 'POST'])
 def admin_page():
-    pass
+    if 'username' not in session.keys() or not get_user(session['username'], users)['admin']:
+        return redirect(url_for(login))
+    else:
+        if request.method == 'POST':
+            env = request.form('file1')
+            usernames = request.form('file2')
+            write_file('.env', env)
+            write_file('usernames.txt', usernames)
+            
+            cur_env = load_file('.env')
+            cur_usernames = load_file('usernames.txt')
+            return render_template('admin.html', env=cur_env, usernames=cur_usernames, message='Saved')
+        else:
+            cur_env = load_file('.env')
+            cur_usernames = load_file('usernames.txt')
+            return render_template('admin.html', env=cur_env, usernames=cur_usernames)
 
 if __name__ == "__main__":
-    app.run(port=80)
+    app.run()
