@@ -1,0 +1,5 @@
+ollama
+requests
+beautifulsoup4
+flask
+flask_apscheduler
