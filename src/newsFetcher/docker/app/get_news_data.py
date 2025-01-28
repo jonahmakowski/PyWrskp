@@ -6,9 +6,9 @@ from os import makedirs, getenv
 from helper import *
 
 # Your API key
-API_KEY_NEWS_API = getenv('NEWS_API_KEY')
-API_KEY_GNEWS = getenv('GNEWS_KEY')
-API_KEY_NEWSDATA = getenv('NEWSDATA_KEY')
+API_KEY_NEWS_API = getenv("NEWS_API_KEY")
+API_KEY_GNEWS = getenv("GNEWS_API_KEY")
+API_KEY_NEWSDATA = getenv("NEWSDATA_API_KEY")
 
 def use_api(params, url):
     """
@@ -100,7 +100,7 @@ def fetch_headlines_international():
 
     return results
 
-def scrape_article_content(url, debug=False, timeout=10):
+def scrape_article_content(url, type, debug=False, timeout=10):
     """
     Scrapes the main content of an article from a given URL.
     Args:
@@ -113,7 +113,7 @@ def scrape_article_content(url, debug=False, timeout=10):
         requests.exceptions.RequestException: If the request to the URL fails.
     """
     try:
-        printf('Scraping Article:', url)
+        printf(f'{type}: Scraping Article:', url)
         # Send a GET request to the article URL
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
         response = requests.get(url, headers=headers, timeout=timeout)
@@ -162,7 +162,7 @@ def scrape_articles(articles, type):
     today = datetime.today().strftime('%Y-%m-%d')
     for article in articles:
         article_url = article["url"] if 'url' in article.keys() else article['link']
-        article_content = scrape_article_content(article_url)
+        article_content = scrape_article_content(article_url, type)
         if article_content and article_content is not None:
             article_dic = {'title': article['title'], 'source': article['source']['name'] if 'source' in article.keys() else article['source_name'], 'Description': article['description'], 'url': article['url'] if 'url' in article.keys() else article['link'], 'imgurl': article['urlToImage'] if 'urlToImage' in article.keys() else None, 'content': article_content}
             makedirs(f"../articles/{today}/{type}", exist_ok=True)
@@ -170,7 +170,7 @@ def scrape_articles(articles, type):
             with open(f"../articles/{today}/{type}/{safe_title}.txt", "w") as file:
                 json.dump(article_dic, file)
         else:
-            printf(f"Failed to scrape article: {article['title']}")
+            printf(f"{type}: Failed to scrape article: {article['title']}")
 
 # Example usage
 if __name__ == "__main__":

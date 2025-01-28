@@ -6,7 +6,7 @@ def printf(*args, sep=' '):
         data = ''
     
     for arg in args:
-        data += arg + sep
+        data += str(arg) + str(sep)
 
     print(data)
 
@@ -14,3 +14,7 @@ def printf(*args, sep=' '):
     
     with open('python.log', 'w') as f:
         f.write(data)
+
+def log_clear():
+    with open('python.log', 'w') as f:
+        f.write('')

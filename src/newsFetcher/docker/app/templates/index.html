@@ -5,67 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Custom News Aggregator</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <script>
-        // Function to load data for a given date
-        function loadDayData(date) {
-            fetch(`/api/${date}`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error("Failed to load data for the selected date.");
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    // Update the summaries
-                    document.getElementById("canada-summary").querySelector("p").textContent = data['canada_summary'];
-                    document.getElementById("international-summary").querySelector("p").textContent = data['international_summary'];
-
-                    // Update Canadian articles
-                    const canadaArticles = document.getElementById("canada-articles");
-                    canadaArticles.innerHTML = "<h3>Canada News</h3>"; // Reset the content
-                    data['articles'].forEach(article => {
-                        if (article['region'] === 'ca') {
-                            canadaArticles.innerHTML += `
-                                <div class="article-box">
-                                    <h4>${article['title']}</h4>
-                                    <p>${article['summary_short']}</p>
-                                    <a href="${article['url']}" target="_blank">Read Full Article</a>
-                                    <p><strong>Source:</strong> ${article['source']}</p>
-                                </div>
-                            `;
-                        }
-                    });
-
-                    // Update International articles
-                    const internationalArticles = document.getElementById("international-articles");
-                    internationalArticles.innerHTML = "<h3>International News</h3>"; // Reset the content
-                    data['articles'].forEach(article => {
-                        if (article['region'] === 'in') {
-                            internationalArticles.innerHTML += `
-                                <div class="article-box">
-                                    <h4>${article['title']}</h4>
-                                    <p>${article['summary_short']}</p>
-                                    <a href="${article['url']}" target="_blank">Read Full Article</a>
-                                    <p><strong>Source:</strong> ${article['source']}</p>
-                                </div>
-                            `;
-                        }
-                    });
-                })
-                .catch(error => {
-                    alert("Error: " + error.message);
-                });
-        }
-    </script>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>Custom News Aggregator</h1>
-            <button onclick="loadDayData('{{ today }}')">Today</button>
-            <button onclick="loadDayData('previous-day')">Previous Day</button>
-        </div>
-
         <div class="summaries">
             <div class="summary" id="canada-summary">
                 <h2>Canada</h2>
