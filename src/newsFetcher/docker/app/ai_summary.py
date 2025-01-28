@@ -51,9 +51,13 @@ def summarize_articles(type):
     path = '../articles/{}/{}'.format(datetime.today().strftime('%Y-%m-%d'), type)
     articles = listdir(path)
     for index, article in enumerate(articles):
-        printf('Summarizing {} of {}:'.format(index+1, len(articles)), article)
+        printf('{}: Summarizing {} of {}:'.format(type, index+1, len(articles)), article)
         with open(join(path, article), 'r') as f:
             file_data = json.load(f)
+        if ('summary_long' in file_data.keys() and 'summary_short' in file_data.keys()) and len(file_data['summary_long']) > 10 and len(file_data['summary_short']) > 10:
+            printf('Summary already exists, skipping...')
+            continue
+        
         summary_long, summary_short = summarize_article(file_data)
 
         file_data['summary_long'] = summary_long
@@ -74,7 +78,7 @@ def daily_summary():
         FileNotFoundError: If the articles directory or files are not found.
     """
     try:
-        with open('../data/daily_summary.txt', 'r') as f:
+        with open('../articles/daily_summary.txt', 'r') as f:
             summaries = json.load(f)
     except FileNotFoundError:
         summaries = {}
@@ -104,14 +108,14 @@ def daily_summary():
         for summary in international_data:
             international_summaries += '\n\n' + summary
         
-        canada_summary = ollama.generate(MODEL, "Summarize all of these articles in one paragraph, The viewer already knows your summary is about. " + canada_summaries)
-        international_summary = ollama.generate(MODEL, "Summarize all of these articles in one paragraph, The viewer already knows your summary is about. " + international_summaries)
+        canada_summary = ollama.generate(MODEL, canada_summaries + "\n\n***You are a news broadcaster, summarize all the information in these articles.*** The articles are above. Have a section for each of the major catagories in the articles.")
+        international_summary = ollama.generate(MODEL, international_summaries + "\n\n***You are a news broadcaster, summarize all the information in these articles.*** The articles are above. Have a section for each of the major catagories in the articles.")
 
         summaries[datetime.today().strftime('%Y-%m-%d')] = {}
         summaries[datetime.today().strftime('%Y-%m-%d')]['canada'] = canada_summary['response']
         summaries[datetime.today().strftime('%Y-%m-%d')]['international'] = international_summary['response']
 
-        with open('../data/daily_summary.txt', 'w') as f:
+        with open(f'../articles/daily_summary.txt', 'w') as f:
             json.dump(summaries, f)
 
         return canada_summary['response'], international_summary['response']
