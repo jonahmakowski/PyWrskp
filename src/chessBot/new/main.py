@@ -29,4 +29,4 @@ def m1_mainloop():
         g = bot_m1(g, 0)
         g.manual_move()
 
-m1_mainloop()
+artificial_semi_intelligence_mainloop()
