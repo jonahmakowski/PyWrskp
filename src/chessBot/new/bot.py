@@ -93,7 +93,7 @@ def make_move_into_game(game:Game, piece, move):
     return g
 
 def m1_analyser(game:Game, piece, move, side):
-    enemy_side = 1 if side == 1 else 0
+    enemy_side = 0 if side == 1 else 1
     #print('line 96', game, piece, move)
     move_game = make_move_into_game(game, piece, move)
     opponent_best_piece, opponent_best_move = artificial_semi_intelligence(move_game, side=enemy_side)
