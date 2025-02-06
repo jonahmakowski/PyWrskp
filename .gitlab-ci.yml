@@ -1,0 +1,8 @@
+stages:
+  - test_ci
+
+test_ci:
+  image: alpine:latest
+  stage: test_ci
+  script:
+    - echo "Testing CI"
