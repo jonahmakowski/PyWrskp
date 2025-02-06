@@ -5,6 +5,7 @@ source_code_zip:
   image: alpine:latest
   stage: source_code_zip
   script:
+    - apk add zip
     - zip -r source_code_$CI_COMMIT_SHA.zip .
   artifacts:
     paths:
