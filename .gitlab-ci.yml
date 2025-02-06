@@ -8,10 +8,10 @@ source_code_zip:
   script:
     - apk add zip
     - mkdir build
-    - zip -r build/source_code_$CI_COMMIT_SHA.zip .
+    - zip -r build/source_code_$CI_COMMIT_SHA.zip src -x build
   artifacts:
     paths:
-      - source_code_$CI_COMMIT_SHA.zip
+      - build/source_code_$CI_COMMIT_SHA.zip
     expire_in: 1 week
 
 github_commit:
@@ -21,7 +21,7 @@ github_commit:
     - apk add git
     - mkdir build
     - mkdir build/copy_for_github
-    - cp -R . /build/copy_for_github
+    - cp -R . build/copy_for_github
     - cd build/copy_for_github
   artifacts:
     paths:
