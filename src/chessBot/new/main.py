@@ -18,6 +18,7 @@ def artificial_unintelligence_mainloop():
 
 def artificial_semi_intelligence_mainloop():
     g = Game()
+    g.board.pr()
     while True:
         piece, location = artificial_semi_intelligence(g)
         g.move_pieces(piece, location)
