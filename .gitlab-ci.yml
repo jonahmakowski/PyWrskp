@@ -1,8 +1,12 @@
 stages:
-  - test_ci
+  - source_code_zip
 
-test_ci:
+source_code_zip:
   image: alpine:latest
-  stage: test_ci
+  stage: source_code_zip
   script:
-    - echo "Testing CI"
+    - zip -r source_code_$CI_COMMIT_SHA.zip .
+  artifacts:
+    paths:
+      - source_code_$CI_COMMIT_SHA.zip
+    expire_in: 1 week
