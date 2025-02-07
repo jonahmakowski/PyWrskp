@@ -5,7 +5,7 @@ index-servers =
 
 [first-repository]
 repository = https://test.pypi.org/legacy/
-username = WhiteSwine
+username = __token__
 password = $TEST_PYPI_PASSWORD
 ... 
 EOL
