@@ -1,3 +1,7 @@
+stages:
+  - source_code_zip
+  - github_commit
+
 source_code_zip:
   image: alpine:latest
   stage: source_code_zip
