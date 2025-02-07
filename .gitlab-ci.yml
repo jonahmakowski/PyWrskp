@@ -1,10 +1,11 @@
 stages:
- - setup
- - build_package
+ - distribute
 
 source_code_zip:
   image: alpine:latest
-  stage: setup
+  stage: distribute
+  variables:
+    GIT_DEPTH: 0
   script:
     - apk add zip
     - mkdir -p build
@@ -16,7 +17,7 @@ source_code_zip:
 
 github_commit:
   image: alpine:latest
-  stage: setup
+  stage: distribute
   variables:
     GIT_DEPTH: 0
   script:
@@ -35,8 +36,14 @@ github_commit:
 
 build_package:
   image: python:alpine
-  stage: build_package
+  stage: distribute
   script:
     - cd src/helpfulPackage
     - pip install setuptools wheel
-    - sh build.sh
+    - python setup.py bdist_wheel sdist
+    - pip install .[dev]
+    - twine check dist/*
+  artifacts:
+    paths:
+      - src/helpfulPackage/dist
+    expire_in: 1 week
