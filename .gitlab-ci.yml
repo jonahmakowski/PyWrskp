@@ -1,11 +1,10 @@
 stages:
-  - source_code_zip
-  - github_commit
-  - build_package
+ - setup
+ - build_package
 
 source_code_zip:
   image: alpine:latest
-  stage: source_code_zip
+  stage: setup
   script:
     - apk add zip
     - mkdir build
@@ -17,7 +16,7 @@ source_code_zip:
 
 github_commit:
   image: alpine:latest
-  stage: github_commit
+  stage: setup
   variables:
     GIT_DEPTH: 0
   script:
