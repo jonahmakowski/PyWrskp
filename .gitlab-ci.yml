@@ -1,7 +1,3 @@
-stages:
-  - source_code_zip
-  - github_commit
-
 source_code_zip:
   image: alpine:latest
   stage: source_code_zip
@@ -21,7 +17,10 @@ github_commit:
     - apk add git tar
     - mkdir build/copy_for_github
     - tar --exclude='build' -cf - -C . . | tar -xf - -C build/copy_for_github
-  artifacts:
-    paths:
-      - build/copy_for_github
+    - cd build/copy_for_github
+    - git config user.name "GitLab CI"
+    - git config user.email "jonah@makowski.ca"
+    - git remote set-url origin https://jonahmakowski:$GITHUB_PASSWORD@github.com/jonahmakowski/pyWrskp.git
+    - git commit -m $CI_COMMIT_TITLE
+    - git push origin master
     expire_in: 1 day
