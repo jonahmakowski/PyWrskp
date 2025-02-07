@@ -19,10 +19,8 @@ github_commit:
   stage: github_commit
   script:
     - apk add git
-    - mkdir build
     - mkdir build/copy_for_github
     - cp -R . build/copy_for_github
-    - cd build/copy_for_github
   artifacts:
     paths:
       - build/copy_for_github
