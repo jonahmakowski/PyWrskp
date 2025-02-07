@@ -1,20 +1,6 @@
 stages:
  - distribute
 
-source_code_zip:
-  image: alpine:latest
-  stage: distribute
-  variables:
-    GIT_DEPTH: 0
-  script:
-    - apk add zip
-    - mkdir -p build
-    - zip -r build/source_code_$CI_COMMIT_SHA.zip src -x build
-  artifacts:
-    paths:
-      - build/source_code_$CI_COMMIT_SHA.zip
-    expire_in: 1 week
-
 github_commit:
   image: alpine:latest
   stage: distribute
