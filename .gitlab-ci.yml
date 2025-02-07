@@ -17,6 +17,8 @@ source_code_zip:
 github_commit:
   image: alpine:latest
   stage: github_commit
+  variables:
+    GIT_DEPTH: 0
   script:
     - apk add git tar ca-certificates
     - update-ca-certificates
