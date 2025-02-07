@@ -23,5 +23,3 @@ github_commit:
     - git remote set-url origin https://jonahmakowski:$GITHUB_PASSWORD@github.com/jonahmakowski/pyWrskp.git
     - git commit -m $CI_COMMIT_TITLE
     - git push origin master
-  
-  expire_in: 1 day
