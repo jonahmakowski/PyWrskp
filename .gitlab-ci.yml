@@ -23,6 +23,9 @@ github_commit:
 build_package:
   image: python:alpine
   stage: distribute
+  variables:
+    TWINE_USERNAME: gitlab-ci-token
+    TWINE_PASSWORD: $CI_JOB_TOKEN
   script:
     - cd src/helpfulPackage
     - pip install setuptools wheel
