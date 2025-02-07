@@ -36,4 +36,4 @@ build_package:
   artifacts:
     paths:
       - src/helpfulPackage/dist
-    expire_in: 1 week
+    expire_in: 1 day
