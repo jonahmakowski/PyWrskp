@@ -26,4 +26,5 @@ github_commit:
     - git config user.name "GitLab CI"
     - git config user.email "jonah@makowski.ca"
     - git remote set-url origin "https://jonahmakowski:$GITHUB_PASSWORD@github.com/jonahmakowski/pyWrskp.git"
+    - git pull
     - git push origin HEAD:main
