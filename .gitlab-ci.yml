@@ -30,9 +30,9 @@ build_package:
     - pip install .[dev]
     - twine check dist/*
     - twine upload --repository-url ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/pypi dist/*
-  only:
-    changes:
-      - src/helpfulPackage/*
+  #only:
+  #  changes:
+  #    - src/helpfulPackage/setup.py
   artifacts:
     paths:
       - src/helpfulPackage/dist
