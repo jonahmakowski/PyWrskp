@@ -1,6 +1,7 @@
 stages:
   - source_code_zip
   - github_commit
+  - build_package
 
 source_code_zip:
   image: alpine:latest
@@ -32,3 +33,10 @@ github_commit:
     - git config pull.rebase false
     - git pull
     - git push
+
+build_package:
+  image: python:alpine
+  stage: build_package
+  script:
+    - cd src/helpfulPackage
+    - sh build.sh
