@@ -39,4 +39,5 @@ build_package:
   stage: build_package
   script:
     - cd src/helpfulPackage
+    - pip install setuptools wheel
     - sh build.sh
