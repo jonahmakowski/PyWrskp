@@ -20,5 +20,5 @@ echo "Installed Dependancies"
 twine check dist/*
 echo "Checked distribution"
 
-twine upload — repository testpypi dist/*
+twine upload --repository testpypi dist/*
 echo "Uploaded to testpypi"
