@@ -33,6 +33,7 @@ build_package:
     - pip install .[dev]
     - twine check dist/*
     - twine upload --repository-url ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/pypi dist/*
+    - ls -la
   #only:
   #  changes:
   #    - src/helpfulPackage/setup.py
@@ -40,4 +41,3 @@ build_package:
     paths:
       - src/helpfulPackage/dist
     expire_in: 1 day
-
