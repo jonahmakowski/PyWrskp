@@ -20,7 +20,7 @@ setup(
         "Programming Language :: Python :: 3.10",
         "Operating System :: OS Independent",
     ],
-    install_requires=['json', 'time'],
+    install_requires=[],
     extras_require={
         "dev": ["twine>=4.0.2"],
     },
