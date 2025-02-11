@@ -24,6 +24,7 @@ github_commit:
 discord_notify:
   stage: notify
   script:
+    - apk add curl
     - |
       curl -H "Content-Type: application/json" -X POST -d '{
         "embeds": [{
