@@ -1,3 +1,6 @@
+from dotenv import load_dotenv
+import os
+
 def dict_merge(d1: dict, d2: dict) -> dict:
     """
     Merges two dictionaries recursively. If a key in both dictionaries has a dictionary as its value,
@@ -48,3 +51,18 @@ def flatten(lst: list) -> list:
         list: A single flattened list containing all the elements of the sublists.
     """
     return [item for sublist in lst for item in sublist]
+
+def load_from_env(variable: str) -> str:
+    """
+    Load the value of an environment variable.
+
+    This function loads environment variables from a .env file and retrieves the value of the specified variable.
+
+    Args:
+        variable (str): The name of the environment variable to retrieve.
+
+    Returns:
+        str or None: The value of the environment variable if it exists, otherwise None.
+    """
+    load_dotenv()
+    return os.getenv(variable)

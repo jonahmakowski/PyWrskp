@@ -5,7 +5,7 @@ with open("app/README.md", "r") as f:
 
 setup(
     name="pyWrkspPackage",
-    version="0.1.0",
+    version="0.1.1",
     description="A group of helpful functions for Python",
     package_dir={"": "app"},
     packages=find_packages(where="app"),
@@ -20,7 +20,7 @@ setup(
         "Programming Language :: Python :: 3.10",
         "Operating System :: OS Independent",
     ],
-    install_requires=[],
+    install_requires=['python-dotenv'],
     extras_require={
         "dev": ["twine>=4.0.2"],
     },
