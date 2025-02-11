@@ -1,4 +1,5 @@
 stages:
+ - notify
  - distribute
 
 github_commit:
@@ -19,6 +20,18 @@ github_commit:
     - git config pull.rebase false
     - git pull
     - git push
+
+discord_notify:
+  stage: notify
+  script:
+    - |
+      curl -H "Content-Type: application/json" -X POST -d '{
+        "embeds": [{
+          "title": "🚀 GitLab CI/CD Pipeline Update",
+          "description": "**Project:** ${CI_PROJECT_NAME}\n**${CI_COMMIT_TITLE}**\n${CI_COMMIT_DESCRIPTION}\n\n\t-${CI_COMMIT_AUTHOR}",
+          "color": 16776960
+        }]
+      }' $DISCORD_WEBHOOK
 
 build_package:
   image: python:alpine
