@@ -28,11 +28,8 @@ discord_notify:
     - apk add curl
     - |
       curl -H "Content-Type: application/json" -X POST -d '{
-        "embeds": [{
-          "title": "🚀 GitLab CI/CD Pipeline Update",
-          "description": "**Project:** $CI_PROJECT_NAME\n**$CI_COMMIT_TITLE**\n$CI_COMMIT_DESCRIPTION\n\n\t-$CI_COMMIT_AUTHOR",
-          "color": 16776960
-        }]
+         \"content\": "**Project:** $CI_PROJECT_NAME\n**$CI_COMMIT_TITLE**\n$CI_COMMIT_DESCRIPTION\n\n\t-$CI_COMMIT_AUTHOR",
+        }
       }' $DISCORD_WEBHOOK
 
 build_package:
