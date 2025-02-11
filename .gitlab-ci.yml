@@ -28,7 +28,7 @@ discord_notify:
     - apk add curl
     - |
       curl -H "Content-Type: application/json" -X POST -d '{
-         \"content\": "**Project:** $CI_PROJECT_NAME\n**$CI_COMMIT_TITLE**\n$CI_COMMIT_DESCRIPTION\n\n\t-$CI_COMMIT_AUTHOR",
+         content: "**Project:** $CI_PROJECT_NAME\n**$CI_COMMIT_TITLE**\n$CI_COMMIT_DESCRIPTION\n\n\t-$CI_COMMIT_AUTHOR",
         }
       }' $DISCORD_WEBHOOK
 
