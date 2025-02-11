@@ -28,15 +28,16 @@ build_package:
     TWINE_PASSWORD: $CI_JOB_TOKEN
   script:
     - cd src/helpfulPackage
+    - pip install --upgrade pip
     - pip install setuptools wheel
     - python setup.py bdist_wheel sdist
     - pip install .[dev]
     - twine check dist/*
     - twine upload --repository-url ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/pypi dist/*
     - ls -la
-  #only:
-  #  changes:
-  #    - src/helpfulPackage/setup.py
+  only:
+    changes:
+      - src/helpfulPackage/setup.py
   artifacts:
     paths:
       - src/helpfulPackage/dist
