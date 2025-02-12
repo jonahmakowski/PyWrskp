@@ -3,7 +3,7 @@ import subprocess
 import requests
 
 # AI model endpoint (Ollama, Llama.cpp, or API)
-AI_ENDPOINT = "http://localhost:11434/api/generate"
+AI_ENDPOINT = "http://192.168.86.4:11434/api/generate"
 
 # Get list of modified files in the last commit
 git_diff_cmd = "git diff --name-only HEAD~1"
@@ -28,7 +28,12 @@ for file in source_files:
         code = f.read()
 
     # Send the code to AI for documentation
-    response = requests.post(AI_ENDPOINT, json={"model": "mistral", "prompt": f"Document this code:\n{code}"})
+    prompt = f"""Generate formal documentation for the following Python script. The documentation should include:
+                 Summary: Provide a brief overview of what the script does in a concise and clear manner.
+                 Functions and Classes: List all functions and classes defined in the script, along with: A short description of what each function/class does. The inputs each function/class takes (parameters). The output (return value) for each function/class.
+                 Dependencies: List all external packages/modules that the script depends on.
+                 The script to document is as follows:\n\n"""
+    response = requests.post(AI_ENDPOINT, json={"model": "llama3.2", "prompt": prompt + code})
     documentation = response.json().get("response", "")
 
     if not documentation:

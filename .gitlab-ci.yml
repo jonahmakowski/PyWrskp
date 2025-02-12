@@ -48,11 +48,7 @@ generate_docs:
   stage: docs
   before_script:
     - pip install requests
-    - apk add curl
-    - curl -fsSL https://ollama.com/install.sh | sh
   script:
-    - ollama serve &
-    - ollama pull mistral
     - python src/doc_generation/generate.py  # Runs AI-powered doc generation
     - |
       # Check if there are any changes
