@@ -25,10 +25,15 @@ discord_notify:
   stage: notify
   image: alpine:latest
   script:
-    - apk add curl
+    - apk add curl jq
+    - export message 
     - |
-      curl -H "Content-Type: application/json" -X POST -d '{
-         content: "**Project:** $CI_PROJECT_NAME\n**$CI_COMMIT_TITLE**\n$CI_COMMIT_DESCRIPTION\n\n\t-$CI_COMMIT_AUTHOR",
+      curl -H "Content-Type: application/json" -X POST -d "$(jq -n --arg project "$CI_PROJECT_NAME" --arg title "$CI_COMMIT_TITLE" --arg desc "$CI_COMMIT_DESCRIPTION" --arg author "$CI_COMMIT_AUTHOR" '{
+          embeds: [{
+          title: "🚀 GitLab CI/CD Pipeline Update",
+          description: "**Project:** \($project)\n**\($title)**\n\($desc)\n\n\t-\($author)",
+          color: 16776960
+        }]
         }
       }' $DISCORD_WEBHOOK
 
