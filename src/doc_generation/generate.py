@@ -9,8 +9,12 @@ AI_ENDPOINT = "http://192.168.86.4:11434/api/generate"
 git_diff_cmd = "git diff --name-only HEAD~1"
 modified_files = subprocess.check_output(git_diff_cmd.split()).decode().splitlines()
 
+print("Modified files:", modified_files)
+
 # Filter files from /src/ that are Python or C++
 source_files = [f for f in modified_files if f.startswith("src/") and f.endswith((".py", ".cpp", ".js"))]
+
+print("Source files:", source_files)
 
 if not source_files:
     print("No source files modified. Skipping doc generation.")
