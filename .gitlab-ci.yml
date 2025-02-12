@@ -45,6 +45,7 @@ build_package:
 
 generate_docs:
   image: python:latest
+  stage: docs
   before_script:
     - pip install requests
   script:
