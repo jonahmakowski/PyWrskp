@@ -1,6 +1,7 @@
 import os
 import subprocess
 import requests
+from ollama import Client
 
 # AI model endpoint (Ollama, Llama.cpp, or API)
 AI_ENDPOINT = "http://192.168.86.4:11434/api/generate"
@@ -20,6 +21,10 @@ if not source_files:
     print("No source files modified. Skipping doc generation.")
     exit(0)
 
+client = Client(
+    host=AI_ENDPOINT,
+)
+
 for file in source_files:
     print(f"Generating docs for: {file}")
 
@@ -33,8 +38,10 @@ for file in source_files:
                  Functions and Classes: List all functions and classes defined in the script, along with: A short description of what each function/class does. The inputs each function/class takes (parameters). The output (return value) for each function/class.
                  Dependencies: List all external packages/modules that the script depends on.
                  The script to document is as follows:\n\n"""
-    response = requests.post(AI_ENDPOINT, json={"model": "llama3.2", "prompt": prompt + code})
-    documentation = response.json().get("response", "")
+    
+    documentation = client.generate('llama3.2', prompt + code)
+
+    print('response:', documentation)
 
     if not documentation:
         print(f"⚠️ No documentation generated for {file}")

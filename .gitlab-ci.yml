@@ -47,7 +47,7 @@ generate_docs:
   image: python:alpine
   stage: docs
   before_script:
-    - pip install requests
+    - pip install requests ollama
     - apk add git
   script:
     - python src/doc_generation/generate.py  # Runs AI-powered doc generation
