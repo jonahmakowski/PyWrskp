@@ -46,6 +46,8 @@ build_package:
 generate_docs:
   image: python:alpine
   stage: docs
+  variables:
+    GIT_DEPTH: 0
   before_script:
     - pip install ollama
     - apk add git

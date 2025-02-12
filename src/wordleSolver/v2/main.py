@@ -4,6 +4,24 @@ from five_letters import get_five_letters, get_words
 
 
 def parse_input(inp, word, word_correct, word_wrong_place, word_wrong):
+    """
+    Parses the input string and updates the word_correct, word_wrong_place, and word_wrong lists/dictionaries
+    based on the input.
+
+    Args:
+        inp (str): A string where each character represents the status of the corresponding letter in the word.
+                   'c' or 'C' indicates the letter is correct and in the correct place.
+                   's' or 'S' indicates the letter is correct but in the wrong place.
+                   'w' or 'W' indicates the letter is incorrect.
+        word (str): The word being evaluated.
+        word_correct (list): A list where the correct letters in the correct positions are stored.
+        word_wrong_place (dict): A dictionary where the keys are letters that are correct but in the wrong place,
+                                 and the values are lists of indices where these letters appear.
+        word_wrong (list): A list of letters that are incorrect.
+
+    Returns:
+        tuple: A tuple containing the updated word_correct list, word_wrong_place dictionary, and word_wrong list.
+    """
     word_lis = list(word)
     index = 0
     for letter in inp:
@@ -24,6 +42,18 @@ def parse_input(inp, word, word_correct, word_wrong_place, word_wrong):
     return word_correct, word_wrong_place, word_wrong
 
 def check_valid_word(word, word_correct, word_wrong_place, word_wrong):
+    """
+    Checks if a given word is valid based on the provided constraints.
+
+    Args:
+        word (str): The word to be checked.
+        word_correct (list): A list where each index contains the correct letter for that position or an empty string if the position is unknown.
+        word_wrong_place (dict): A dictionary where keys are letters and values are lists of indices where the letter should not be.
+        word_wrong (list): A list of letters that should not be in the word.
+
+    Returns:
+        bool: True if the word is valid based on the constraints, False otherwise.
+    """
     word_lis = list(word)
     index = 0
 
@@ -50,6 +80,19 @@ def check_valid_word(word, word_correct, word_wrong_place, word_wrong):
     return True
 
 def give_rank(word_list):
+    """
+    Assigns a rank to each word in the given list based on the presence of specific letters.
+
+    The function uses predefined letter rankings to calculate a rank for each word. 
+    Each letter has a specific rank value, and the rank of a word is the sum of the 
+    rank values of the letters it contains.
+
+    Parameters:
+    word_list (list of str): A list of words to be ranked.
+
+    Returns:
+    list of int: A list of ranks corresponding to the words in the input list.
+    """
     rank1 = ['q', 'j', 'x']
     rank2 = ['z', 'w', 'k']
     rank3 = ['v', 'f', 'y']
@@ -96,6 +139,19 @@ def give_rank(word_list):
     return ranks
 
 def find_all_valid(words:list, ranks:list, word_correct:list, word_wrong_place:dict, word_wrong:list):
+    """
+    Filters out invalid words from the given list of words based on the provided criteria.
+
+    Args:
+        words (list): List of words to be filtered.
+        ranks (list): List of ranks corresponding to the words.
+        word_correct (list): List of characters that are correct and in the correct position.
+        word_wrong_place (dict): Dictionary where keys are positions and values are lists of characters that are correct but in the wrong position.
+        word_wrong (list): List of characters that are incorrect and should not be in the word.
+
+    Returns:
+        tuple: A tuple containing the filtered list of words and their corresponding ranks.
+    """
     index = 0
     while index < len(words):
         word = words[index]
@@ -107,6 +163,16 @@ def find_all_valid(words:list, ranks:list, word_correct:list, word_wrong_place:d
     return words, ranks
 
 def find_highest_points(words, ranks):
+    """
+    Finds the index of the word with the highest rank.
+
+    Args:
+        words (list of str): A list of words.
+        ranks (list of int): A list of ranks corresponding to each word.
+
+    Returns:
+        int: The index of the word with the highest rank. If no words are provided, returns -1.
+    """
     high = 0
     high_index = -1
     for index, _ in enumerate(words):
@@ -117,6 +183,17 @@ def find_highest_points(words, ranks):
     return high_index
 
 def remove_invalid_word_from_file(word, file='../words.txt'):
+    """
+    Removes all occurrences of a specified word from a file containing a list of words.
+    Args:
+        word (str): The word to be removed from the file.
+        file (str, optional): The path to the file containing the list of words. Defaults to '../words.txt'.
+    Returns:
+        None
+    Side Effects:
+        Modifies the specified file by removing all occurrences of the given word.
+        Prints a confirmation message after the word has been removed.
+    """
     words = get_words(file=file)
     words.pop(words.index(word))
     
@@ -129,6 +206,18 @@ def remove_invalid_word_from_file(word, file='../words.txt'):
 
 
 def solver(starting_word="crane"):
+    """
+    Solves the Wordle puzzle by making guesses and refining the list of possible words based on feedback.
+    Args:
+        starting_word (str): The initial word to start the guessing process. Default is "crane".
+    The function reads a list of five-letter words from a file, ranks them, and iteratively makes guesses based on the feedback provided by the user. The feedback should be in the form of:
+        - 'C' for letters in the correct place,
+        - 'S' for letters in the word but in the wrong place,
+        - 'W' for letters not in the word at all.
+    The function continues to make guesses until the correct word is found or there are no more words left to guess.
+    Returns:
+        None
+    """
     with open('../five_letter_words.txt', 'r') as file:
         words_temp = file.readlines()
 

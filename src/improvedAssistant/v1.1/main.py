@@ -13,11 +13,31 @@ is_speaking = False
 
 
 def find_closest_command(user_input, command_list):
+    """
+    Finds the closest matching command from a list of commands based on the user's input.
+
+    Args:
+        user_input (str): The input string provided by the user.
+        command_list (list of str): A list of possible command strings to match against.
+
+    Returns:
+        tuple: A tuple containing the closest matching command (str) and the similarity score (float).
+    """
     closest_match, score = process.extractOne(user_input, command_list)
     return closest_match, score
 
 
 def listen():
+    """
+    Listens to the user's speech through the microphone, converts it to text using Google's speech recognition,
+    and plays a sound before and after listening.
+
+    Returns:
+        str: The recognized text from the user's speech, or None if the speech could not be recognized.
+
+    Raises:
+        Exception: If there is an error during the speech recognition process.
+    """
     r = sr.Recognizer()
 
     with sr.Microphone() as source:
@@ -36,6 +56,16 @@ def listen():
 
 
 def speak_text(text, wait=True):
+    """
+    Convert the given text to speech and play it.
+
+    Args:
+        text (str): The text to be converted to speech.
+        wait (bool, optional): If True, the function will wait until the speech is finished playing before returning. Defaults to True.
+
+    Returns:
+        None
+    """
     tts = gTTS(text=text, lang='en')
     tts.save("speech.mp3")
     def play_audio():
@@ -53,10 +83,29 @@ def speak_text(text, wait=True):
 
 
 def run_app(app):
+    """
+    Executes a bash script with the provided application name as an argument.
+
+    Args:
+        app (str): The name of the application to be passed to the bash script.
+
+    Returns:
+        None
+    """
     subprocess.run(['bash', 'actions.sh', 'app', f"{app}"])
 
 
 def open_file(file, loc=None):
+    """
+    Opens a file using a bash script.
+
+    Parameters:
+    file (str): The name or path of the file to open.
+    loc (str, optional): An optional location parameter to be passed to the bash script. Defaults to None.
+
+    Returns:
+    None
+    """
     if loc is not None:
         subprocess.run(['bash', 'actions.sh', '-l', loc, 'open', f"{file}"])
     else:
@@ -64,10 +113,32 @@ def open_file(file, loc=None):
 
 
 def open_web(url):
+    """
+    Opens a web page using a bash script.
+
+    Args:
+        url (str): The URL of the web page to open.
+
+    Returns:
+        None
+    """
     subprocess.run(['bash', 'actions.sh', 'web', f"{url}"])
 
 
 def python_run(file, loc=None):
+    """
+    Executes a Python script using a bash script.
+
+    This function runs a Python script by invoking a bash script named 'actions.sh'.
+    If a location is provided, it includes the location as an argument to the bash script.
+
+    Args:
+        file (str): The path to the Python script to be executed.
+        loc (str, optional): An optional location argument to be passed to the bash script.
+
+    Returns:
+        None
+    """
     if loc is not None:
         subprocess.run(['bash', 'actions.sh', '-l', loc, 'python', f"{file}"])
     else:
@@ -75,24 +146,85 @@ def python_run(file, loc=None):
 
 
 def start_music():
+    """
+    Starts playing music by running a bash script.
+
+    This function uses the subprocess module to execute a bash script named 'actions.sh' 
+    with the argument 'play'. The script is expected to be located in the same directory 
+    as the script calling this function.
+
+    Raises:
+        subprocess.CalledProcessError: If the subprocess call fails.
+    """
     subprocess.run(['bash', 'actions.sh', 'play'])
 
 
 def create_file(file):
+    """
+    Creates a file by running a bash script.
+
+    Args:
+        file (str): The name of the file to be created.
+    """
     subprocess.run(['bash', 'actions.sh', 'create', f"{file}"])
 
 
 def stop_music():
+    """
+    Stops the music by running a bash script with the 'pause' argument.
+
+    This function uses the subprocess module to execute a bash script named 'actions.sh'
+    with the 'pause' argument, which is intended to stop the currently playing music.
+
+    Note:
+        Ensure that 'actions.sh' is located in the correct directory and has the appropriate
+        permissions to be executed.
+
+    Raises:
+        subprocess.CalledProcessError: If the subprocess call fails.
+    """
     subprocess.run(['bash', 'actions.sh', 'pause'])
 
 
 def ai_backend(chat):
+    """
+    Processes a chat conversation using the Ollama AI model and returns the latest response.
+
+    Args:
+        chat (list): A list of dictionaries representing the chat messages. Each dictionary should contain
+                     at least a 'message' key with the message content.
+
+    Returns:
+        tuple: A tuple containing:
+            - str: The content of the latest response from the AI model.
+            - list: The updated chat list with the latest response appended.
+    """
     responses = ollama.chat(model='llama3', messages=chat)
     chat.append(responses['message'])
     return responses['message']['content'], chat
 
 
 def ask_ai():  # doesn't use action.sh because it doesn't play well with python
+    """
+    Launches a simple AI chat interface using PySimpleGUI.
+
+    The function creates a window with a text input for user messages, a send button, 
+    a goodbye button, and a multiline text area to display the chat history. 
+    It maintains a chat history and interacts with an AI backend to generate responses.
+
+    The chat history is initialized with a system message indicating the AI's role. 
+    User inputs are appended to the chat history and sent to the AI backend for a response. 
+    The response is then displayed in the chat history.
+
+    The function runs an event loop to handle user interactions:
+    - If the window is closed or the "Goodbye" button is pressed, the window is closed.
+    - If the "Send" button is pressed, the user input is processed and the AI response is displayed.
+
+    Note:
+        The `ai_backend` function should be defined elsewhere to handle the interaction 
+        with the AI model and return the AI's response along with the updated chat history.
+
+    """
     layout = [
         [sg.Text('Chatbot', expand_x=True, justification='center', font=('Helvetica', 20))],
         [sg.InputText(key='-INPUT-')],
@@ -121,12 +253,36 @@ def ask_ai():  # doesn't use action.sh because it doesn't play well with python
 
 
 def remove_keyword(text, keyword):
+    """
+    Removes the first occurrence of a specified keyword from a given text.
+
+    Args:
+        text (str): The input text from which the keyword will be removed.
+        keyword (str): The keyword to be removed from the text.
+
+    Returns:
+        str: The text with the first occurrence of the keyword removed.
+
+    Raises:
+        ValueError: If the keyword is not found in the text.
+    """
     text_lis = text.split()
     text_lis.remove(keyword)
     return ' '.join(text_lis)
 
 
 def place_in_top_right(window):
+    """
+    Places the given window in the top-right corner of the screen.
+
+    Args:
+        window: An object representing the window to be positioned. It must have
+                the attributes 'TKroot' (the Tkinter root window) and 'size' (a tuple
+                containing the width and height of the window).
+
+    Returns:
+        The window object with its position updated to the top-right corner of the screen.
+    """
     screen_width = window.TKroot.winfo_screenwidth()
     x = screen_width - window.size[0]
     y = 0
@@ -135,6 +291,27 @@ def place_in_top_right(window):
 
 
 def parse_command(command):
+    """
+    Parses a given command and executes the corresponding action.
+
+    Args:
+        command (str): The command to be parsed and executed.
+
+    Supported Commands:
+        - "open app": Opens the specified application.
+        - "open file": Opens a file using a file dialog.
+        - "search": Searches the web for the specified keyword using DuckDuckGo.
+        - "run python": Runs a specified Python file.
+        - "play music": Plays music.
+        - "pause music": Pauses the currently playing music.
+        - "create file": Creates a new file in the specified directory.
+        - "ai chat": Opens an AI chat assistant.
+        - "ai" or "intelligence": Asks the AI assistant a question.
+        - "what time is it": Announces the current time.
+        - "show commands" or "help": Displays a list of available commands.
+
+    If the command is not recognized, it suggests the closest matching command.
+    """
     lower_command = command.lower()
     if "open app" in lower_command:
         app = remove_keyword(command, 'open')
@@ -242,6 +419,21 @@ def parse_command(command):
 
 
 def run_assistant():
+    """
+    Runs the assistant application with a GUI window.
+
+    The function creates a window with 'Terminate' and 'Listen' buttons,
+    places the window in the top right corner of the screen, and enters
+    an event loop to handle user interactions.
+
+    Event Loop:
+    - If the 'Terminate' button or the window close button is clicked, the loop breaks and the application exits.
+    - If the 'Listen' button is clicked, the assistant listens for a command.
+    - If a command is detected, it is parsed and executed.
+
+    Note:
+    - The function assumes the existence of `sg`, `place_in_top_right`, `listen`, and `parse_command` functions or modules.
+    """
     layout = [[sg.Button('Terminate'), sg.Button('Listen')]]
     window = sg.Window('Your Assistant', layout, keep_on_top=True)
 
