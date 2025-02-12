@@ -26,7 +26,6 @@ discord_notify:
   image: alpine:latest
   script:
     - apk add curl jq
-    - export message 
     - |
       curl -H "Content-Type: application/json" -X POST -d "$(jq -n --arg project "$CI_PROJECT_NAME" --arg title "$CI_COMMIT_TITLE" --arg desc "$CI_COMMIT_DESCRIPTION" --arg author "$CI_COMMIT_AUTHOR" '{
           embeds: [{
