@@ -36,6 +36,7 @@ for file in source_files:
                  Summary: Provide a brief overview of what the script does in a concise and clear manner.
                  Functions and Classes: List all functions and classes defined in the script, along with: A short description of what each function/class does. The inputs each function/class takes (parameters). The output (return value) for each function/class.
                  Dependencies: List all external packages/modules that the script depends on.
+                 Include the entire code in the documentation, and add comments as nessary, however, don't modify the code in any way.
                  The script to document is as follows:\n\n"""
     
     documentation = client.generate('llama3.2', prompt + code)['response']
@@ -47,7 +48,7 @@ for file in source_files:
         continue
 
     # Convert file path from /src/ to /docs/
-    doc_path = file.replace("src/", "docs/").replace(".py", ".md").replace(".cpp", ".md").replace(".js", ".md")
+    doc_path = file.replace("src/", "docs/ai_docs/").replace(".py", ".md").replace(".cpp", ".md").replace(".js", ".md")
 
     # Ensure parent directories exist
     os.makedirs(os.path.dirname(doc_path), exist_ok=True)
