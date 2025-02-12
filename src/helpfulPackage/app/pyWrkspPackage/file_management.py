@@ -1,4 +1,5 @@
 import json
+import os
 
 def load_from_file(file_path: str) -> str:
     """
@@ -71,3 +72,27 @@ def json_write_file(file_path: str, data: dict) -> None:
     """
     with open(file_path, 'w') as file:
         json.dump(data, file, indent=4)
+
+def create_folders(path: str) -> None:
+    """
+    Create a folder and all its parent directories if they do not exist.
+
+    Args:
+        path (str): The path to the folder to be created.
+
+    Returns:
+        None
+    """
+    os.makedirs(path, exist_ok=True)
+
+def file_exists(file_path: str) -> bool:
+    """
+    Check if a file exists at the specified path.
+
+    Args:
+        file_path (str): The path to the file to be checked.
+
+    Returns:
+        bool: True if the file exists, False otherwise.
+    """
+    return os.path.isfile(file_path)

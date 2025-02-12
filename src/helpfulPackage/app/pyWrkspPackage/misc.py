@@ -57,3 +57,21 @@ def timer(func):
         print(f"{func.__name__} took {end - start:.4f} seconds")
         return result
     return wrapper
+
+def timestamp_print(*args, sep=' ', end='\n') -> None:
+    """
+    Prints the given arguments with a timestamp.
+
+    Args:
+        *args: Variable length argument list to be printed.
+        sep (str, optional): Separator between arguments. Defaults to a single space.
+        end (str, optional): String appended after the last value. Defaults to a newline.
+
+    Example:
+        timestamp_print("Hello", "world")
+        # Output: [2023-10-05 14:23:45] Hello world
+    """
+    print(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] ",end='')
+    for arg in args:
+        print(arg, end=sep)
+    print(end)

@@ -56,13 +56,14 @@ def load_from_env(variable: str) -> str:
     """
     Load the value of an environment variable.
 
-    This function loads environment variables from a .env file and retrieves the value of the specified variable.
+    This function loads the environment variables from a .env file and retrieves
+    the value of the specified environment variable.
 
     Args:
         variable (str): The name of the environment variable to retrieve.
 
     Returns:
-        str or None: The value of the environment variable if it exists, otherwise None.
+        str: The value of the specified environment variable as a string.
     """
     load_dotenv()
-    return os.getenv(variable)
+    return str(os.getenv(variable))
