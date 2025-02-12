@@ -44,7 +44,7 @@ build_package:
     expire_in: 1 day
 
 generate_docs:
-  image: python:latest
+  image: python:alpine
   stage: docs
   before_script:
     - pip install requests
