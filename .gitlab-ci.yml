@@ -58,7 +58,7 @@ generate_docs:
       git add docs/
       if ! git diff --cached --quiet; then
         git commit -m "🤖 Auto-generate docs for latest changes"
-        git push "http://__token__:${DOCS_KEY}@192.168.86.4:8929/jonahmakowski/pyWrskp.git" HEAD:$CI_COMMIT_REF_NAME
+        git push "http://gitlab_ci_token:${DOCS_KEY}@192.168.86.4:8929/jonahmakowski/pyWrskp.git" HEAD:$CI_COMMIT_REF_NAME
       else
         echo "No changes to commit."
       fi
