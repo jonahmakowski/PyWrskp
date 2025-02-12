@@ -3,7 +3,6 @@ import PySimpleGUI as sg
 import os
 import ollama
 
-
 def run_app(app):
     """
     Executes a bash script with the provided application name as an argument.
@@ -15,7 +14,6 @@ def run_app(app):
         None
     """
     subprocess.run(['bash', 'actions.sh', 'app', f"{app}"])
-
 
 def open_file(file, loc=None):
     """
@@ -33,7 +31,6 @@ def open_file(file, loc=None):
     else:
         subprocess.run(['bash', 'actions.sh', 'open', f"{file}"])
 
-
 def open_web(url):
     """
     Opens a web page using a bash script.
@@ -45,7 +42,6 @@ def open_web(url):
         None
     """
     subprocess.run(['bash', 'actions.sh', 'web', f"{url}"])
-
 
 def python_run(file, loc=None):
     """
@@ -66,7 +62,6 @@ def python_run(file, loc=None):
     else:
         subprocess.run(['bash', 'actions.sh', 'python', f"{file}"])
 
-
 def start_music():
     """
     Starts playing music by running a bash script.
@@ -79,7 +74,6 @@ def start_music():
     """
     subprocess.run(['bash', 'actions.sh', 'play'])
 
-
 def create_file(file):
     """
     Creates a file by running a bash script.
@@ -88,7 +82,6 @@ def create_file(file):
         file (str): The name of the file to be created.
     """
     subprocess.run(['bash', 'actions.sh', 'create', f"{file}"])
-
 
 def stop_music():
     """
