@@ -3,7 +3,7 @@ import subprocess
 import requests
 
 # AI model endpoint (Ollama, Llama.cpp, or API)
-AI_ENDPOINT = "http://192.168.86.4:11434/api/generate"
+AI_ENDPOINT = "http://localhost:11434/api/generate"
 
 # Get list of modified files in the last commit
 git_diff_cmd = "git diff --name-only HEAD~1"
