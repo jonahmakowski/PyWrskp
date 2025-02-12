@@ -14,7 +14,17 @@ MOVIE_YEAR = '1939'
 MOVIE_TYPE = 'SHOW'
 
 def search_movie(title, year=None):
-    """Search for a movie using Internet Archive's API."""
+    """
+    Searches for a movie on the Internet Archive based on the given title and optional year.
+
+    Args:
+        title (str): The title of the movie to search for.
+        year (int, optional): The year of the movie to search for. Defaults to None.
+
+    Returns:
+        list: A list of dictionaries containing movie information (identifier, title, creator, year) if found.
+        None: If no movies are found matching the search criteria.
+    """
     base_url = "https://archive.org/advancedsearch.php"
     params = {
         "q": f'title:"{title}" AND mediatype:movies' if year is None else f'title:"{title}" AND mediatype:movies AND year:{year}',
@@ -29,7 +39,18 @@ def search_movie(title, year=None):
     return None
 
 def download_movie(identifier, dest_folder):
-    """Download the best available movie file using metadata API with a progress bar."""
+    """
+    Downloads a movie from the Internet Archive given its identifier and saves it to the specified destination folder.
+    The function prioritizes downloading an MP4 file if available. If no MP4 file is found, it will download an MKV or AVI file.
+    Args:
+        identifier (str): The unique identifier of the movie on the Internet Archive.
+        dest_folder (str): The destination folder where the movie file will be saved.
+    Returns:
+        str: The local file path where the movie was downloaded.
+    Raises:
+        requests.exceptions.RequestException: If there is an issue with the HTTP request.
+        ValueError: If no suitable movie files are found.
+    """
     base_url = f"https://archive.org/metadata/{identifier}"
     response = requests.get(base_url)
     response.raise_for_status()
@@ -67,7 +88,16 @@ def download_movie(identifier, dest_folder):
     raise ValueError("No suitable movie files found.")
 
 def get_imdb_id(movie_title, year=None):
-    """Fetch the IMDb ID for a movie using the OMDb API."""
+    """
+    Fetches the IMDb ID for a given movie title using the OMDB API.
+    Args:
+        movie_title (str): The title of the movie.
+        year (int, optional): The release year of the movie to narrow down the search. Defaults to None.
+    Returns:
+        str: The IMDb ID of the movie if found, otherwise None.
+    Raises:
+        None: This function does not raise any exceptions, but it prints an error message if the request fails.
+    """
     base_url = "http://www.omdbapi.com/?i=tt3896198&apikey={}".format(OMDB_API_KEY)
     params = {
         "t": movie_title,
@@ -83,7 +113,17 @@ def get_imdb_id(movie_title, year=None):
         return None
 
 def rename_and_move(file_path, movie_title, year=None):
-    """Rename and move the file to match Jellyfin's naming conventions with IMDb ID tag."""
+    """
+    Renames and moves a file to a new directory based on the movie title and year.
+    Args:
+        file_path (str): The path to the file that needs to be renamed and moved.
+        movie_title (str): The title of the movie.
+        year (int, optional): The release year of the movie. Defaults to None.
+    Returns:
+        str: The new file path after renaming and moving the file.
+    Raises:
+        Exception: If there is an error in fetching the IMDb ID or moving the file.
+    """
     # Fetch IMDb ID
     imdb_id = get_imdb_id(movie_title, year)
     imdb_tag = f" [imdbid-{imdb_id}]" if imdb_id else ""
