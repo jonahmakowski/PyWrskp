@@ -39,7 +39,7 @@ for file in source_files:
                  Dependencies: List all external packages/modules that the script depends on.
                  The script to document is as follows:\n\n"""
     
-    documentation = client.generate('llama3.2', prompt + code)
+    documentation = client.generate('llama3.2', prompt + code)['response']
 
     print('response:', documentation)
 
