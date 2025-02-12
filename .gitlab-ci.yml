@@ -1,5 +1,6 @@
 stages:
  - distribute
+ - docs
 
 github_commit:
   image: alpine:latest
@@ -41,3 +42,23 @@ build_package:
     paths:
       - src/helpfulPackage/dist
     expire_in: 1 day
+
+generate_docs:
+  image: python:latest
+  before_script:
+    - pip install requests
+  script:
+    - python src/doc_generation/generate.py  # Runs AI-powered doc generation
+    - |
+      # Check if there are any changes
+      git config --global user.email "gitlab-ci@localhost"
+      git config --global user.name "GitLab CI Docs Bot"
+      git add docs/
+      if ! git diff --cached --quiet; then
+        git commit -m "🤖 Auto-generate docs for latest changes"
+        git push "https://${CI_JOB_TOKEN}@${CI_REPOSITORY_URL}" HEAD:$CI_COMMIT_REF_NAME
+      else
+        echo "No changes to commit."
+      fi
+  only:
+    - main  # Run only on the main branch

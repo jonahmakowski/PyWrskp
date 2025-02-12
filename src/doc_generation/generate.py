@@ -1,0 +1,44 @@
+import os
+import subprocess
+import requests
+
+# AI model endpoint (Ollama, Llama.cpp, or API)
+AI_ENDPOINT = "http://192.168.86.4:11434/api/generate"
+
+# Get list of modified files in the last commit
+git_diff_cmd = "git diff --name-only HEAD~1"
+modified_files = subprocess.check_output(git_diff_cmd.split()).decode().splitlines()
+
+# Filter files from /src/ that are Python or C++
+source_files = [f for f in modified_files if f.startswith("src/") and f.endswith((".py", ".cpp", ".js"))]
+
+if not source_files:
+    print("No source files modified. Skipping doc generation.")
+    exit(0)
+
+for file in source_files:
+    print(f"Generating docs for: {file}")
+
+    # Read the source code
+    with open(file, "r") as f:
+        code = f.read()
+
+    # Send the code to AI for documentation
+    response = requests.post(AI_ENDPOINT, json={"model": "mistral", "prompt": f"Document this code:\n{code}"})
+    documentation = response.json().get("response", "")
+
+    if not documentation:
+        print(f"⚠️ No documentation generated for {file}")
+        continue
+
+    # Convert file path from /src/ to /docs/
+    doc_path = file.replace("src/", "docs/").replace(".py", ".md").replace(".cpp", ".md").replace(".js", ".md")
+
+    # Ensure parent directories exist
+    os.makedirs(os.path.dirname(doc_path), exist_ok=True)
+
+    # Write the documentation to the mirrored docs folder
+    with open(doc_path, "w") as f:
+        f.write(f"# Documentation for {file}\n\n{documentation}")
+
+    print(f"✅ Saved docs: {doc_path}")
