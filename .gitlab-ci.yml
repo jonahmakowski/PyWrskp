@@ -27,7 +27,7 @@ discord_notify:
   script:
     - apk add curl jq
     - |
-      curl -H "Content-Type: application/json" -X POST -d "$(jq -n --arg project "$CI_PROJECT_NAME" --arg title "$CI_COMMIT_TITLE" --arg desc "$CI_COMMIT_DESCRIPTION" --arg author "$CI_COMMIT_AUTHOR" '{
+      curl -H "Content-Type: application/json" -X POST -d "$(jq -n --arg project "$CI_PROJECT_NAME" --arg title "$CI_COMMIT_TITLE" --arg desc "$CI_COMMIT_DESCRIPTION" --arg author "$CI_COMMIT_AUTHOR") '{
           embeds: [{
           title: "🚀 GitLab CI/CD Pipeline Update",
           description: "**Project:** \($project)\n**\($title)**\n\($desc)\n\n\t-\($author)",
