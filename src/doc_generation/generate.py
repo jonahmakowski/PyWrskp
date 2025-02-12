@@ -1,6 +1,5 @@
 import os
 import subprocess
-import requests
 from ollama import Client
 
 # AI model endpoint (Ollama, Llama.cpp, or API)

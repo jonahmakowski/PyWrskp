@@ -47,7 +47,7 @@ generate_docs:
   image: python:alpine
   stage: docs
   before_script:
-    - pip install requests ollama
+    - pip install ollama
     - apk add git
   script:
     - python src/doc_generation/generate.py  # Runs AI-powered doc generation
@@ -58,7 +58,7 @@ generate_docs:
       git add docs/
       if ! git diff --cached --quiet; then
         git commit -m "🤖 Auto-generate docs for latest changes"
-        git push "${CI_JOB_TOKEN}@${CI_REPOSITORY_URL}" HEAD:$CI_COMMIT_REF_NAME
+        git push ${CI_REPOSITORY_URL} HEAD:$CI_COMMIT_REF_NAME
       else
         echo "No changes to commit."
       fi
