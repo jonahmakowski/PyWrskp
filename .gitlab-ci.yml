@@ -48,6 +48,7 @@ generate_docs:
   stage: docs
   before_script:
     - pip install requests
+    - apk add git
   script:
     - python src/doc_generation/generate.py  # Runs AI-powered doc generation
     - |
