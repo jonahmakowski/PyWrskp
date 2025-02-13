@@ -74,4 +74,4 @@ def timestamp_print(*args, sep=' ', end='\n') -> None:
     print(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] ",end='')
     for arg in args:
         print(arg, end=sep)
-    print(end)
+    print(end, end='')
