@@ -3,90 +3,19 @@
 **Script Documentation**
 
 **Summary**
-------------
 
-This Python script provides a set of utility functions to interact with the user and measure execution time. The `int_input` and `float_input` functions prompt users to enter integer and floating-point numbers, respectively, until valid input is provided. The `timer` decorator prints the execution time of a given function. The `timestamp_print` function prints its arguments with a timestamp.
+This Python script provides a set of utility functions to interact with the user and measure execution times. The `int_input` and `float_input` functions prompt the user to enter integer or floating-point numbers, respectively, until a valid value is entered. The `timer` decorator measures the execution time of a given function.
 
 **Functions and Classes**
--------------------------
 
 ### int_input(prompt: str) -> int
 
 *   Description: Prompts the user to enter an integer value.
-*   Inputs:
+*   Parameters:
     *   prompt (str): The message to display when asking for input.
-*   Output:
-    *   int: The integer value entered by the user.
+*   Returns: The integer value entered by the user.
 
 ```python
-while True:
-    try:
-        return int(input(prompt))
-    except ValueError:
-        print("Please enter a number.")
-```
-
-### float_input(prompt: str) -> float
-
-*   Description: Prompts the user to enter a floating-point number.
-*   Inputs:
-    *   prompt (str): The message to display when asking for input.
-*   Output:
-    *   float: The floating-point number entered by the user.
-
-```python
-while True:
-    try:
-        return float(input(prompt))
-    except ValueError:
-        print("Please enter a number.")
-```
-
-### timer(func)
-
-*   Description: A decorator that prints the execution time of the decorated function.
-*   Inputs:
-    *   func (callable): The function to be decorated.
-*   Output:
-    *   callable: The wrapped function that prints its execution time.
-
-```python
-def wrapper(*args, **kwargs):
-    start = time.time()
-    result = func(*args, **kwargs)
-    end = time.time()
-    print(f"{func.__name__} took {end - start:.4f} seconds")
-    return result
-return wrapper
-```
-
-### timestamp_print(*args, sep=' ', end='\n') -> None
-
-*   Description: Prints the given arguments with a timestamp.
-*   Inputs:
-    *   *args: Variable length argument list to be printed.
-    *   sep (str, optional): Separator between arguments. Defaults to a single space.
-    *   end (str, optional): String appended after the last value. Defaults to a newline.
-
-```python
-print(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] ",end='')
-for arg in args:
-    print(arg, end=sep)
-print(end)
-```
-
-**Dependencies**
---------------
-
-*   time: For timing-related functions (e.g., `time.time()`).
-
-**Code with Comments**
---------------------
-
-```python
-import time
-
-# Function to prompt the user for an integer input.
 def int_input(prompt: str) -> int:
     """
     Prompt the user to enter an integer value.
@@ -101,16 +30,21 @@ def int_input(prompt: str) -> int:
     Returns:
         int: The integer value entered by the user.
     """
-    # Use a while loop to repeatedly ask for input until valid input is provided.
     while True:
         try:
-            # Attempt to convert the user's input to an integer and return it.
             return int(input(prompt))
         except ValueError:
-            # If the conversion fails, print an error message and show the prompt again.
             print("Please enter a number.")
+```
 
-# Function to prompt the user for a floating-point input.
+### float_input(prompt: str) -> float
+
+*   Description: Prompts the user to enter a floating-point number.
+*   Parameters:
+    *   prompt (str): The message to display when asking for input.
+*   Returns: The floating-point number entered by the user.
+
+```python
 def float_input(prompt: str) -> float:
     """
     Prompt the user to enter a floating-point number.
@@ -125,16 +59,20 @@ def float_input(prompt: str) -> float:
     Returns:
         float: The floating-point number entered by the user.
     """
-    # Use a while loop to repeatedly ask for input until valid input is provided.
     while True:
         try:
-            # Attempt to convert the user's input to a float and return it.
             return float(input(prompt))
         except ValueError:
-            # If the conversion fails, print an error message and show the prompt again.
             print("Please enter a number.")
+```
 
-# Function to measure the execution time of a given function using a decorator.
+### timer(func)
+
+*   Description: A decorator that prints the execution time of the decorated function.
+*   Parameters:
+    *   func (callable): The function to be decorated.
+
+```python
 def timer(func):
     """
     A decorator that prints the execution time of the decorated function.
@@ -145,16 +83,24 @@ def timer(func):
     Returns:
         callable: The wrapped function that prints its execution time.
     """
-    # Define a nested function wrapper that will print the execution time and return the result.
     def wrapper(*args, **kwargs):
-        start = time.time()  # Record the start time of the function's execution.
-        result = func(*args, **kwargs)  # Execute the function.
-        end = time.time()  # Record the end time of the function's execution.
-        print(f"{func.__name__} took {end - start:.4f} seconds")  # Print the execution time.
-        return result  # Return the result of the function.
-    return wrapper  # Return the wrapped function.
+        start = time.time()
+        result = func(*args, **kwargs)
+        end = time.time()
+        print(f"{func.__name__} took {end - start:.4f} seconds")
+        return result
+    return wrapper
+```
 
-# Function to print its arguments with a timestamp.
+### timestamp_print(*args, sep=' ', end='\n') -> None
+
+*   Description: Prints the given arguments with a timestamp.
+*   Parameters:
+    *   args (variable length argument list): The values to be printed.
+    *   sep (str): Separator between arguments. Defaults to a single space.
+    *   end (str): String appended after the last value. Defaults to a newline.
+
+```python
 def timestamp_print(*args, sep=' ', end='\n') -> None:
     """
     Prints the given arguments with a timestamp.
@@ -168,9 +114,23 @@ def timestamp_print(*args, sep=' ', end='\n') -> None:
         timestamp_print("Hello", "world")
         # Output: [2023-10-05 14:23:45] Hello world
     """
-    print(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] ", end='')  # Print the timestamp.
+    print(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] ",end='')
     for arg in args:
-        print(arg, end=sep)  # Print each argument with the specified separator.
-    print(end)  # Append the newline string after printing all arguments.
-
+        print(arg, end=sep)
+    print(end, end='')
 ```
+
+**Dependencies**
+
+The script depends on the following external packages/modules:
+
+*   `time`: Provides the time-related functions used in the script.
+*   `input()`: Used to prompt the user for input.
+
+```python
+import time
+
+# Rest of the code...
+```
+
+Note: The actual dependencies are not listed separately as they are built-in Python modules. However, if this script were part of a larger project or package, additional dependencies might be required.
