@@ -1,6 +1,13 @@
 import pyWrkspPackage
 
 def main():
+    """
+    Reads data from "input.txt" and processes it to find and evaluate specific patterns.
+    The function looks for occurrences of the pattern "mul(a,b)" in the data, where 'a' and 'b' 
+    are numeric values. It then extracts these values, multiplies them, and sums the results.
+    Returns:
+        int: The sum of all evaluated "mul(a,b)" patterns found in the data.
+    """
     data = pyWrkspPackage.load_from_file("input.txt")
     
     valid = []
