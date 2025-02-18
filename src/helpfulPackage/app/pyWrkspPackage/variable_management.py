@@ -68,7 +68,7 @@ def load_from_env(variable: str) -> str:
     load_dotenv()
     return str(os.getenv(variable))
 
-def list_to_str(list):
+def list_to_str(list) -> str:
     """
     Converts a list of items into a single concatenated string.
 
@@ -82,3 +82,17 @@ def list_to_str(list):
     for item in list:
         out += str(item)
     return out
+
+def make_matrix(rows: int, cols: int, default=None) -> list:
+    """
+    Creates a matrix (2D list) with the specified number of rows and columns.
+
+    Args:
+        rows (int): The number of rows in the matrix.
+        cols (int): The number of columns in the matrix.
+        default (optional): The default value to fill the matrix with. Defaults to None.
+
+    Returns:
+        list: A 2D list representing a matrix with the specified number of rows and columns.
+    """
+    return [[default for _ in range(cols)] for _ in range(rows)]
