@@ -67,3 +67,18 @@ def load_from_env(variable: str) -> str:
     """
     load_dotenv()
     return str(os.getenv(variable))
+
+def list_to_str(list):
+    """
+    Converts a list of items into a single concatenated string.
+
+    Args:
+        list (list): The list of items to be converted to a string.
+
+    Returns:
+        str: A single string containing all items from the list concatenated together.
+    """
+    out = ''
+    for item in list:
+        out += str(item)
+    return out
