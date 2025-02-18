@@ -6,80 +6,39 @@
 **Summary**
 ------------
 
-The pyWrkspPackage script is a Python package that provides a set of helpful functions for various tasks. It serves as a foundation for further development and customization.
+The pyWrkspPackage script is a Python package that provides a set of helpful functions for various tasks. The package can be easily installed using pip and provides documentation for the user.
 
 **Functions and Classes**
 -------------------------
 
-### setup()
+### setup
+
+*   **Description:** This function initializes the package.
+*   **Inputs:**
+    *   `name`: The name of the package.
+    *   `version`: The version number of the package.
+    *   `description`: A short description of the package.
+    *   `package_dir`: A dictionary containing the directory path for the package.
+    *   `packages`: A list of packages to include in the installation.
+    *   `long_description`: A long description of the package.
+    *   `long_description_content_type`: The content type of the long description.
+    *   `url`: The URL of the package repository.
+    *   `author`: The author's name.
+    *   `author_email`: The author's email address.
+    *   `license`: The license under which the package is released.
+    *   `classifiers`: A list of classifiers for the package.
+*   **Output:** Returns None.
 
 ```python
-def setup(
-    name: str,  # Package name
-    version: str,  # Package version
-    description: str,  # Package description
-    package_dir: dict = {},  # Package directory
-    packages: list = [],  # List of packages to include
-    long_description: str,  # Long description of the package
-    long_description_content_type: str = "text/markdown",  # Content type of the long description
-    url: str = "",  # URL of the package
-    author: str = "",  # Author name
-    author_email: str = "",  # Author email address
-    license: str = "",  # License of the package
-    classifiers: list = [],  # List of classifiers for the package
-    install_requires: list = [],  # List of dependencies to install
-    extras_require: dict = {},  # Dictionary of extra dependencies
-    python_requires: str = "",  # Minimum Python version required
-):
-```
-
-*   `name`: Package name (string)
-*   `version`: Package version (string)
-*   `description`: Package description (string)
-*   `package_dir`: Directory to find the packages in (dictionary)
-*   `packages`: List of packages to include (list)
-*   `long_description`: Long description of the package (string)
-*   `long_description_content_type`: Content type of the long description (string)
-*   `url`: URL of the package (string)
-*   `author`: Author name (string)
-*   `author_email`: Author email address (string)
-*   `license`: License of the package (string)
-*   `classifiers`: List of classifiers for the package (list)
-*   `install_requires`: List of dependencies to install (list)
-*   `extras_require`: Dictionary of extra dependencies (dictionary)
-*   `python_requires`: Minimum Python version required (string)
-
-Returns:
-
-*   None
-
-**Dependencies**
------------------
-
-The script depends on the following external packages:
-
-*   `setuptools` for package installation and management
-*   `python-dotenv` for environment variable loading
-*   `twine>=4.0.2` for development dependencies
-
-Note: The `twine` dependency is only included in the `dev` extras.
-
-**Code**
--------
-
-```python
-# Import necessary modules from setuptools
+# setup function to initialize the package
 from setuptools import find_packages, setup
 
-# Read the long description from the README.md file
 with open("app/README.md", "r") as f:
     long_description = f.read()
 
-# Set up the package using the setup function
 setup(
-    # Package metadata
     name="pyWrkspPackage",
-    version="0.3.0",
+    version="0.3.1",
     description="A group of helpful functions for Python",
     package_dir={"": "app"},
     packages=find_packages(where="app"),
@@ -89,21 +48,26 @@ setup(
     author="Jonah Makowski",
     author_email="jonah@makowski.ca",
     license="MIT",
-    # Classifiers for the package
     classifiers=[
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3.10",
         "Operating System :: OS Independent",
     ],
-    # Dependencies to install
     install_requires=['python-dotenv'],
-    # Extra dependencies
     extras_require={
         "dev": ["twine>=4.0.2"],
     },
-    # Minimum Python version required
     python_requires=">=3.10",
 )
 ```
 
-This documentation provides a clear overview of the `pyWrkspPackage` script, including its functions and classes, dependencies, and code structure.
+**Dependencies**
+----------------
+
+The following external packages/modules are required for the script to function:
+
+*   `setuptools`
+*   `python-dotenv` (install requirement)
+*   `twine` (development extra requirement)
+
+Note: The dependencies can be installed using pip: `pip install setuptools python-dotenv twine`
