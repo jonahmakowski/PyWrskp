@@ -46,6 +46,7 @@ build_package:
 generate_docs:
   image: python:alpine
   stage: docs
+  timeout: 5h # Increase timeout to 5 hours
   variables:
     GIT_DEPTH: 0
   before_script:
