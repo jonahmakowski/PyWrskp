@@ -16,6 +16,18 @@ source_files = [f for f in modified_files if f.startswith("src/") and f.endswith
 
 print("Source files:", source_files)
 
+documentation_files = [os.path.join(dirpath,f) for (dirpath, dirnames, filenames) in os.walk('docs/ai_docs/') for f in filenames]
+
+print('Documentation files:', documentation_files)
+
+# Remove old documentation for files that have been deleted
+for doc_file in documentation_files:
+    corresponding_source_file = doc_file.replace("docs/ai_docs/", "src/").replace(".md", ".py")
+    if not os.path.exists(corresponding_source_file):
+        print(f"Removing outdated documentation: {doc_file}")
+        os.remove(doc_file)
+
+# Generate New Documentation
 if not source_files:
     print("No source files modified. Skipping doc generation.")
     exit(0)
