@@ -37,6 +37,10 @@ client = Client(
 )
 
 for file in source_files:
+    if not os.path.exists(file):
+        print(f"⚠️ Source file not found: {file}")
+        continue
+
     print(f"Generating docs for: {file}")
 
     # Read the source code
