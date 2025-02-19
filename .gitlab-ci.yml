@@ -49,6 +49,7 @@ generate_docs:
   timeout: 5h # Increase timeout to 5 hours
   variables:
     GIT_DEPTH: 0
+    RUNNER_SCRIPT_TIMEOUT: 5h
   before_script:
     - pip install ollama
     - apk add git
