@@ -14,11 +14,11 @@ print("Modified files:", modified_files)
 # Filter files from /src/ that are Python or C++
 source_files = [f for f in modified_files if f.startswith("src/") and f.endswith((".py", ".cpp", ".js"))]
 
-print("Source files:", source_files)
+print(f"{len(source_files)}; Source files:", source_files)
 
 documentation_files = [os.path.join(dirpath,f) for (dirpath, dirnames, filenames) in os.walk('docs/ai_docs/') for f in filenames]
 
-print('Documentation files:', documentation_files)
+print(f"{len(documentation_files)}; Documentation files:", documentation_files)
 
 # Remove old documentation for files that have been deleted
 for doc_file in documentation_files:
@@ -36,12 +36,12 @@ client = Client(
     host=AI_ENDPOINT,
 )
 
-for file in source_files:
+for file_num, file in enumerate(source_files):
     if not os.path.exists(file):
-        print(f"⚠️ Source file not found: {file}")
+        print(f"{file_num} ⚠️ Source file not found: {file}")
         continue
 
-    print(f"Generating docs for: {file}")
+    print(f"{file_num} Generating docs for: {file}")
 
     # Read the source code
     with open(file, "r") as f:
@@ -56,8 +56,6 @@ for file in source_files:
                  The script to document is as follows:\n\n"""
     
     documentation = client.generate('llama3.2', prompt + code)['response']
-
-    print('response:', documentation)
 
     if not documentation:
         print(f"⚠️ No documentation generated for {file}")
