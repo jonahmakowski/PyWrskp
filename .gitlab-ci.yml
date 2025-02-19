@@ -46,10 +46,8 @@ build_package:
 generate_docs:
   image: python:alpine
   stage: docs
-  timeout: 5h # Increase timeout to 5 hours
   variables:
     GIT_DEPTH: 0
-    RUNNER_SCRIPT_TIMEOUT: 5h
   before_script:
     - pip install ollama
     - apk add git
@@ -57,12 +55,12 @@ generate_docs:
     - git config --global user.email "gitlab-ci@localhost"
     - git config --global user.name "GitLab CI Docs Bot"
     - git checkout main
+    - git remote set-url origin "http://gitlab_ci_token:${DOCS_KEY}@192.168.86.4:8929/jonahmakowski/pyWrskp.git"
     - python src/docGeneration/generate.py  # Runs AI-powered doc generation
     - git add docs/
     - |
       # Check if there are any changes
       if ! git diff --cached --quiet; then
-        git remote set-url origin "http://gitlab_ci_token:${DOCS_KEY}@192.168.86.4:8929/jonahmakowski/pyWrskp.git"
         git pull
         git commit -m "🤖 Auto-generate docs for latest changes"
         git push

@@ -68,7 +68,7 @@ def load_from_env(variable: str) -> str:
     load_dotenv()
     return str(os.getenv(variable))
 
-def list_to_str(list) -> str:
+def list_to_str(list, sep='') -> str:
     """
     Converts a list of items into a single concatenated string.
 
@@ -80,7 +80,7 @@ def list_to_str(list) -> str:
     """
     out = ''
     for item in list:
-        out += str(item)
+        out += str(item+sep)
     return out
 
 def make_matrix(rows: int, cols: int, default=None) -> list:
