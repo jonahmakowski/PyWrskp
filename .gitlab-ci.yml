@@ -52,7 +52,7 @@ generate_docs:
     - pip install ollama
     - apk add git
   script:
-    - python src/doc_generation/generate.py  # Runs AI-powered doc generation
+    - python src/docGeneration/generate.py  # Runs AI-powered doc generation
     - |
       # Check if there are any changes
       git config --global user.email "gitlab-ci@localhost"
