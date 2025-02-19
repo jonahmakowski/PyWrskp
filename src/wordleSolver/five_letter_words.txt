@@ -15680,7 +15680,6 @@ pterk
 ptest
 ptlog
 ptorr
-ptyas
 pubal
 pubes
 pubic
