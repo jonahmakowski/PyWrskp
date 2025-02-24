@@ -1,5 +1,6 @@
 from dotenv import load_dotenv
 import os
+import copy
 
 def dict_merge(d1: dict, d2: dict) -> dict:
     """
@@ -97,3 +98,15 @@ def make_matrix(rows: int, cols: int, default=None) -> list:
         list: A 2D list representing a matrix with the specified number of rows and columns.
     """
     return [[default for _ in range(cols)] for _ in range(rows)]
+
+def recursive_copy(lst: list) -> list:
+    """
+    Recursively copies a list of lists.
+
+    Args:
+        lst (list): The list to be copied. This can be a nested list.
+
+    Returns:
+        list: A new list that is a deep copy of the input list.
+    """
+    return copy.deepcopy(lst)

@@ -5,7 +5,7 @@ with open("app/README.md", "r") as f:
 
 setup(
     name="pyWrkspPackage",
-    version="0.3.3",
+    version="0.3.4",
     description="A group of helpful functions for Python",
     package_dir={"": "app"},
     packages=find_packages(where="app"),
