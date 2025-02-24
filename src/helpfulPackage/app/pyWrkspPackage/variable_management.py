@@ -105,7 +105,7 @@ def recursive_copy(lst: list) -> list:
 
     Args:
         lst (list): The list to be copied. This can be a nested list.
-
+ 
     Returns:
         list: A new list that is a deep copy of the input list.
     """
