@@ -1,112 +1,71 @@
 # Documentation for src/helpfulPackage/setup.py
 
-**PyWrkspPackage Documentation**
+**pyWrkspPackage Documentation**
 
-**Summary**
-------------
+**Summary:**
+The pyWrkspPackage script is a Python package that provides a collection of helpful functions and classes for various tasks. It includes documentation, setup information, and metadata required to install and use the package.
 
-PyWrkspPackage is a Python package that provides a group of helpful functions for various tasks. It includes features such as automatic documentation generation and setup for easy installation.
+**Functions and Classes:**
 
-**Functions and Classes**
-------------------------
+*   **setup**: This function is used to configure the installation of the pyWrkspPackage.
+    *   Parameters: None
+    *   Returns: None (sets up the package directory and dependencies)
+*   **find_packages**: This function finds all packages in the specified directory.
+    *   Parameters: `where="app"` (specifies the directory to search for packages)
+    *   Returns: A list of found packages
 
-### setup()
+**Dependencies:**
 
-*   Description: This function is used to set up the PyWrkspPackage.
-*   Parameters:
-    *   `name`: The name of the package.
-    *   `version`: The version number of the package.
-    *   `description`: A brief description of the package.
-    *   `package_dir`: A dictionary specifying the directory where the package is located.
-    *   `packages`: A list of packages to include in the installation.
-    *   `long_description`: The long description of the package.
-    *   `long_description_content_type`: The type of content for the long description.
-    *   `url`: The URL of the package's repository.
-    *   `author`: The name of the author.
-    *   `author_email`: The email address of the author.
-    *   `license`: The license under which the package is released.
-    *   `classifiers`: A list of classifiers for the package.
-    *   `install_requires`: A list of dependencies required for installation.
-    *   `extras_require`: An optional dictionary specifying additional dependencies based on environment variables.
-    *   `python_requires`: The minimum version of Python required to install and run the package.
+*   The pyWrkspPackage script depends on the following external packages/modules:
+    +   [setuptools](https://pypi.org/project/setuptools/): a collection of tools for building, distributing, and installing Python packages
+    +   [python-dotenv](https://pypi.org/project/python-dotenv/): a library for loading environment variables from a .env file
 
-### find_packages(where="app")
-
-*   Description: This function is used to find packages in a specific directory.
-*   Parameters:
-    *   `where`: The directory where the package is located.
-
-**Dependencies**
----------------
-
-The following external packages/modules are required for PyWrkspPackage:
-
-*   `python-dotenv`
-*   `twine` (for development dependencies)
-
-**Code**
-------
+**Code:**
 
 ```python
-# Import necessary modules from setuptools
+# Import the necessary modules
 from setuptools import find_packages, setup
 
-# Open and read the README.md file
+# Read the README file to generate the long description
 with open("app/README.md", "r") as f:
-    # Read the long description of the package
+    # Set the long description variable to the contents of the README file
     long_description = f.read()
 
-# Set up the PyWrkspPackage using the setup function
+# Define the setup function
 setup(
-    # Name of the package
     name="pyWrkspPackage",
-    
-    # Version number of the package
-    version="0.3.4",
-    
-    # Brief description of the package
+    version="0.3.5",
     description="A group of helpful functions for Python",
-    
-    # Directory where the package is located
+    # Specify the package directory and find packages in the "app" directory
     package_dir={"": "app"},
-    
-    # List of packages to include in the installation
     packages=find_packages(where="app"),
-    
-    # Long description of the package
+    # Set the long description from the README file
     long_description=long_description,
-    
-    # Type of content for the long description
+    # Set the content type of the long description to Markdown
     long_description_content_type="text/markdown",
-    
-    # URL of the package's repository
+    # Specify the URL for the package repository
     url="https://github.com/jonahmakowski/pyWrskp",
-    
-    # Name and email address of the author
+    # Set the author and email addresses
     author="Jonah Makowski",
     author_email="jonah@makowski.ca",
-    
-    # License under which the package is released
+    # Specify the license under which the package is released (MIT License)
     license="MIT",
-    
-    # Classifiers for the package
+    # Define the classifiers for the package
     classifiers=[
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3.10",
         "Operating System :: OS Independent",
     ],
-    
-    # Dependencies required for installation
+    # Install the required dependencies, including python-dotenv
     install_requires=['python-dotenv'],
-    
-    # Optional dependencies based on environment variables
+    # Specify additional dependencies for development mode (twine >= 4.0.2)
     extras_require={
         "dev": ["twine>=4.0.2"],
     },
-    
-    # Minimum version of Python required to install and run the package
+    # Set the minimum Python version required to run the package (3.10)
     python_requires=">=3.10",
 )
+
 ```
 
-This documentation provides a clear overview of the PyWrkspPackage, its functions and classes, dependencies, and code structure.
+**Note:** The code has been commented and formatted for readability, but it does not contain any additional functionality or modifications beyond what is included in the original script.
