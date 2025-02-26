@@ -49,7 +49,7 @@ for file_num, file in enumerate(source_files):
         code = f.read()
 
     # Send the code to AI for documentation
-    prompt = load_from_file("prompt.md")
+    prompt = load_from_file("./prompt.md")
     
     documentation = client.generate('llama3.2', prompt + code)['response']
 
@@ -66,5 +66,5 @@ for file_num, file in enumerate(source_files):
     # Write the documentation to the mirrored docs folder
     with open(doc_path, "w") as f:
         f.write(f"# Documentation for {file}\n\n{documentation}")
- 
+
     print(f"✅ Saved docs: {doc_path}")

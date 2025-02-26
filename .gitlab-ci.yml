@@ -16,9 +16,11 @@ github_commit:
     - git config user.name "GitLab CI"
     - git config user.email "jonah@makowski.ca"
     - git checkout main
+    - git remote set-url gitlab "http://gitlab_ci_token:${DOCS_KEY}@192.168.86.4:8929/jonahmakowski/pyWrskp.git"
+    - git pull gitlab
     - git remote set-url origin "https://jonahmakowski:$GITHUB_PASSWORD@github.com/jonahmakowski/pyWrskp.git"
     - git config pull.rebase false
-    - git pull
+    - git pull origin
     - git push
 
 build_package:
