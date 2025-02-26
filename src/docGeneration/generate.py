@@ -1,5 +1,6 @@
 import os
 import subprocess
+from pyWrkspPackage import load_from_file
 from ollama import Client
 
 # AI model endpoint (Ollama, Llama.cpp, or API)
@@ -48,12 +49,7 @@ for file_num, file in enumerate(source_files):
         code = f.read()
 
     # Send the code to AI for documentation
-    prompt = f"""Generate formal documentation for the following Python script. The documentation should include:
-                 Summary: Provide a brief overview of what the script does in a concise and clear manner.
-                 Functions and Classes: List all functions and classes defined in the script, along with: A short description of what each function/class does. The inputs each function/class takes (parameters). The output (return value) for each function/class.
-                 Dependencies: List all external packages/modules that the script depends on.
-                 Include the entire code in the documentation, and add comments, however, don't modify the actual code in any way.
-                 The script to document is as follows:\n\n"""
+    prompt = load_from_file("prompt.md")
     
     documentation = client.generate('llama3.2', prompt + code)['response']
 
