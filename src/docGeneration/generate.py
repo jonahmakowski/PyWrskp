@@ -49,7 +49,7 @@ for file_num, file in enumerate(source_files):
         code = f.read()
 
     # Send the code to AI for documentation
-    prompt = load_from_file("./prompt.md")
+    prompt = load_from_file("src/docGeneration/prompt.md")
     
     documentation = client.generate('llama3.2', prompt + code)['response']
 
